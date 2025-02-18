@@ -10,16 +10,16 @@ import lombok.Setter;
 @Setter
 public class RegisterRequest {
 
-    @Pattern(regexp = "^(?!\\s*$).{3,20}$")
+    @Pattern(regexp = "^(?!\\s*$).{3,20}$", message = "Username must be between 3 and 20 symbols")
     private String username;
 
     @NotBlank
-    @Email
+    @Email(message = "Please enter a valid email")
     private String email;
 
-    @Pattern(regexp = "^(?!\\s*$).{3,20}$")
+    @Pattern(regexp = "^(?!\\s*$).{3,20}$", message = "Password must be between 3 and 20 symbols")
     private String password;
 
-    @Pattern(regexp = "^(?!\\s*$).{3,20}$")
+    @Pattern(regexp = "^(?!\\s*$).{3,20}$", message = "Confirm Password must be between 3 and 20 symbols")
     private String confirmPassword;
 }
