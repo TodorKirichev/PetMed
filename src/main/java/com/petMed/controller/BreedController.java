@@ -1,6 +1,7 @@
 package com.petMed.controller;
 
 import com.petMed.service.BreedService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +19,9 @@ public class BreedController {
         this.breedService = breedService;
     }
 
-    @GetMapping()
-    public List<Enum<?>> getBreeds(@RequestParam String species) {
-
-        return breedService.getBreedsBySpecies(species);
+    @GetMapping
+    public ResponseEntity<List<String>> getBreeds(@RequestParam String species) {
+        List<String> breeds = breedService.getBreedsBySpecies(species);
+        return ResponseEntity.ok(breeds);
     }
 }

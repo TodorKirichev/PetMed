@@ -1,8 +1,6 @@
 package com.petMed.model.dto;
 
-import com.petMed.model.enums.PetSpecies;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +12,10 @@ public class PetData {
     @NotBlank
     private String name;
 
-    @NotNull
+    @NotBlank
     private String species;
 
-    @NotNull
+    @NotBlank
     private String breed;
 
     @Positive
