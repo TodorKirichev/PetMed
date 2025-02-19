@@ -39,4 +39,7 @@ public class User {
 
     @ManyToOne
     private Clinic clinic;
+
+    @Column
+    private boolean isActive;
 }

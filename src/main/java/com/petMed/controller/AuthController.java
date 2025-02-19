@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -48,19 +49,11 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public ModelAndView login() {
-        return new ModelAndView("login");
-    }
-
-    @PostMapping("/login")
-    public ModelAndView loginUser(@Valid LoginRequest loginRequest, BindingResult bindingResult, HttpSession session) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("login");
+    public ModelAndView login(@RequestParam(value = "error", required = false) String errorParam) {
+        ModelAndView modelAndView = new ModelAndView("login");
+        if (errorParam != null) {
+            modelAndView.addObject("errorMessage", "Invalid username or password");
         }
-        User loggedInUser = userService.login(loginRequest);
-
-        session.setAttribute("user_id", loggedInUser.getId());
-
-        return new ModelAndView("redirect:/home");
+        return modelAndView;
     }
 }

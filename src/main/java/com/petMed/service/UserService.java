@@ -5,14 +5,17 @@ import com.petMed.model.dto.RegisterRequest;
 import com.petMed.model.entity.User;
 import com.petMed.model.enums.Role;
 import com.petMed.repository.UserRepository;
-import jakarta.validation.Valid;
+import com.petMed.security.AuthenticationDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -46,6 +49,7 @@ public class UserService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.PET_OWNER)
+                .isActive(true)
                 .build();
         userRepository.save(user);
     }
@@ -54,13 +58,11 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User login(LoginRequest loginRequest) {
-        Optional<User> byUsername = findByUsername(loginRequest.getUsername());
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        if (byUsername.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), byUsername.get().getPassword())) {
-            return byUsername.get();
-        }
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
 
-        throw new RuntimeException("Invalid username or password");
+        return new AuthenticationDetails(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
     }
 }
