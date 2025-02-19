@@ -1,5 +1,6 @@
 package com.petMed.model.entity;
 
+import com.petMed.model.enums.PetSpecies;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,11 +22,14 @@ public class Pet {
     @Column(nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String species;
+    private PetSpecies species;
 
+    @Column(nullable = false)
     private String breed;
 
+    @Column(nullable = false)
     private int age;
 
     @ManyToOne(optional = false)

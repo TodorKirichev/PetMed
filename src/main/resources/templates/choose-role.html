@@ -3,11 +3,12 @@
 <head th:replace="~{fragments/commons::head}"></head>
 
 <body>
-
 <header th:replace="~{fragments/commons::nav}"></header>
 
 <main>
-    Index
+    <h1>Choose Your Role</h1>
+    <a th:href="@{/users/register/vet}">Vet</a>
+    <a th:href="@{users/register/owner}">Owner</a>
 </main>
 
 </body>

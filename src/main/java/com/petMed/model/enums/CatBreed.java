@@ -1,0 +1,19 @@
+package com.petMed.model.enums;
+
+public enum CatBreed {
+    PERSIAN,
+    MAINE_COON,
+    SIAMESE,
+    BENGAL,
+    RAGDOLL,
+    BRITISH_SHORTHAIR,
+    SPHYNX,
+    ABYSSINIAN,
+    SCOTTISH_FOLD,
+    RUSSIAN_BLUE,
+    BURMESE,
+    NORWEGIAN_FOREST_CAT,
+    TONKINESE,
+    ORIENTAL_SHORTHAIR,
+    EGYPTIAN_MAU
+}

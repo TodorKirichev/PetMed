@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<main>
+  <form th:action="@{/pets/add}" th:object="${petData}" th:method="POST">
+    <label for="name">Pet Name:</label>
+    <input type="text" id="name" th:field="*{name}" />
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+    <label for="species">Species:</label>
+    <select id="species" th:field="*{species}" onchange="fetchBreeds()">
+      <option th:value="${species}">Select Species</option>
+      <option th:each="species : ${T(com.petMed.model.enums.PetSpecies).values()}" th:value="${species}" th:text="${species}"></option>
+    </select>
+    <p th:if="${#fields.hasErrors('species')}" th:errors="*{species}"></p>
+
+    <label for="breed">Breed:</label>
+    <select id="breed" th:field="*{breed}"></select>
+    <p th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></p>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" min="0" />
+    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+
+    <button type="submit">Add Pet</button>
+  </form>
+</main>
+</body>
+</html>

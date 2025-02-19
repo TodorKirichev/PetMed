@@ -10,6 +10,12 @@ import lombok.Setter;
 @Setter
 public class RegisterRequest {
 
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
     @Pattern(regexp = "^(?!\\s*$).{3,20}$", message = "Username must be between 3 and 20 symbols")
     private String username;
 

@@ -1,6 +1,5 @@
 package com.petMed.service;
 
-import com.petMed.model.dto.LoginRequest;
 import com.petMed.model.dto.RegisterRequest;
 import com.petMed.model.entity.User;
 import com.petMed.model.enums.Role;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public void register(RegisterRequest registerRequest) {
+    public void registerOwner(RegisterRequest registerRequest) {
         if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {
             throw new RuntimeException("Passwords do not match");
         }
@@ -45,6 +45,8 @@ public class UserService implements UserDetailsService {
         }
 
         User user = User.builder()
+                .fistName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
@@ -64,5 +66,9 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
 
         return new AuthenticationDetails(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
+    }
+
+    public User findById(UUID userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
