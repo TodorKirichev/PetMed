@@ -30,7 +30,7 @@ public class Pet {
     private String breed;
 
     @Column(nullable = false)
-    private int age;
+    private Integer age;
 
     @ManyToOne(optional = false)
     private User owner;

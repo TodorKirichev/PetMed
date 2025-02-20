@@ -1,15 +1,18 @@
 package com.petMed.controller;
 
-import com.petMed.model.dto.RegisterRequest;
+import com.petMed.model.entity.Pet;
+import com.petMed.model.entity.User;
+import com.petMed.security.AuthenticationDetails;
 import com.petMed.service.UserService;
-import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -18,28 +21,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ModelAttribute("registerRequest")
-    public RegisterRequest registerRequest() {
-        return new RegisterRequest();
+    @GetMapping("/pets")
+    public ModelAndView showUserPets(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+        ModelAndView modelAndView = new ModelAndView("user-pets");
+
+        User user = userService.findById(authenticationDetails.getUserId());
+        List<Pet> pets = user.getPets();
+        modelAndView.addObject("pets", pets);
+
+        return modelAndView;
     }
 
-    @GetMapping("/register/owner")
-    public ModelAndView showRegisterForm() {
-        return new ModelAndView("register-owner");
-    }
 
-    @PostMapping("/register/owner")
-    public ModelAndView registerOwner(@Valid RegisterRequest registerRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("register-owner");
-        }
-        userService.registerOwner(registerRequest);
-
-        return new ModelAndView("redirect:/login");
-    }
-
-    @GetMapping("/register/vet")
-    public ModelAndView registerVet() {
-        return new ModelAndView("register-vet");
-    }
 }

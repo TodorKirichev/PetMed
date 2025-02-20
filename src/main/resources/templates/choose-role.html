@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/commons::head}"></head>
 
 <body>
@@ -7,8 +7,8 @@
 
 <main>
     <h1>Choose Your Role</h1>
-    <a th:href="@{/users/register/vet}">Vet</a>
-    <a th:href="@{users/register/owner}">Owner</a>
+    <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">Vet</a>
+    <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">Owner</a>
 </main>
 
 </body>

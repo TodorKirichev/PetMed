@@ -19,5 +19,5 @@ public class PetData {
     private String breed;
 
     @Positive
-    private int age;
+    private Integer age;
 }

@@ -1,6 +1,7 @@
 package com.petMed.service;
 
 import com.petMed.model.dto.RegisterRequest;
+import com.petMed.model.entity.Pet;
 import com.petMed.model.entity.User;
 import com.petMed.model.enums.Role;
 import com.petMed.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -71,4 +73,5 @@ public class UserService implements UserDetailsService {
     public User findById(UUID userId) {
         return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
     }
+
 }

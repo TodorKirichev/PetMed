@@ -7,6 +7,9 @@ import com.petMed.model.enums.PetSpecies;
 import com.petMed.repository.PetRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class PetService {
 
@@ -27,5 +30,23 @@ public class PetService {
                 .build();
 
         petRepository.save(pet);
+    }
+
+    public Pet findPetByIdAndOwnerId(UUID id, UUID userId) {
+        return getByIdAndOwnerId(id, userId);
+    }
+
+    public void delete(UUID id, UUID userId) {
+        Pet byIdAndOwnerId = getByIdAndOwnerId(id, userId);
+        petRepository.delete(byIdAndOwnerId);
+    }
+
+    private Pet getByIdAndOwnerId(UUID id, UUID userId) {
+        Optional<Pet> byIdAndOwnerId = petRepository.findByIdAndOwnerId(id, userId);
+
+        if (byIdAndOwnerId.isEmpty()) {
+            throw new RuntimeException("Pet not found");
+        }
+        return byIdAndOwnerId.get();
     }
 }
