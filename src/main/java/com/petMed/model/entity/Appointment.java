@@ -33,6 +33,4 @@ public class Appointment {
     @Column(nullable = false)
     private AppointmentStatus status;
 
-    @ManyToOne
-    private Clinic clinic;
 }

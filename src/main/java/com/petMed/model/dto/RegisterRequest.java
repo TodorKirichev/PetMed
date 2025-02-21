@@ -28,4 +28,7 @@ public class RegisterRequest {
 
     @Pattern(regexp = "^(?!\\s*$).{3,20}$", message = "Confirm Password must be between 3 and 20 symbols")
     private String confirmPassword;
+
+    @NotBlank
+    private String phone;
 }

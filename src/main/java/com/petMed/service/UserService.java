@@ -1,18 +1,20 @@
 package com.petMed.service;
 
+import com.petMed.model.dto.PetOwnerRegisterRequest;
 import com.petMed.model.dto.RegisterRequest;
-import com.petMed.model.entity.Pet;
+import com.petMed.model.dto.VetRegisterRequest;
+import com.petMed.model.entity.Clinic;
 import com.petMed.model.entity.User;
 import com.petMed.model.enums.Role;
 import com.petMed.repository.UserRepository;
 import com.petMed.security.AuthenticationDetails;
+import jakarta.validation.Valid;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,17 +23,51 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ClinicService clinicService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.clinicService = clinicService;
     }
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public void registerOwner(RegisterRequest registerRequest) {
+    public void registerOwner(PetOwnerRegisterRequest petOwnerRegisterRequest) {
+        validate(petOwnerRegisterRequest);
+
+        User user = createUser(petOwnerRegisterRequest);
+        user.setRole(Role.PET_OWNER);
+        userRepository.save(user);
+    }
+
+    public void registerVet(VetRegisterRequest vetRegisterRequest) {
+        validate(vetRegisterRequest);
+
+        User user = createUser(vetRegisterRequest);
+        user.setRole(Role.VET);
+
+        Clinic clinic = clinicService.createClinic(vetRegisterRequest);
+        user.setClinic(clinic);
+
+        userRepository.save(user);
+    }
+
+    private User createUser(RegisterRequest registerRequest) {
+        return User.builder()
+                .fistName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
+                .username(registerRequest.getUsername())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .phone(registerRequest.getPhone())
+                .isActive(true)
+                .build();
+    }
+
+    private void validate(RegisterRequest registerRequest) {
         if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {
             throw new RuntimeException("Passwords do not match");
         }
@@ -45,21 +81,14 @@ public class UserService implements UserDetailsService {
         if (byEmail.isPresent()) {
             throw new RuntimeException("Email already exists");
         }
-
-        User user = User.builder()
-                .fistName(registerRequest.getFirstName())
-                .lastName(registerRequest.getLastName())
-                .username(registerRequest.getUsername())
-                .email(registerRequest.getEmail())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Role.PET_OWNER)
-                .isActive(true)
-                .build();
-        userRepository.save(user);
     }
 
     private Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User findById(UUID userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
@@ -69,9 +98,4 @@ public class UserService implements UserDetailsService {
 
         return new AuthenticationDetails(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
     }
-
-    public User findById(UUID userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
 }

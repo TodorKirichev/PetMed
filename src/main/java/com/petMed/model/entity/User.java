@@ -36,15 +36,18 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String phone;
+
+    @OneToOne
+    private Clinic clinic;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets = new ArrayList<>();
-
-    @ManyToOne
-    private Clinic clinic;
 
     @Column
     private boolean isActive;

@@ -4,6 +4,8 @@ import com.petMed.model.enums.PetSpecies;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -34,4 +36,7 @@ public class Pet {
 
     @ManyToOne(optional = false)
     private User owner;
+
+    @OneToMany(mappedBy = "pet")
+    private List<MedicalRecord> medicalRecords = new ArrayList<>();
 }

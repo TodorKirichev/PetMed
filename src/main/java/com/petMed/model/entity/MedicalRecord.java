@@ -1,6 +1,5 @@
 package com.petMed.model.entity;
 
-import com.petMed.model.enums.CityName;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,23 +11,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "clinics")
-public class Clinic {
+@Table(name = "medical_records")
+public class MedicalRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
-    private String name;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CityName city;
+    private String diagnosis;
 
     @Column(nullable = false)
-    private String address;
+    private String treatment;
 
-    @Column
-    private String site;
+    @OneToOne(optional = false)
+    private Appointment appointment;
+
+    @ManyToOne
+    private Pet pet;
 }

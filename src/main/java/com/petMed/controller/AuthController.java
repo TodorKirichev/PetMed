@@ -1,7 +1,8 @@
 package com.petMed.controller;
 
+import com.petMed.model.dto.VetRegisterRequest;
 import com.petMed.model.dto.LoginRequest;
-import com.petMed.model.dto.RegisterRequest;
+import com.petMed.model.dto.PetOwnerRegisterRequest;
 import com.petMed.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,14 @@ public class AuthController {
         return new LoginRequest();
     }
 
-    @ModelAttribute("registerRequest")
-    public RegisterRequest registerRequest() {
-        return new RegisterRequest();
+    @ModelAttribute("petOwnerRegisterRequest")
+    public PetOwnerRegisterRequest petOwnerRegisterRequest() {
+        return new PetOwnerRegisterRequest();
+    }
+
+    @ModelAttribute("vetRegisterRequest")
+    public VetRegisterRequest vetRegisterRequest() {
+        return new VetRegisterRequest();
     }
 
     @GetMapping("/register")
@@ -42,11 +48,11 @@ public class AuthController {
     }
 
     @PostMapping("/register-owner")
-    public ModelAndView registerOwner(@Valid RegisterRequest registerRequest, BindingResult bindingResult) {
+    public ModelAndView registerOwner(@Valid PetOwnerRegisterRequest petOwnerRegisterRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("register-owner");
         }
-        userService.registerOwner(registerRequest);
+        userService.registerOwner(petOwnerRegisterRequest);
 
         return new ModelAndView("redirect:/login");
     }
@@ -54,6 +60,16 @@ public class AuthController {
     @GetMapping("/register-vet")
     public ModelAndView registerVetForm() {
         return new ModelAndView("register-vet");
+    }
+
+    @PostMapping("/register-vet")
+    public ModelAndView registerVet(@Valid VetRegisterRequest vetRegisterRequest, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("register-vet");
+        }
+        userService.registerVet(vetRegisterRequest);
+
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/login")

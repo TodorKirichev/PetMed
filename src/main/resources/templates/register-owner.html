@@ -8,7 +8,7 @@
 
 <main>
     <h2>Register owner</h2>
-    <form th:action="@{/register-owner}" th:method="POST" th:object="${registerRequest}">
+    <form th:action="@{/register-owner}" th:method="POST" th:object="${petOwnerRegisterRequest}">
 
         <label for="first-name">First Name:</label>
         <input type="text" id="first-name" name="first-name" th:field="*{firstName}">
@@ -17,6 +17,10 @@
         <label for="last-name">Last Name:</label>
         <input type="text" id="last-name" name="last-name" th:field="*{lastName}">
         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" th:field="*{phone}">
+        <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
 
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" th:field="*{username}">
