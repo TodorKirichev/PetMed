@@ -7,6 +7,7 @@ import com.petMed.security.AuthenticationDetails;
 import com.petMed.service.PetService;
 import com.petMed.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,11 +33,13 @@ public class PetController {
         return new PetData();
     }
 
+    @PreAuthorize("hasRole('PET_OWNER')")
     @GetMapping("/add")
     public ModelAndView showPetForm() {
         return new ModelAndView("pet-form");
     }
 
+    @PreAuthorize("hasRole('PET_OWNER')")
     @PostMapping("/add")
     public ModelAndView addPet(@Valid PetData petData, BindingResult bindingResult, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
         if (bindingResult.hasErrors()) {

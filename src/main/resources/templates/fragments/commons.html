@@ -16,8 +16,8 @@
         <a th:href="@{/}">Logo</a>
       </div>
       <div>
-        <a th:href="@{/pets/add}" sec:authorize="isAuthenticated()">Add pet</a>
-        <a th:href="@{/user/pets}" sec:authorize="isAuthenticated()">My pets</a>
+        <a th:href="@{/pets/add}" sec:authorize="hasRole('PET_OWNER')">Add pet</a>
+        <a th:href="@{/user/pets}" sec:authorize="hasRole('PET_OWNER')">My pets</a>
         <a th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
         <a th:href="@{/register}" sec:authorize="!isAuthenticated()">Register</a>
         <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
