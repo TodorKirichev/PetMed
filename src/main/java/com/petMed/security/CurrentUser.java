@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AuthenticationDetails implements UserDetails {
+public class CurrentUser implements UserDetails {
 
     private UUID userId;
     private String username;

@@ -3,7 +3,7 @@ package com.petMed.controller;
 import com.petMed.model.dto.PetData;
 import com.petMed.model.entity.Pet;
 import com.petMed.model.entity.User;
-import com.petMed.security.AuthenticationDetails;
+import com.petMed.security.CurrentUser;
 import com.petMed.service.PetService;
 import com.petMed.service.UserService;
 import jakarta.validation.Valid;
@@ -14,10 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/pets")
+@PreAuthorize("hasRole('PET_OWNER')")
 public class PetController {
 
     private final PetService petService;
@@ -33,39 +35,48 @@ public class PetController {
         return new PetData();
     }
 
-    @PreAuthorize("hasRole('PET_OWNER')")
+    @GetMapping
+    public ModelAndView showUserPets(@AuthenticationPrincipal CurrentUser currentUser) {
+        ModelAndView modelAndView = new ModelAndView("user-pets");
+
+        User user = userService.findById(currentUser.getUserId());
+        List<Pet> pets = user.getPets();
+        modelAndView.addObject("pets", pets);
+
+        return modelAndView;
+    }
+
     @GetMapping("/add")
     public ModelAndView showPetForm() {
         return new ModelAndView("pet-form");
     }
 
-    @PreAuthorize("hasRole('PET_OWNER')")
     @PostMapping("/add")
-    public ModelAndView addPet(@Valid PetData petData, BindingResult bindingResult, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+    public ModelAndView addPet(@Valid PetData petData, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser currentUser) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("pet-form");
         }
-        User user = userService.findById(authenticationDetails.getUserId());
+        User user = userService.findById(currentUser.getUserId());
 
         petService.save(petData, user);
 
-        return new ModelAndView("redirect:/home");
+        return new ModelAndView("redirect:/pets");
     }
 
     @GetMapping("/{id}/edit-profile")
-    public ModelAndView editProfile(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+    public ModelAndView editProfile(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
         ModelAndView modelAndView = new ModelAndView("pet-edit-profile");
 
-        Pet pet = petService.findPetByIdAndOwnerId(id, authenticationDetails.getUserId());
+        Pet pet = petService.findPetByIdAndOwnerId(id, currentUser.getUserId());
         modelAndView.addObject("pet", pet);
 
         return modelAndView;
     }
 
     @GetMapping("/{id}/delete")
-    public ModelAndView deletePet(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
-        petService.delete(id, authenticationDetails.getUserId());
-        return new ModelAndView("redirect:/user/pets");
+    public ModelAndView deletePet(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
+        petService.delete(id, currentUser.getUserId());
+        return new ModelAndView("redirect:/pets");
     }
 
 }

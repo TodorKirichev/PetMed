@@ -1,6 +1,6 @@
 package com.petMed.controller;
 
-import com.petMed.security.AuthenticationDetails;
+import com.petMed.security.CurrentUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public ModelAndView showHomePage(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+    public ModelAndView showHomePage(@AuthenticationPrincipal CurrentUser currentUser) {
         ModelAndView modelAndView = new ModelAndView("home");
 
-        modelAndView.addObject("username", authenticationDetails.getUsername());
+        modelAndView.addObject("username", currentUser.getUsername());
         return modelAndView;
     }
 }

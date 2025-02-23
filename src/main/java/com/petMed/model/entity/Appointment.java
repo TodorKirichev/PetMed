@@ -24,7 +24,7 @@ public class Appointment {
     private Pet pet;
 
     @ManyToOne(optional = false)
-    private User veterinarian;
+    private User vet;
 
     @Column(nullable = false)
     private LocalDateTime dateTime;

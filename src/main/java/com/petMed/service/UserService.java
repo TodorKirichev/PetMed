@@ -7,8 +7,7 @@ import com.petMed.model.entity.Clinic;
 import com.petMed.model.entity.User;
 import com.petMed.model.enums.Role;
 import com.petMed.repository.UserRepository;
-import com.petMed.security.AuthenticationDetails;
-import jakarta.validation.Valid;
+import com.petMed.security.CurrentUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -96,6 +95,6 @@ public class UserService implements UserDetailsService {
 
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
 
-        return new AuthenticationDetails(user.getId(), username, user.getPassword(), user.getRole(), user.isActive());
+        return new CurrentUser(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 }

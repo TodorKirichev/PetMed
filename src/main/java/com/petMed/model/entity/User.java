@@ -49,6 +49,9 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "vet")
+    List<Appointment> appointments = new ArrayList<>();
+
     @Column
     private boolean isActive;
 }
