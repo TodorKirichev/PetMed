@@ -9,15 +9,43 @@
 <main>
     vet
     <div class="container">
-        <h2>Select a date to generate daily schedule</h2>
 
-        <form th:action="@{/appointments/generate}" th:method="POST">
-            <label for="date">Select Date:</label>
-            <input type="date" id="date" name="date" required />
+        <div class="show-schedule">
+            <h1>Тoday's schedule</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Start time</th>
+                    <th>Pet</th>
+                    <th>Species</th>
+                    <th>Breed</th>
+                    <th>Owner</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.startTime}"></td>
+                    <td th:text="${appointment.pet.name}"></td>
+                    <td th:text="${appointment.pet.species}"></td>
+                    <td th:text="${appointment.pet.breed}"></td>
+                    <td th:text="${appointment.pet.owner.fistName}"></td>
 
-            <button type="submit">Generate</button>
-        </form>
-        <p id="message" th:if="${message}" th:text="${message}"></p>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="generate-schedule">
+            <h2>Select a date to generate daily schedule</h2>
+
+            <form th:action="@{/appointments/generate}" th:method="POST">
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" required />
+
+                <button type="submit">Generate</button>
+            </form>
+            <p id="message" th:if="${message}" th:text="${message}"></p>
+        </div>
 
     </div>
 </main>

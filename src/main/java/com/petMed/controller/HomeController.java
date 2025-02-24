@@ -18,7 +18,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public ModelAndView showHomePage(@AuthenticationPrincipal CurrentUser currentUser) {
-        String view = userDashboardService.getDashboardView(currentUser);
-        return new ModelAndView(view);
+        ModelAndView modelAndView = userDashboardService.getDashboardView(currentUser);
+        return modelAndView;
     }
 }

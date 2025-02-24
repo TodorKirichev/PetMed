@@ -49,4 +49,9 @@ public class AppointmentService {
         appointmentRepository.saveAll(appointments);
         return "Successfully created daily schedule";
     }
+
+
+    public List<Appointment> findAllAppointmentsForToday(User user) {
+        return appointmentRepository.findByDateAndVetOrderByDateAscStartTimeAsc(LocalDate.now(), user);
+    }
 }
