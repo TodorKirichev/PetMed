@@ -1,6 +1,8 @@
 package com.petMed.service;
 
+import com.petMed.model.dto.AppointmentData;
 import com.petMed.model.entity.Appointment;
+import com.petMed.model.entity.Pet;
 import com.petMed.model.entity.User;
 import com.petMed.repository.AppointmentRepository;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,20 @@ public class AppointmentService {
 
     public List<Appointment> findAllAppointmentsForToday(User user) {
         return appointmentRepository.findByDateAndVetOrderByDateAscStartTimeAsc(LocalDate.now(), user);
+    }
+
+    public List<Appointment> findAvailableAppointmentsByDay(LocalDate day, User vet) {
+        return appointmentRepository.findAllByDateAndVetOrderByStartTime(day, vet);
+    }
+
+    public Appointment findByVetAndDateAndTime(User vet, LocalDate date, LocalTime time) {
+        return appointmentRepository.findByVetAndDateAndStartTime(vet, date, time);
+    }
+
+    public void book(User vet, Pet pet, AppointmentData appointmentData) {
+        Appointment appointment = findByVetAndDateAndTime(vet, appointmentData.getDate(), appointmentData.getTime());
+        appointment.setPet(pet);
+        appointment.setBooked(true);
+        appointmentRepository.save(appointment);
     }
 }

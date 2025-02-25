@@ -34,6 +34,6 @@ public class UserDashboardService {
         } else if (currentUser.getRole() == Role.ADMIN) {
             return new ModelAndView("admin-home");
         }
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
 }

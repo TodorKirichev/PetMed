@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<form th:action="'/appointments/book/' + ${vet.username}" th:method="POST" th:object="${appointmentData}">
+  <label for="datepicker">Choose a Date:</label>
+  <input type="date" id="datepicker" name="selectedDate" required  th:field="*{date}"/>
+  <input type="hidden" id="vetUsername" th:value="${vet.username}"/>
+
+
+  <label for="availableHours">Choose a Time:</label>
+  <select name="selectedTime" id="availableHours" th:field="*{time}">
+    <option value="">Please select a time</option>
+  </select>
+
+
+  <label for="pet">Choose a Pet:</label>
+  <select name="pet" id="pet" th:field="*{petId}">
+    <option value="">Please select a pet</option>
+    <option th:each="pet : ${owner.getPets()}" th:text="${pet.name}" th:value="${pet.id}"></option>
+  </select>
+
+
+  <button type="submit">Book Appointment</button>
+</form>
+
+<script th:src="@{/js/appointment-form.js}" type="text/javascript"></script>
+</body>
+</html>
