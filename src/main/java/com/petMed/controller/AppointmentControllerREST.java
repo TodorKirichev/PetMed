@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/appointments")
 public class AppointmentControllerREST {
 
     private final UserService userService;
@@ -30,21 +30,18 @@ public class AppointmentControllerREST {
     }
 
     @GetMapping("/available-hours")
-    public ResponseEntity<Map<String, List<String>>> getAvailableHours(@RequestParam String date, @RequestParam String vetUsername) {
-
+    public ResponseEntity<List<String>> getAvailableHours(@RequestParam String date, @RequestParam String vetUsername) {
         LocalDate selectedDate = LocalDate.parse(date);
         User vet = userService.findVetByUsername(vetUsername);
 
         List<Appointment> existingAppointments = appointmentService.findAvailableAppointmentsByDay(selectedDate, vet);
+
         List<String> availableTimes = existingAppointments.stream()
                 .filter(appointment -> !appointment.isBooked())
                 .map(appointment -> appointment.getStartTime().toString())
                 .collect(Collectors.toList());
 
-        Map<String, List<String>> response = new HashMap<>();
-        response.put("times", availableTimes);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(availableTimes);
     }
 
 }

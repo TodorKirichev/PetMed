@@ -7,20 +7,22 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 
 <main>
-    <ul th:each="pet : ${pets}">
-        <li>
-            <div class="pet-name" th:text="${pet.name}"></div>
-            <div class="pet-details">
-                <div class="pet-species" th:text="${pet.species}"></div>
-                <div class="pet-breed" th:text="${pet.breed}"></div>
-                <div class="pet-age" th:text="${pet.age}"></div>
-            </div>
-            <form th:action="@{'/pets/' + ${pet.id} + '/edit-profile'}" th:method="GET">
-                <button>Edit pet profile</button>
-            </form>
-            <a th:href="@{'/pets/' + ${pet.id} + '/delete'}">Delete pet</a>
-        </li>
-    </ul>
+    <div class="container">
+        <ul th:each="pet : ${pets}">
+            <li>
+                <div class="pet-name" th:text="${pet.name}"></div>
+                <div class="pet-details">
+                    <div class="pet-species" th:text="${pet.species}"></div>
+                    <div class="pet-breed" th:text="${pet.breed}"></div>
+                    <div class="pet-age" th:text="${pet.age}"></div>
+                </div>
+                <form th:action="@{'/pets/' + ${pet.id} + '/edit-profile'}" th:method="GET">
+                    <button>Edit pet profile</button>
+                </form>
+                <a th:href="@{'/pets/' + ${pet.id} + '/delete'}">Delete pet</a>
+            </li>
+        </ul>
+    </div>
 </main>
 
 </body>

@@ -6,9 +6,11 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 
 <main>
-    <h1>Choose Your Role</h1>
-    <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">Vet</a>
-    <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">Owner</a>
+    <div class="container">
+        <h1>Choose Your Role</h1>
+        <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">Vet</a>
+        <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">Owner</a>
+    </div>
 </main>
 
 </body>

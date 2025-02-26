@@ -16,7 +16,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests(requests -> requests
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                    .requestMatchers("/", "register","register-owner", "register-vet").permitAll()
+                    .requestMatchers("/", "/register","/register-owner", "/register-vet").permitAll()
                     .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

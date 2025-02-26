@@ -8,13 +8,13 @@ function fetchAvailableTimes() {
         return;
     }
 
-    fetch(`/appointments/available-hours?date=${selectedDate}&vetUsername=${vetUsername}`)
+    fetch(`/api/appointments/available-hours?date=${selectedDate}&vetUsername=${vetUsername}`)
         .then(response => response.json())
         .then(data => {
             timeSelect.innerHTML = '';
 
-            if (data.times.length > 0) {
-                data.times.forEach(time => {
+            if (data.length > 0) {
+                data.forEach(time => {
                     const option = document.createElement("option");
                     option.value = time;
                     option.text = time;
@@ -24,10 +24,6 @@ function fetchAvailableTimes() {
                 timeSelect.innerHTML = '<option value="">No available times</option>';
             }
         })
-        .catch(error => {
-            console.error("Error fetching available times:", error);
-            timeSelect.innerHTML = '<option value="">Error loading times</option>';
-        });
 }
 
 document.getElementById("datepicker").addEventListener("change", fetchAvailableTimes);

@@ -63,16 +63,6 @@ public class PetController {
         return new ModelAndView("redirect:/pets");
     }
 
-    @GetMapping("/{id}/edit-profile")
-    public ModelAndView editProfile(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
-        ModelAndView modelAndView = new ModelAndView("pet-edit-profile");
-
-        Pet pet = petService.findPetByIdAndOwnerId(id, currentUser.getUserId());
-        modelAndView.addObject("pet", pet);
-
-        return modelAndView;
-    }
-
     @GetMapping("/{id}/delete")
     public ModelAndView deletePet(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
         petService.delete(id, currentUser.getUserId());
