@@ -35,16 +35,16 @@ public class AppointmentController {
         return new AppointmentData();
     }
 
-    @PostMapping("/generate")
-    public ModelAndView generateDailySchedule(@AuthenticationPrincipal CurrentUser currentUser, @RequestParam LocalDate date, RedirectAttributes redirectAttributes) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/home");
-
-        User vet = userService.findById(currentUser.getUserId());
-        String message = appointmentService.createDailySchedule(vet, date);
-        redirectAttributes.addFlashAttribute("message", message);
-
-        return modelAndView;
-    }
+//    @PostMapping("/generate")
+//    public ModelAndView generateDailySchedule(@AuthenticationPrincipal CurrentUser currentUser, @RequestParam LocalDate date, RedirectAttributes redirectAttributes) {
+//        ModelAndView modelAndView = new ModelAndView("redirect:/home");
+//
+//        User vet = userService.findById(currentUser.getUserId());
+//        String message = appointmentService.createDailySchedule(vet, date);
+//        redirectAttributes.addFlashAttribute("message", message);
+//
+//        return modelAndView;
+//    }
 
     @GetMapping("/book/{username}")
     public ModelAndView showAppointmentForm(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {

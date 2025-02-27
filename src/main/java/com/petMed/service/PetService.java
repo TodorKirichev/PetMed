@@ -14,9 +14,11 @@ import java.util.UUID;
 public class PetService {
 
     private final PetRepository petRepository;
+    private final AppointmentService appointmentService;
 
-    public PetService(PetRepository petRepository) {
+    public PetService(PetRepository petRepository, AppointmentService appointmentService) {
         this.petRepository = petRepository;
+        this.appointmentService = appointmentService;
     }
 
     public void save(PetData petData, User user) {
@@ -38,6 +40,7 @@ public class PetService {
 
     public void delete(UUID id, UUID userId) {
         Pet byIdAndOwnerId = getByIdAndOwnerId(id, userId);
+        appointmentService.freeUp(byIdAndOwnerId.getAppointments());
         petRepository.delete(byIdAndOwnerId);
     }
 

@@ -20,4 +20,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
     List<Appointment> findAllByDateAndVetOrderByStartTime(LocalDate day, User vet);
 
     Appointment findByVetAndDateAndStartTime(User vet, LocalDate date, LocalTime time);
+
+    boolean existsByVetAndDate(User vet, LocalDate date);
 }

@@ -38,5 +38,8 @@ public class Pet {
     private User owner;
 
     @OneToMany(mappedBy = "pet")
+    private List<Appointment> appointments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pet")
     private List<MedicalRecord> medicalRecords = new ArrayList<>();
 }

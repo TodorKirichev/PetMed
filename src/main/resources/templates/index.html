@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="vet-description">
-                    <p th:text="${vet.fistName}"></p>
+                    <p th:text="${vet.firstName}"></p>
                     <p th:text="${vet.clinic.city}"></p>
                     <form th:action="'/appointments/book/' + ${vet.username}" th:method="GET">
                         <button type="submit">Request an Appointment</button>

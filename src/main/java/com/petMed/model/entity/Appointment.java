@@ -28,11 +28,9 @@ public class Appointment {
     @Column(nullable = false)
     private LocalTime startTime;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private LocalTime endTime;
-
-    @Column(nullable = false)
-    private boolean isBooked;
+    private AppointmentStatus status;
 
     @ManyToOne
     private Pet pet;

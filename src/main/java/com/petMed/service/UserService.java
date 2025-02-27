@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
 
     private User createUser(RegisterRequest registerRequest) {
         return User.builder()
-                .fistName(registerRequest.getFirstName())
+                .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())

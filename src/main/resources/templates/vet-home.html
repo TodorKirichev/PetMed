@@ -35,24 +35,24 @@
                     <td th:text="${appointment.pet.name}"></td>
                     <td th:text="${appointment.pet.species}"></td>
                     <td th:text="${appointment.pet.breed}"></td>
-                    <td th:text="${appointment.pet.owner.fistName}"></td>
+                    <td th:text="${appointment.pet.owner.firstName}"></td>
 
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="generate-schedule">
-            <h2>Select a date to generate daily schedule</h2>
+<!--        <div class="generate-schedule">-->
+<!--            <h2>Select a date to generate daily schedule</h2>-->
 
-            <form th:action="@{/appointments/generate}" th:method="POST">
-                <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date" required />
+<!--            <form th:action="@{/appointments/generate}" th:method="POST">-->
+<!--                <label for="date">Select Date:</label>-->
+<!--                <input type="date" id="date" name="date" required />-->
 
-                <button type="submit">Generate</button>
-            </form>
-            <p id="message" th:if="${message}" th:text="${message}"></p>
-        </div>
+<!--                <button type="submit">Generate</button>-->
+<!--            </form>-->
+<!--            <p id="message" th:if="${message}" th:text="${message}"></p>-->
+<!--        </div>-->
 
     </div>
 </main>
