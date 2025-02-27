@@ -1,0 +1,23 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+li {
+    margin: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    background-color: blue;
+    padding: 10px;
+}
+

@@ -25,7 +25,7 @@ public class UserDashboardService {
         User user = userService.findById(currentUser.getUserId());
 
         if (currentUser.getRole() == Role.VET) {
-            modelAndView.setViewName("vet-owner-home");
+            modelAndView.setViewName("vet-home");
 
             List<Appointment> appointments = appointmentService.findAllAppointmentsForToday(user);
             modelAndView.addObject("appointments", appointments);
