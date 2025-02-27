@@ -39,6 +39,18 @@ public class AppointmentScheduler {
         }
     }
 
+    @Scheduled(cron = "0 * * * * ?")
+    public void cleanupOldAppointments() {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        List<Appointment> oldAppointments = appointmentRepository
+                .findByDateBeforeAndStatus(yesterday, AppointmentStatus.SCHEDULED);
+
+        if (!oldAppointments.isEmpty()) {
+            appointmentRepository.deleteAll(oldAppointments);
+        }
+    }
+
     private void generateAppointmentsForDay(LocalDate date) {
         List<User> vets = userRepository.findAllByRole(Role.VET);
 
@@ -68,7 +80,6 @@ public class AppointmentScheduler {
 
         appointmentRepository.save(appointment);
     }
-
 
     private boolean isWeekend(LocalDate date) {
         return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;

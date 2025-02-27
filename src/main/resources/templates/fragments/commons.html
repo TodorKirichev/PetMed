@@ -17,6 +17,7 @@
     </div>
 
     <ul>
+      <li sec:authorize="hasRole('VET')"><a th:href="@{/home}">My schedule</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets/add}">Add pet</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets}">My pets</a></li>
       <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
