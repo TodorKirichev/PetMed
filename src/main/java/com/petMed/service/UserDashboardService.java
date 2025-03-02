@@ -7,6 +7,7 @@ import com.petMed.security.CurrentUser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,8 +28,9 @@ public class UserDashboardService {
         if (currentUser.getRole() == Role.VET) {
             modelAndView.setViewName("vet-home");
 
-            List<Appointment> appointments = appointmentService.findAllAppointmentsForToday(user);
+            List<Appointment> appointments = appointmentService.findAllAppointmentsByDayAndVet(LocalDate.now(), user);
             modelAndView.addObject("appointments", appointments);
+            modelAndView.addObject("vetUsername", user.getUsername());
             return modelAndView;
 
         } else if (currentUser.getRole() == Role.ADMIN) {

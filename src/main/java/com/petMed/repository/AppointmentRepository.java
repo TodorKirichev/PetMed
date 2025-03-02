@@ -9,13 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID> {
 
-    List<Appointment> findByDateAndVetOrderByDateAscStartTimeAsc(LocalDate now, User user);
+    List<Appointment> findByDateAndVetOrderByStartTimeAsc(LocalDate now, User user);
 
     List<Appointment> findAllByDateAndVetOrderByStartTime(LocalDate day, User vet);
 

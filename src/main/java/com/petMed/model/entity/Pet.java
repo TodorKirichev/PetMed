@@ -40,6 +40,6 @@ public class Pet {
     @OneToMany(mappedBy = "pet")
     private List<Appointment> appointments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pet")
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
     private List<MedicalRecord> medicalRecords = new ArrayList<>();
 }

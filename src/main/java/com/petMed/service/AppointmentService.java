@@ -1,5 +1,6 @@
 package com.petMed.service;
 
+import com.petMed.model.dto.AppointmentDTO;
 import com.petMed.model.dto.AppointmentData;
 import com.petMed.model.entity.Appointment;
 import com.petMed.model.entity.Pet;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -53,12 +55,8 @@ public class AppointmentService {
 //    }
 
 
-    public List<Appointment> findAllAppointmentsForToday(User user) {
-        return appointmentRepository.findByDateAndVetOrderByDateAscStartTimeAsc(LocalDate.now(), user);
-    }
-
-    public List<Appointment> findAvailableAppointmentsByDay(LocalDate day, User vet) {
-        return appointmentRepository.findAllByDateAndVetOrderByStartTime(day, vet);
+    public List<Appointment> findAllAppointmentsByDayAndVet(LocalDate currentDay, User user) {
+        return appointmentRepository.findByDateAndVetOrderByStartTimeAsc(currentDay, user);
     }
 
     public Appointment findByVetAndDateAndTime(User vet, LocalDate date, LocalTime time) {
@@ -78,5 +76,34 @@ public class AppointmentService {
             appointment.setStatus(AppointmentStatus.SCHEDULED);
             appointmentRepository.save(appointment);
         });
+    }
+
+    public Appointment findById(UUID appointmentId) {
+        Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
+        if (appointment.isEmpty()) {
+            throw new RuntimeException("Appointment not found");
+        }
+        return appointment.get();
+    }
+
+    public List<AppointmentDTO> findAllBookedAppointmentsByDayAndVet(LocalDate currentDate, User vet) {
+        return findAllAppointmentsByDayAndVet(currentDate, vet)
+                .stream().filter(appointment -> appointment.getStatus() == AppointmentStatus.BOOKED)
+                .map(appointment -> AppointmentDTO.builder()
+                        .appointmentId(appointment.getId())
+                        .startTime(appointment.getStartTime().toString())
+                        .petName(appointment.getPet().getName())
+                        .petSpecies(appointment.getPet().getSpecies().toString())
+                        .petBreed(appointment.getPet().getBreed())
+                        .petOwnerFirstName(appointment.getPet().getOwner().getFirstName())
+                        .build()).collect(Collectors.toList());
+    }
+
+    public List<String> findAllAvailableTimesForAppointmentByDayAndVet(LocalDate selectedDate, User vet) {
+        return findAllAppointmentsByDayAndVet(selectedDate, vet)
+                .stream()
+                .filter(appointment -> appointment.getStatus() == AppointmentStatus.SCHEDULED)
+                .map(appointment -> appointment.getStartTime().toString())
+                .collect(Collectors.toList());
     }
 }

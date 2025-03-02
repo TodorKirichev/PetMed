@@ -1,3 +1,10 @@
+body {
+    background-image: url("https://images.ctfassets.net/rt5zmd3ipxai/3A8A0XUWSnu46pgON14NAe/c39526820edf7d6ac170ba09eb162c86/NVA-Studio-Dog-Tongue-Blue.png?fit=fill&fm=webp&h=567&w=1485&q=75,%20https://images.ctfassets.net/rt5zmd3ipxai/3A8A0XUWSnu46pgON14NAe/c39526820edf7d6ac170ba09eb162c86/NVA-Studio-Dog-Tongue-Blue.png?fit=fill&fm=webp&h=1134&w=2970&q=75");
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
 main {
     display: flex;
     justify-content: center;
@@ -6,6 +13,7 @@ main {
 }
 
 form {
+    background-color: white;
     width: 400px;
     display: flex;
     flex-direction: column;

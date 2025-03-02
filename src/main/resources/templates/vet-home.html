@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pet Med App</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/vet-home.css"/>
@@ -18,7 +18,12 @@
     <div class="container">
 
         <div class="show-schedule">
-            <h1>Тoday's schedule</h1>
+            <h1 id="schedule-info">Тoday's schedule</h1>
+            <input type="hidden" id="vet-username" th:value="${vetUsername}">
+            <div>
+                <button id="prev-day">Prev</button>
+                <button id="next-day">Next</button>
+            </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -29,7 +34,7 @@
                     <th>Owner</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="schedule-body">
                 <tr th:each="appointment : ${appointments}" th:if="${appointment.pet}">
                     <td th:text="${appointment.startTime}"></td>
                     <td th:text="${appointment.pet.name}"></td>
@@ -40,6 +45,16 @@
                 </tr>
                 </tbody>
             </table>
+
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <h2>Enter Medical Record</h2>
+                    <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
+                    <textarea id="treatment-textarea" rows="6" cols="50" placeholder="Enter treatment here..."></textarea>
+                    <button id="save-record">Save Record</button>
+                    <button id="close-record">Close</button>
+                </div>
+            </div>
         </div>
 
 <!--        <div class="generate-schedule">-->
@@ -57,6 +72,7 @@
     </div>
 </main>
 
-<script th:src="@{/js/flash-message.js}" type="text/javascript"></script>
+<script th:src="@{/js/fetch-schedule.js}" type="text/javascript"></script>
+<!--<script th:src="@{/js/flash-message.js}" type="text/javascript"></script>-->
 </body>
 </html>
