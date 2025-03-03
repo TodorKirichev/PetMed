@@ -1,8 +1,8 @@
 package com.petMed.util;
 
-import com.petMed.model.entity.User;
-import com.petMed.model.enums.Role;
-import com.petMed.repository.UserRepository;
+import com.petMed.user.model.User;
+import com.petMed.user.model.Role;
+import com.petMed.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

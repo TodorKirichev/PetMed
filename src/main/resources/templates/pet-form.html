@@ -22,7 +22,7 @@
 
       <select id="species" th:field="*{species}" onchange="fetchBreeds()">
         <option th:value="${species}">Select Species</option>
-        <option th:each="species : ${T(com.petMed.model.enums.PetSpecies).values()}" th:value="${species}" th:text="${species}"></option>
+        <option th:each="species : ${T(com.petMed.pet.model.PetSpecies).values()}" th:value="${species}" th:text="${species.speciesName}"></option>
       </select>
       <p th:if="${#fields.hasErrors('species')}" th:errors="*{species}"></p>
 

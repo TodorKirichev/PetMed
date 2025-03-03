@@ -35,7 +35,7 @@
 
       <select id="city" th:field="*{city}">
         <option th:value="${city}">Select City</option>
-        <option th:each="city : ${T(com.petMed.model.enums.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
+        <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
       </select>
       <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
 

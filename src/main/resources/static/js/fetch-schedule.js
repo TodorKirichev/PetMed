@@ -13,7 +13,7 @@ const fetchSchedule = () => {
             scheduleBody.innerHTML = "";
 
             if (data.length === 0) {
-                scheduleBody.innerHTML = "<tr><td colspan='5'>No appointments</td></tr>";
+                scheduleBody.innerHTML = "<tr><td colspan='6'>No appointments</td></tr>";
                 return;
             }
 

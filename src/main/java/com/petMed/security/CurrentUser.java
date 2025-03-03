@@ -1,6 +1,6 @@
 package com.petMed.security;
 
-import com.petMed.model.enums.Role;
+import com.petMed.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
