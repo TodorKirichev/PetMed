@@ -3,6 +3,7 @@ package com.petMed.user.service;
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.web.dto.PetOwnerRegisterRequest;
 import com.petMed.web.dto.RegisterRequest;
+import com.petMed.web.dto.VetData;
 import com.petMed.web.dto.VetRegisterRequest;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.user.model.User;
@@ -32,7 +33,7 @@ public class UserService implements UserDetailsService {
         this.clinicService = clinicService;
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByUsernameOptional(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -50,7 +51,12 @@ public class UserService implements UserDetailsService {
         User user = createUser(vetRegisterRequest);
         user.setRole(Role.VET);
 
-        Clinic clinic = clinicService.createClinic(vetRegisterRequest);
+        Clinic clinic = clinicService.createClinic(
+                vetRegisterRequest.getClinicName(),
+                vetRegisterRequest.getCity(),
+                vetRegisterRequest.getAddress(),
+                vetRegisterRequest.getSite()
+        );
         user.setClinic(clinic);
 
         userRepository.save(user);
@@ -73,7 +79,7 @@ public class UserService implements UserDetailsService {
             throw new RuntimeException("Passwords do not match");
         }
 
-        Optional<User> byUsername = findByUsername(registerRequest.getUsername());
+        Optional<User> byUsername = findByUsernameOptional(registerRequest.getUsername());
         if (byUsername.isPresent()) {
             throw new RuntimeException("User already exists");
         }
@@ -104,7 +110,35 @@ public class UserService implements UserDetailsService {
         return userRepository.findAllByRole(Role.VET);
     }
 
-    public User findVetByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Vet not found"));
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void changeRole(String username, String newRole) {
+        User byUsername = findByUsername(username);
+        byUsername.setRole(Role.valueOf(newRole));
+        userRepository.save(byUsername);
+    }
+
+    public void updateVetProfile(UUID userId, VetData vetData) {
+        User vet = findById(userId);
+        Clinic clinic = clinicService.createClinic(
+                vetData.getClinicName(),
+                vetData.getCity(),
+                vetData.getAddress(),
+                vetData.getSite()
+        );
+
+        vet.setId(vet.getId());
+        vet.setFirstName(vetData.getFirstName());
+        vet.setLastName(vetData.getLastName());
+        vet.setPhone(vetData.getPhone());
+        vet.setClinic(clinic);
+
+        userRepository.save(vet);
     }
 }

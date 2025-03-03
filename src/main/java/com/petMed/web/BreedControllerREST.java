@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/breeds")
-public class BreedController {
+public class BreedControllerREST {
 
     private final BreedService breedService;
 
-    public BreedController(BreedService breedService) {
+    public BreedControllerREST(BreedService breedService) {
         this.breedService = breedService;
     }
 

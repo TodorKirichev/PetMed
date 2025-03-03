@@ -7,6 +7,7 @@ import com.petMed.security.CurrentUser;
 import com.petMed.appointment.service.AppointmentService;
 import com.petMed.pet.service.PetService;
 import com.petMed.user.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,10 +44,11 @@ public class AppointmentController {
 //    }
 
     @GetMapping("/book/{username}")
+    @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView showAppointmentForm(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
         ModelAndView modelAndView = new ModelAndView("appointment-form");
 
-        User vet = userService.findVetByUsername(username);
+        User vet = userService.findByUsername(username);
         User owner = userService.findById(currentUser.getUserId());
 
         modelAndView.addObject("vet", vet);
@@ -56,10 +58,11 @@ public class AppointmentController {
     }
 
     @PostMapping("/book/{username}")
+    @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView bookAppointment(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser, AppointmentData appointmentData) {
         ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
-        User vet = userService.findVetByUsername(username);
+        User vet = userService.findByUsername(username);
         Pet pet = petService.findPetByIdAndOwnerId(appointmentData.getPetId(), currentUser.getUserId());
 
         appointmentService.book(vet, pet, appointmentData);

@@ -4,11 +4,22 @@ import com.petMed.clinic.model.CityName;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-public class VetRegisterRequest extends RegisterRequest{
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class VetData {
+
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
+    @NotBlank
+    private String phone;
 
     @NotBlank
     private String clinicName;
@@ -20,5 +31,4 @@ public class VetRegisterRequest extends RegisterRequest{
     private String address;
 
     private String site;
-
 }

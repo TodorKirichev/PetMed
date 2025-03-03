@@ -16,10 +16,11 @@
 
 <main>
     <div class="container">
+        <h1 th:if="${vet.getClinic() == null}">You need to add a clinic before you can offer appointments.</h1>
 
         <div class="show-schedule">
             <h1 id="schedule-info">Тoday's schedule</h1>
-            <input type="hidden" id="vet-username" th:value="${vetUsername}">
+            <input type="hidden" id="vet-username" th:value="${vet.username}">
             <div>
                 <button id="prev-day">Prev</button>
                 <button id="next-day">Next</button>
@@ -51,24 +52,25 @@
                 <div class="popup-content">
                     <h2>Enter Medical Record</h2>
                     <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
-                    <textarea id="treatment-textarea" rows="6" cols="50" placeholder="Enter treatment here..."></textarea>
+                    <textarea id="treatment-textarea" rows="6" cols="50"
+                              placeholder="Enter treatment here..."></textarea>
                     <button id="save-record">Save Record</button>
                     <button id="close-record">Close</button>
                 </div>
             </div>
         </div>
 
-<!--        <div class="generate-schedule">-->
-<!--            <h2>Select a date to generate daily schedule</h2>-->
+        <!--        <div class="generate-schedule">-->
+        <!--            <h2>Select a date to generate daily schedule</h2>-->
 
-<!--            <form th:action="@{/appointments/generate}" th:method="POST">-->
-<!--                <label for="date">Select Date:</label>-->
-<!--                <input type="date" id="date" name="date" required />-->
+        <!--            <form th:action="@{/appointments/generate}" th:method="POST">-->
+        <!--                <label for="date">Select Date:</label>-->
+        <!--                <input type="date" id="date" name="date" required />-->
 
-<!--                <button type="submit">Generate</button>-->
-<!--            </form>-->
-<!--            <p id="message" th:if="${message}" th:text="${message}"></p>-->
-<!--        </div>-->
+        <!--                <button type="submit">Generate</button>-->
+        <!--            </form>-->
+        <!--            <p id="message" th:if="${message}" th:text="${message}"></p>-->
+        <!--        </div>-->
 
     </div>
 </main>

@@ -1,8 +1,11 @@
 package com.petMed.clinic.service;
 
+import com.petMed.clinic.model.CityName;
 import com.petMed.web.dto.VetRegisterRequest;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.clinic.repository.ClinicRepository;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +17,20 @@ public class ClinicService {
         this.clinicRepository = clinicRepository;
     }
 
-    public Clinic createClinic(VetRegisterRequest vetRegisterRequest) {
+    public Clinic createClinic(String clinicName, CityName city, String address, String site) {
+//        Optional<Clinic> byName = clinicRepository.findByName(vetRegisterRequest.getClinicName());
+//        if (byName.isPresent()) {
+//            Clinic clinic = byName.get();
+//            clinic.setCity(vetRegisterRequest.getCity());
+//            clinic.setAddress(vetRegisterRequest.getAddress());
+//            clinic.setSite(vetRegisterRequest.getSite());
+//            return clinicRepository.save(clinic);
+//        }
         Clinic clinic = Clinic.builder()
-                .name(vetRegisterRequest.getClinicName())
-                .city(vetRegisterRequest.getCity())
-                .address(vetRegisterRequest.getAddress())
+                .name(clinicName)
+                .city(city)
+                .address(address)
+                .site(site)
                 .build();
         return clinicRepository.save(clinic);
     }

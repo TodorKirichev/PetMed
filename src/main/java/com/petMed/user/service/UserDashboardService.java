@@ -22,20 +22,16 @@ public class UserDashboardService {
         this.userService = userService;
     }
 
-    public ModelAndView getDashboardView(CurrentUser currentUser) {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = userService.findById(currentUser.getUserId());
-
+    public ModelAndView  getDashboardView(CurrentUser currentUser) {
         if (currentUser.getRole() == Role.VET) {
-            modelAndView.setViewName("vet-home");
-
-            List<Appointment> appointments = appointmentService.findAllAppointmentsByDayAndVet(LocalDate.now(), user);
-            modelAndView.addObject("appointments", appointments);
-            modelAndView.addObject("vetUsername", user.getUsername());
-            return modelAndView;
+            User vet = userService.findById(currentUser.getUserId());
+            if (vet.getClinic() == null) {
+                return new ModelAndView("redirect:/vets/profile");
+            }
+            return new ModelAndView("redirect:/vets/schedule");
 
         } else if (currentUser.getRole() == Role.ADMIN) {
-            return new ModelAndView("admin-home");
+            return new ModelAndView("redirect:/admin/users");
         }
         return new ModelAndView("redirect:/");
     }

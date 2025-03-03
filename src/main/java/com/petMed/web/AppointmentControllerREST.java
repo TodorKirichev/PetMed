@@ -25,7 +25,7 @@ public class AppointmentControllerREST {
     @GetMapping("/available-hours")
     public ResponseEntity<List<String>> getAvailableHours(@RequestParam String date, @RequestParam String vetUsername) {
         LocalDate selectedDate = LocalDate.parse(date);
-        User vet = userService.findVetByUsername(vetUsername);
+        User vet = userService.findByUsername(vetUsername);
         List<String> availableTimes = appointmentService.findAllAvailableTimesForAppointmentByDayAndVet(selectedDate, vet);
 
         return ResponseEntity.ok(availableTimes);
@@ -34,7 +34,7 @@ public class AppointmentControllerREST {
     @GetMapping("/date")
     public ResponseEntity<List<AppointmentInfo>> getAllByDate(@RequestParam String date, @RequestParam String vetUsername) {
         LocalDate currentDate = LocalDate.parse(date);
-        User vet = userService.findVetByUsername(vetUsername);
+        User vet = userService.findByUsername(vetUsername);
         List<AppointmentInfo> allAppointmentsByDay = appointmentService.findAllBookedAppointmentsByDayAndVet(currentDate, vet);
 
         return ResponseEntity.ok(allAppointmentsByDay);

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Pet Med App</title>
+  <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="/css/styles.css"/>
+  <link rel="stylesheet" href="/css/header.css"/>
+  <link rel="stylesheet" href="/css/vet-edit-profile.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<main>
+  <form th:action="@{/vets/profile}" th:method="POST" th:object="${vetData}">
+    <h1>Edit profile</h1>
+
+    <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
+    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+
+    <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
+    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+
+    <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
+    <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+
+    <input type="text" id="clinic-name" name="clinic-name" placeholder="Clinic Name" th:field="*{clinicName}">
+    <p th:if="${#fields.hasErrors('clinicName')}" th:errors="*{clinicName}"></p>
+
+    <select id="city" th:field="*{city}">
+      <option th:value="${city}">Select City</option>
+      <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
+    </select>
+    <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+
+    <input type="text" id="address" name="address" placeholder="Address" th:field="*{address}">
+    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+
+    <input type="text" id="site" name="site" placeholder="Site" th:field="*{site}">
+    <p th:if="${#fields.hasErrors('site')}" th:errors="*{site}"></p>
+
+    <button type="submit">Save</button>
+  </form>
+</main>
+</body>
+</html>

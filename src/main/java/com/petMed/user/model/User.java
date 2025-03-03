@@ -38,7 +38,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String phone;
 
     @OneToOne
@@ -52,7 +52,7 @@ public class User {
     private List<Pet> pets = new ArrayList<>();
 
     @OneToMany(mappedBy = "vet")
-    List<Appointment> appointments = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>();
 
     @Column
     private boolean isActive;
