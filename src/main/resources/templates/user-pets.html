@@ -23,10 +23,12 @@
                     <div class="pet-breed" th:text="${pet.breed}"></div>
                     <div class="pet-age" th:text="${pet.age}"></div>
                 </div>
-                <form th:action="@{'/pets/' + ${pet.id} + '/edit-profile'}" th:method="GET">
-                    <button>Edit pet profile</button>
+                <form th:action="@{'/pets/' + ${pet.id} + '/medical-records'}" th:method="GET">
+                    <button>View medical records</button>
                 </form>
-                <a th:href="@{'/pets/' + ${pet.id} + '/delete'}">Delete pet</a>
+                <form th:method="DELETE" th:action="@{'/pets/' + ${pet.id} + '/delete'}">
+                    <button>Delete pet</button>
+                </form>
             </li>
         </ul>
     </div>

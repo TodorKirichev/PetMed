@@ -5,6 +5,7 @@ import com.petMed.pet.model.Pet;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -25,6 +26,9 @@ public class MedicalRecord {
 
     @Column(nullable = false)
     private String treatment;
+
+    @Column(nullable = false)
+    private LocalDate createdOn;
 
     @OneToOne(optional = false)
     private Appointment appointment;

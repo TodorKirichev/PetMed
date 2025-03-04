@@ -6,6 +6,7 @@ import com.petMed.pet.model.Pet;
 import com.petMed.medicalRecord.repository.MedicalRecordRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,7 @@ public class MedicalRecordService {
         MedicalRecord medicalRecord = MedicalRecord.builder()
                 .diagnosis(diagnosis)
                 .treatment(treatment)
+                .createdOn(LocalDate.now())
                 .appointment(appointment)
                 .pet(pet)
                 .build();

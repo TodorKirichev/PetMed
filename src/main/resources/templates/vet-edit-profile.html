@@ -14,7 +14,7 @@
 <header th:replace="~{fragments/commons::nav}"></header>
 
 <main>
-  <form th:action="@{/vets/profile}" th:method="POST" th:object="${vetData}">
+  <form th:action="@{/vets/profile}" th:method="PATCH" th:object="${vetData}">
     <h1>Edit profile</h1>
 
     <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">

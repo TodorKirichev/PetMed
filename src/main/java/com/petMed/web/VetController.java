@@ -13,10 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
@@ -64,7 +61,7 @@ public class VetController {
         return modelAndView;
     }
 
-    @PostMapping("/profile")
+    @PatchMapping("/profile")
     public ModelAndView editProfile(@Valid VetData vetData, BindingResult bindingResult, @AuthenticationPrincipal CurrentUser currentUser) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("vet-edit-profile");

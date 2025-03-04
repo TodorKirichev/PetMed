@@ -1,5 +1,6 @@
 package com.petMed.web;
 
+import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.web.dto.PetData;
 import com.petMed.pet.model.Pet;
 import com.petMed.user.model.User;
@@ -63,10 +64,22 @@ public class PetController {
         return new ModelAndView("redirect:/pets");
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public ModelAndView deletePet(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
         petService.delete(id, currentUser.getUserId());
         return new ModelAndView("redirect:/pets");
+    }
+
+    @GetMapping("/{id}/medical-records")
+    public ModelAndView getMedicalRecords(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
+        ModelAndView modelAndView = new ModelAndView("medical-records");
+
+        Pet pet = petService.findPetByIdAndOwnerId(id, currentUser.getUserId());
+        List<MedicalRecord> medicalRecords = pet.getMedicalRecords();
+        modelAndView.addObject("medicalRecords", medicalRecords);
+
+        return modelAndView;
+
     }
 
 }
