@@ -1,10 +1,8 @@
 package com.petMed.user.service;
 
+import com.petMed.email.client.NotificationClient;
 import com.petMed.clinic.service.ClinicService;
-import com.petMed.web.dto.PetOwnerRegisterRequest;
-import com.petMed.web.dto.RegisterRequest;
-import com.petMed.web.dto.VetData;
-import com.petMed.web.dto.VetRegisterRequest;
+import com.petMed.web.dto.*;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.user.model.User;
 import com.petMed.user.model.Role;
@@ -20,17 +18,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.petMed.email.EmailTemplates.CONFIRM_EMAIL_BODY;
+import static com.petMed.email.EmailTemplates.CONFIRM_EMAIL_SUBJECT;
+
 @Service
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ClinicService clinicService;
+    private final NotificationClient notificationClient;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService, NotificationClient notificationClient) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.clinicService = clinicService;
+        this.notificationClient = notificationClient;
     }
 
     public Optional<User> findByUsernameOptional(String username) {
@@ -43,6 +46,8 @@ public class UserService implements UserDetailsService {
         User user = createUser(petOwnerRegisterRequest);
         user.setRole(Role.PET_OWNER);
         userRepository.save(user);
+
+        sendEmail(user);
     }
 
     public void registerVet(VetRegisterRequest vetRegisterRequest) {
@@ -51,15 +56,31 @@ public class UserService implements UserDetailsService {
         User user = createUser(vetRegisterRequest);
         user.setRole(Role.VET);
 
-        Clinic clinic = clinicService.createClinic(
+        Clinic clinic = createClinic(vetRegisterRequest);
+        user.setClinic(clinic);
+
+        userRepository.save(user);
+
+        sendEmail(user);
+    }
+
+    private void sendEmail(User user) {
+        NotificationData notificationData = NotificationData.builder()
+                .email(user.getEmail())
+                .subject(CONFIRM_EMAIL_SUBJECT)
+                .body(String.format(CONFIRM_EMAIL_BODY, user.getFirstName(), user.getLastName()))
+                .build();
+
+        notificationClient.sendEmail(notificationData);
+    }
+
+    private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {
+        return clinicService.createClinic(
                 vetRegisterRequest.getClinicName(),
                 vetRegisterRequest.getCity(),
                 vetRegisterRequest.getAddress(),
                 vetRegisterRequest.getSite()
         );
-        user.setClinic(clinic);
-
-        userRepository.save(user);
     }
 
     private User createUser(RegisterRequest registerRequest) {
