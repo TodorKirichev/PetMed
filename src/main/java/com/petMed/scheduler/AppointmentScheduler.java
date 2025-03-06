@@ -1,4 +1,4 @@
-package com.petMed.appointment.service;
+package com.petMed.scheduler;
 
 import com.petMed.appointment.model.Appointment;
 import com.petMed.user.model.User;

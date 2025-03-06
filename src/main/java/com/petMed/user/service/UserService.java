@@ -2,12 +2,14 @@ package com.petMed.user.service;
 
 import com.petMed.email.client.NotificationClient;
 import com.petMed.clinic.service.ClinicService;
+import com.petMed.event.UserRegisterEvent;
 import com.petMed.web.dto.*;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.user.model.User;
 import com.petMed.user.model.Role;
 import com.petMed.user.repository.UserRepository;
 import com.petMed.security.CurrentUser;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,22 +20,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.petMed.email.EmailTemplates.CONFIRM_EMAIL_BODY;
-import static com.petMed.email.EmailTemplates.CONFIRM_EMAIL_SUBJECT;
-
 @Service
 public class UserService implements UserDetailsService {
 
+    private final ApplicationEventPublisher eventPublisher;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ClinicService clinicService;
-    private final NotificationClient notificationClient;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService, NotificationClient notificationClient) {
+    public UserService(ApplicationEventPublisher eventPublisher, UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService) {
+        this.eventPublisher = eventPublisher;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.clinicService = clinicService;
-        this.notificationClient = notificationClient;
     }
 
     public Optional<User> findByUsernameOptional(String username) {
@@ -47,7 +46,11 @@ public class UserService implements UserDetailsService {
         user.setRole(Role.PET_OWNER);
         userRepository.save(user);
 
-        sendEmail(user);
+        eventPublisher.publishEvent(createUserRegisterEvent(user));
+    }
+
+    private static UserRegisterEvent createUserRegisterEvent(User user) {
+        return new UserRegisterEvent(user, user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
     public void registerVet(VetRegisterRequest vetRegisterRequest) {
@@ -61,17 +64,7 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        sendEmail(user);
-    }
-
-    private void sendEmail(User user) {
-        NotificationData notificationData = NotificationData.builder()
-                .email(user.getEmail())
-                .subject(CONFIRM_EMAIL_SUBJECT)
-                .body(String.format(CONFIRM_EMAIL_BODY, user.getFirstName(), user.getLastName()))
-                .build();
-
-        notificationClient.sendEmail(notificationData);
+        eventPublisher.publishEvent(createUserRegisterEvent(user));
     }
 
     private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {
