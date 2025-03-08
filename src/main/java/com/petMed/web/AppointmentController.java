@@ -7,9 +7,11 @@ import com.petMed.security.CurrentUser;
 import com.petMed.appointment.service.AppointmentService;
 import com.petMed.pet.service.PetService;
 import com.petMed.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,17 +34,6 @@ public class AppointmentController {
         return new AppointmentData();
     }
 
-//    @PostMapping("/generate")
-//    public ModelAndView generateDailySchedule(@AuthenticationPrincipal CurrentUser currentUser, @RequestParam LocalDate date, RedirectAttributes redirectAttributes) {
-//        ModelAndView modelAndView = new ModelAndView("redirect:/home");
-//
-//        User vet = userService.findById(currentUser.getUserId());
-//        String message = appointmentService.createDailySchedule(vet, date);
-//        redirectAttributes.addFlashAttribute("message", message);
-//
-//        return modelAndView;
-//    }
-
     @GetMapping("/book/{username}")
     @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView showAppointmentForm(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -59,15 +50,17 @@ public class AppointmentController {
 
     @PostMapping("/book/{username}")
     @PreAuthorize("hasRole('PET_OWNER')")
-    public ModelAndView bookAppointment(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser, AppointmentData appointmentData) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/home");
+    public ModelAndView bookAppointment(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser, @Valid AppointmentData appointmentData, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("appointment-form");
+        }
 
         User vet = userService.findByUsername(username);
         Pet pet = petService.findPetByIdAndOwnerId(appointmentData.getPetId(), currentUser.getUserId());
 
         appointmentService.book(vet, pet, appointmentData);
 
-        return modelAndView;
+        return new ModelAndView("redirect:/home");
     }
 
 

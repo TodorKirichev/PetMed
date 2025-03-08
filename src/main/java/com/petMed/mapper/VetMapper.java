@@ -2,7 +2,6 @@ package com.petMed.mapper;
 
 import com.petMed.user.model.User;
 import com.petMed.web.dto.VetData;
-import com.petMed.web.dto.VetRegisterRequest;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

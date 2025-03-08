@@ -35,7 +35,7 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phone}"></td>
                 <td th:text="${user.role}"></td>
-                <form th:method="POST" th:action="@{'/admin/users/' + ${user.username} + '/change-role'}">
+                <form th:method="POST" th:action="@{'/users/' + ${user.username} + '/change-role'}">
                 <td>
                     <select name="new-role" id="new-role">
                         <option>Select role</option>

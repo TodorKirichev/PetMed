@@ -1,6 +1,5 @@
 package com.petMed.user.service;
 
-import com.petMed.email.client.NotificationClient;
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.event.UserRegisterEvent;
 import com.petMed.web.dto.*;
@@ -49,10 +48,6 @@ public class UserService implements UserDetailsService {
         eventPublisher.publishEvent(createUserRegisterEvent(user));
     }
 
-    private static UserRegisterEvent createUserRegisterEvent(User user) {
-        return new UserRegisterEvent(user, user.getFirstName(), user.getLastName(), user.getEmail());
-    }
-
     public void registerVet(VetRegisterRequest vetRegisterRequest) {
         validate(vetRegisterRequest);
 
@@ -65,6 +60,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         eventPublisher.publishEvent(createUserRegisterEvent(user));
+    }
+
+    private static UserRegisterEvent createUserRegisterEvent(User user) {
+        return new UserRegisterEvent(user, user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
     private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {
@@ -125,7 +124,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Vet not found"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public List<User> findAllUsers() {

@@ -1,5 +1,7 @@
 package com.petMed.web.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +13,19 @@ import java.util.UUID;
 @Setter
 public class AppointmentData {
 
+    @NotNull
     private UUID appointmentId;
 
+    @NotNull
     private UUID petId;
 
+    @NotBlank
     private String vetUsername;
 
+    @NotNull
     private LocalDate date;
 
+    @NotNull
     private LocalTime time;
 
 }

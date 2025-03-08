@@ -1,11 +1,11 @@
-package com.petMed.web.dto;
+package com.petMed.email.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class NotificationData {
+public class EmailNotificationData {
 
     private String email;
 

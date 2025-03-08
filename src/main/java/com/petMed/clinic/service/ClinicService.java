@@ -1,11 +1,8 @@
 package com.petMed.clinic.service;
 
 import com.petMed.clinic.model.CityName;
-import com.petMed.web.dto.VetRegisterRequest;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.clinic.repository.ClinicRepository;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service

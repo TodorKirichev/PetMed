@@ -16,8 +16,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 
     List<Appointment> findByDateAndVetOrderByStartTimeAsc(LocalDate now, User user);
 
-    List<Appointment> findAllByDateAndVetOrderByStartTime(LocalDate day, User vet);
-
     Appointment findByVetAndDateAndStartTime(User vet, LocalDate date, LocalTime time);
 
     boolean existsByVetAndDate(User vet, LocalDate date);

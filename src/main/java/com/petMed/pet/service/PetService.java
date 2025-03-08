@@ -24,15 +24,19 @@ public class PetService {
 
     public void save(PetData petData, User user) {
         PetSpecies petSpecies = PetSpecies.valueOf(petData.getSpecies());
-        Pet pet = Pet.builder()
+        Pet pet = create(petData, user, petSpecies);
+
+        petRepository.save(pet);
+    }
+
+    private static Pet create(PetData petData, User user, PetSpecies petSpecies) {
+        return Pet.builder()
                 .name(petData.getName())
                 .species(petSpecies)
                 .breed(petData.getBreed())
                 .age(petData.getAge())
                 .owner(user)
                 .build();
-
-        petRepository.save(pet);
     }
 
     public Pet findPetByIdAndOwnerId(UUID id, UUID userId) {
@@ -47,7 +51,6 @@ public class PetService {
 
     private Pet getByIdAndOwnerId(UUID id, UUID userId) {
         Optional<Pet> byIdAndOwnerId = petRepository.findByIdAndOwnerId(id, userId);
-
         if (byIdAndOwnerId.isEmpty()) {
             throw new RuntimeException("Pet not found");
         }

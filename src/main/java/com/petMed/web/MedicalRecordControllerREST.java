@@ -8,8 +8,6 @@ import com.petMed.medicalRecord.service.MedicalRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/medical-records")
@@ -30,7 +28,7 @@ public class MedicalRecordControllerREST {
         String diagnosis = medicalRecordData.getDiagnosis();
         String treatment = medicalRecordData.getTreatment();
 
-        medicalRecordService.createRecord(appointment, pet, diagnosis, treatment);
+        medicalRecordService.createMedicalRecord(appointment, pet, diagnosis, treatment);
         appointmentService.changeStatusToCompleted(appointment);
 
         return ResponseEntity.ok("Record created");
