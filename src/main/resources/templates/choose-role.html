@@ -11,17 +11,19 @@
 </head>
 
 <body>
-<header th:replace="~{fragments/commons::nav}"></header>
+<header th:insert="~{fragments/commons::nav}"></header>
 
 <main>
-    <h1>Choose Your Role</h1>
     <div class="container">
-        <p>
-            <a  class="choose-one" th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">I'm a Vet</a>
-        </p>
-        <p>
-            <a  class="choose-one" th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">I'm an Owner</a>
-        </p>
+        <h1>Choose Your Role</h1>
+        <div class="choose-one">
+            <div class="option">
+                <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">I'm a Vet</a>
+            </div>
+            <div class="option">
+                <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">I'm an Owner</a>
+            </div>
+        </div>
     </div>
 </main>
 

@@ -22,9 +22,9 @@ public class UserDashboardService {
         if (currentUser.getRole() == Role.VET) {
             User vet = userService.findById(currentUser.getUserId());
             if (vet.getClinic() == null) {
-                return new ModelAndView("redirect:/profile");
+                return new ModelAndView("redirect:/users/profile");
             }
-            return new ModelAndView("redirect:/schedule");
+            return new ModelAndView("redirect:/users/schedule");
 
         } else if (currentUser.getRole() == Role.ADMIN) {
             return new ModelAndView("redirect:/users");

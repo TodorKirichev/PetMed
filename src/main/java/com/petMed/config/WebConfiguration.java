@@ -22,6 +22,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         http.csrf().disable()
                 .authorizeHttpRequests(requests -> requests
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .requestMatchers("/img/**").permitAll()
                     .requestMatchers("/", "/register","/register-owner", "/register-vet").permitAll()
                     .anyRequest().authenticated())
                 .formLogin(form -> form

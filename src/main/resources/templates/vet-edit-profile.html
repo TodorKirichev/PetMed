@@ -11,38 +11,40 @@
 </head>
 
 <body>
-<header th:replace="~{fragments/commons::nav}"></header>
+<header th:insert="~{fragments/commons::nav}"></header>
 
 <main>
-  <form th:action="@{/profile}" th:method="PATCH" th:object="${vetData}">
-    <h1>Edit profile</h1>
+  <div class="container">
+    <form th:action="@{/users/profile}" th:method="PATCH" th:object="${vetData}">
+      <h1>Edit profile</h1>
 
-    <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
-    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+      <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
+      <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
-    <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
-    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+      <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
+      <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
-    <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
-    <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+      <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
+      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
 
-    <input type="text" id="clinic-name" name="clinic-name" placeholder="Clinic Name" th:field="*{clinicName}">
-    <p th:if="${#fields.hasErrors('clinicName')}" th:errors="*{clinicName}"></p>
+      <input type="text" id="clinic-name" name="clinic-name" placeholder="Clinic Name" th:field="*{clinicName}">
+      <p th:if="${#fields.hasErrors('clinicName')}" th:errors="*{clinicName}"></p>
 
-    <select id="city" th:field="*{city}">
-      <option th:value="${city}">Select City</option>
-      <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
-    </select>
-    <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+      <select id="city" th:field="*{city}">
+        <option th:value="${city}">Select City</option>
+        <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
+      </select>
+      <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
 
-    <input type="text" id="address" name="address" placeholder="Address" th:field="*{address}">
-    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+      <input type="text" id="address" name="address" placeholder="Address" th:field="*{address}">
+      <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
 
-    <input type="text" id="site" name="site" placeholder="Site" th:field="*{site}">
-    <p th:if="${#fields.hasErrors('site')}" th:errors="*{site}"></p>
+      <input type="text" id="site" name="site" placeholder="Site" th:field="*{site}">
+      <p th:if="${#fields.hasErrors('site')}" th:errors="*{site}"></p>
 
-    <button type="submit">Save</button>
-  </form>
+      <button type="submit">Save</button>
+    </form>
+  </div>
 </main>
 </body>
 </html>

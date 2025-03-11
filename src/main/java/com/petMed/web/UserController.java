@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/users")
+    @GetMapping("")
     public ModelAndView getUsers() {
         ModelAndView modelAndView = new ModelAndView();
 
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/users/{username}/change-role")
+    @PostMapping("/{username}/change-role")
     public ModelAndView changeRole(@PathVariable String username, @RequestParam("new-role") String newRole) {
         userService.changeRole(username, newRole);
         return new ModelAndView("redirect:/users");

@@ -12,30 +12,33 @@
 
 <body>
 
-<header th:replace="~{fragments/commons::nav}"></header>
+<header th:insert="~{fragments/commons::nav}"></header>
 
 <main>
-    <form th:action="@{/pets/add}" th:object="${petData}" th:method="POST">
+    <div class="container">
+      <form th:action="@{/pets/add}" th:object="${petData}" th:method="POST">
+        <h1>Add pet</h1>
 
-      <input type="text" id="name" placeholder="Pet Name" th:field="*{name}" />
-      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        <input type="text" id="name" placeholder="Pet Name" th:field="*{name}" />
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
-      <select id="species" th:field="*{species}" onchange="fetchBreeds()">
-        <option th:value="${species}">Select Species</option>
-        <option th:each="species : ${T(com.petMed.pet.model.PetSpecies).values()}" th:value="${species}" th:text="${species.speciesName}"></option>
-      </select>
-      <p th:if="${#fields.hasErrors('species')}" th:errors="*{species}"></p>
+        <select id="species" th:field="*{species}" onchange="fetchBreeds()">
+          <option th:value="${species}">Select Species</option>
+          <option th:each="species : ${T(com.petMed.pet.model.PetSpecies).values()}" th:value="${species}" th:text="${species.speciesName}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('species')}" th:errors="*{species}"></p>
 
-      <select id="breed" th:field="*{breed}">
-        <option th:value="${species}">Select Breed</option>
-      </select>
-      <p th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></p>
+        <select id="breed" th:field="*{breed}">
+          <option th:value="${species}">Select Breed</option>
+        </select>
+        <p th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></p>
 
-      <input type="number" id="age" placeholder="Age" th:field="*{age}" min="0" />
-      <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+        <input type="number" id="age" placeholder="Age" th:field="*{age}" min="0" />
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
 
-      <button type="submit">Add Pet</button>
-    </form>
+        <button type="submit">Add Pet</button>
+      </form>
+    </div>
 </main>
 
 <script th:src="@{/js/fetch-breeds.js}" type="text/javascript"></script>

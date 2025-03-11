@@ -8,20 +8,20 @@
   <link rel="stylesheet" href="/css/header.css"/>
 </head>
 <body>
-<header th:fragment="header">
+<header>
   <nav>
     <div class="logo">
       <a th:href="@{/}" class="logo">
-        Logo
+        <img th:src="@{/img/paw.png}">
       </a>
     </div>
 
     <ul>
       <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/users}">Manage Users</a></li>
-      <li sec:authorize="hasRole('VET')"><a th:href="@{/schedule}">My schedule</a></li>
+      <li sec:authorize="hasRole('VET')"><a th:href="@{/users/schedule}">My schedule</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets/add}">Add pet</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets}">My pets</a></li>
-      <li sec:authorize="hasRole('VET')"><a th:href="@{/profile}">Edit profile</a></li>
+      <li sec:authorize="hasRole('VET')"><a th:href="@{/users/profile}">Edit profile</a></li>
       <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
       <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
       <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>

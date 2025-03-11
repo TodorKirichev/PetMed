@@ -50,7 +50,7 @@ public class AppointmentController {
 
     @PostMapping("/book/{username}")
     @PreAuthorize("hasRole('PET_OWNER')")
-    public ModelAndView bookAppointment(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser, @Valid AppointmentData appointmentData, BindingResult bindingResult) {
+    public ModelAndView bookAppointment(@Valid AppointmentData appointmentData, BindingResult bindingResult, @PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("appointment-form");
         }

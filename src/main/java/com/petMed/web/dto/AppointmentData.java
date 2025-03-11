@@ -14,13 +14,7 @@ import java.util.UUID;
 public class AppointmentData {
 
     @NotNull
-    private UUID appointmentId;
-
-    @NotNull
     private UUID petId;
-
-    @NotBlank
-    private String vetUsername;
 
     @NotNull
     private LocalDate date;

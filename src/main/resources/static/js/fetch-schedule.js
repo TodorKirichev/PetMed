@@ -66,6 +66,7 @@ const fetchSchedule = () => {
                             })
                             .finally(() => {
                                 popup.style.display = "none";
+                                window.location.reload();
                             });
 
                     }, { once: true });
