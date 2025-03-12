@@ -15,20 +15,25 @@
 
 <main>
     <div class="container">
-        <ul th:each="pet : ${pets}">
-            <li>
-                <div class="pet-name" th:text="${pet.name}"></div>
-                <div class="pet-details">
-                    <div class="pet-species" th:text="${pet.species.speciesName}"></div>
-                    <div class="pet-breed" th:text="${pet.breed}"></div>
-                    <div class="pet-age" th:text="${pet.age}"></div>
+        <ul>
+            <li th:each="pet : ${pets}">
+                <div class="details">
+                    <div class="pet-picture"></div>
+                    <div class="pet-details">
+                        <p class="pet-name" th:text="'Name: ' + ${pet.name}"></p>
+                        <p class="pet-species" th:text="'Species: ' + ${pet.species.speciesName}"></p>
+                        <p class="pet-breed" th:text="'Breed: ' + ${pet.breed}"></p>
+                        <p class="pet-age" th:text="'Age: ' + ${pet.age}"></p>
+                    </div>
                 </div>
-                <form th:action="@{'/pets/' + ${pet.id} + '/medical-records'}" th:method="GET">
-                    <button>View medical records</button>
-                </form>
-                <form th:method="DELETE" th:action="@{'/pets/' + ${pet.id} + '/delete'}">
-                    <button>Delete pet</button>
-                </form>
+                <div class="buttons">
+                    <form th:action="@{'/pets/' + ${pet.id} + '/medical-records'}" th:method="GET">
+                        <button>View medical records</button>
+                    </form>
+                    <form th:method="DELETE" th:action="@{'/pets/' + ${pet.id} + '/delete'}">
+                        <button>Delete pet</button>
+                    </form>
+                </div>
             </li>
         </ul>
     </div>

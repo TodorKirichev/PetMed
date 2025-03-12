@@ -16,6 +16,8 @@
 <main>
   <div class="container">
     <form th:action="'/appointments/book/' + ${vet.username}" th:method="POST" th:object="${appointmentData}">
+      <h1>Book an appointment</h1>
+
       <label for="datepicker">Choose a Date:</label>
       <input type="date" id="datepicker" name="selectedDate" required  th:field="*{date}"/>
       <input type="hidden" id="vetUsername" th:value="${vet.username}"/>

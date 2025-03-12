@@ -5,6 +5,10 @@ header {
     z-index: 100;
     border-bottom: 1px solid #12629C;
     box-shadow: 0px 0px 20px 0px #12629C;
+    background-image: url('/img/nav.png');
+    background-color: #f7fbff;
+    background-position: center -26px;
+    background-repeat: no-repeat;
 }
 
 header nav {

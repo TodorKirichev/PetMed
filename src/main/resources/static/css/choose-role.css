@@ -7,16 +7,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 60px;
     margin-top: 40px;
     width: 80%;
+}
+
+.choose-one > * {
+    flex: 1 1 0;
+    aspect-ratio: 1 / 1;
+}
+
+.choose-one h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .option {
     flex: 1 1 0;
     aspect-ratio: 1 / 1;
-    background-color: #12629C;
     border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px #12629C;
+}
+
+.option:hover {
+    box-shadow: 0px 0px 20px 8px #004270;
+}
+
+.vet-container .option {
+    background-image: url('/img/vet.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.owner-container .option {
+    background-image: url('/img/owner.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 a {

@@ -16,7 +16,7 @@
 
 <main>
     <div class="container">
-        <table class="table">
+        <table>
             <thead>
             <tr>
                 <th>Date</th>
@@ -24,7 +24,6 @@
                 <th>Treatment</th>
                 <th>Vet</th>
                 <th>Clinic</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -34,7 +33,6 @@
                 <td th:text="${record.treatment}"></td>
                 <td th:text="${record.appointment.vet.firstName} + ' ' + ${record.appointment.vet.lastName}"></td>
                 <td th:text="${record.appointment.vet.clinic.name}"></td>
-
             </tr>
             </tbody>
         </table>

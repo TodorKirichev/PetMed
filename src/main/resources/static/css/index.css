@@ -1,0 +1,53 @@
+form {
+    all: unset;
+}
+
+.container {
+    margin-top: 40px;
+    justify-content: left;
+}
+
+.container ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.container li {
+    width: 800px;
+    border: 1px solid #004270;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: -1px;
+}
+
+.container li:first-of-type {
+    border-radius:8px 8px 0 0;
+}
+
+.container li:last-of-type {
+    border-radius: 0 0 8px 8px;
+}
+
+.vet-profile-pic {
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    background-color: #12629C;
+    border-radius: 4px;
+}
+
+.vet-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.vet-description p {
+    margin-bottom: 6px;
+    display: flex;
+}
+
+button {
+    width: 100%;
+    margin: 0;
+}

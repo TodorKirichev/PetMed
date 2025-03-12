@@ -15,13 +15,18 @@
 
 <main>
     <div class="container">
-        <h1>Choose Your Role</h1>
         <div class="choose-one">
-            <div class="option">
-                <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()">I'm a Vet</a>
+            <div class="vet-container">
+                <h2>I'm a vet</h2>
+                <div class="option">
+                    <a th:href="@{/register-vet}" sec:authorize="!isAuthenticated()"></a>
+                </div>
             </div>
-            <div class="option">
-                <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()">I'm an Owner</a>
+            <div class="owner-container">
+                <h2>I'm an owner</h2>
+                <div class="option">
+                    <a th:href="@{/register-owner}" sec:authorize="!isAuthenticated()"></a>
+                </div>
             </div>
         </div>
     </div>

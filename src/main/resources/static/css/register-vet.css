@@ -1,0 +1,36 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: unset;
+    margin-top: 40px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin-bottom: 0;
+}
+
+.general-info,
+.additional-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.general-info > *,
+.additional-info > * {
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+form input,
+form select {
+    outline: none;
+    border: 1px solid #004270;
+    border-radius: 4px;
+}
+
+form input:focus {
+    box-shadow: 0px 0px 4px 0px #12629C;
+}
