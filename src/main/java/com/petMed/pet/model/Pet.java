@@ -36,6 +36,9 @@ public class Pet {
     @Column(nullable = false)
     private Integer age;
 
+    @Column
+    private String imageUrl;
+
     @ManyToOne(optional = false)
     private User owner;
 

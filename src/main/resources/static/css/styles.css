@@ -72,6 +72,7 @@ button {
 
 button:hover {
     background-color: #004270;
+    box-shadow: 0px 0px 4px 0px #12629C;
 }
 
 select {
@@ -106,8 +107,14 @@ form > select {
     border-radius: 4px;
 }
 
-form > input:focus {
+form > input:focus,
+form > select:focus {
     box-shadow: 0px 0px 4px 0px #12629C;
+}
+
+input[type=file] {
+    background-color: white;
+    color: transparent;
 }
 
 

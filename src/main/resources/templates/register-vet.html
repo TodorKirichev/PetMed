@@ -16,7 +16,7 @@
 
 <main>
     <div class="container">
-      <form th:action="@{/register-vet}" th:method="POST" th:object="${vetRegisterRequest}">
+      <form th:action="@{/register-vet}" th:method="POST" th:object="${vetRegisterRequest}" enctype="multipart/form-data">
         <h1>Register</h1>
 
         <div class="form-content">
@@ -24,17 +24,19 @@
             <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
             <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
+            <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
             <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
             <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
             <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
             <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
-            <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}">
-            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-
             <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
             <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+
+            <input type="file" name="photo" accept="image/*">
 
             <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>

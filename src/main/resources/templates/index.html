@@ -18,7 +18,7 @@
         <ul>
             <li th:each="vet : ${vets}" th:if="${vet.clinic != null}">
                 <div class="vet-profile-pic">
-
+                    <img th:src="${vet.imageUrl}" alt="Profile Photo">
                 </div>
 
                 <div class="vet-description">

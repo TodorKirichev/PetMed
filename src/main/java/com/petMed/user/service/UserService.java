@@ -48,10 +48,11 @@ public class UserService implements UserDetailsService {
         eventPublisher.publishEvent(createUserRegisterEvent(user));
     }
 
-    public void registerVet(VetRegisterRequest vetRegisterRequest) {
+    public void registerVet(VetRegisterRequest vetRegisterRequest, String imageUrl) {
         validate(vetRegisterRequest);
 
         User user = createUser(vetRegisterRequest);
+        user.setImageUrl(imageUrl);
         user.setRole(Role.VET);
 
         Clinic clinic = createClinic(vetRegisterRequest);

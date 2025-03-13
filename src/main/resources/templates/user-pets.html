@@ -18,7 +18,9 @@
         <ul>
             <li th:each="pet : ${pets}">
                 <div class="details">
-                    <div class="pet-picture"></div>
+                    <div class="pet-picture">
+                        <img th:src="${pet.imageUrl}" alt="Profile Photo">
+                    </div>
                     <div class="pet-details">
                         <p class="pet-name" th:text="'Name: ' + ${pet.name}"></p>
                         <p class="pet-species" th:text="'Species: ' + ${pet.species.speciesName}"></p>

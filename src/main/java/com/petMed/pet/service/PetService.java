@@ -22,19 +22,20 @@ public class PetService {
         this.appointmentService = appointmentService;
     }
 
-    public void save(PetData petData, User user) {
+    public void save(PetData petData, User user, String imageUrl) {
         PetSpecies petSpecies = PetSpecies.valueOf(petData.getSpecies());
-        Pet pet = create(petData, user, petSpecies);
+        Pet pet = create(petData, user, petSpecies, imageUrl);
 
         petRepository.save(pet);
     }
 
-    private static Pet create(PetData petData, User user, PetSpecies petSpecies) {
+    private static Pet create(PetData petData, User user, PetSpecies petSpecies, String imageUrl) {
         return Pet.builder()
                 .name(petData.getName())
                 .species(petSpecies)
                 .breed(petData.getBreed())
                 .age(petData.getAge())
+                .imageUrl(imageUrl)
                 .owner(user)
                 .build();
     }

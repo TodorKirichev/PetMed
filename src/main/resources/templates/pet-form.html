@@ -17,7 +17,7 @@
 <main>
     <div class="container">
       <div class="form-container">
-        <form th:action="@{/pets/add}" th:object="${petData}" th:method="POST">
+        <form th:action="@{/pets/add}" th:object="${petData}" th:method="POST" enctype="multipart/form-data">
           <h1>Add pet</h1>
 
           <input type="text" id="name" placeholder="Pet Name" th:field="*{name}" />
@@ -36,6 +36,8 @@
 
           <input type="number" id="age" placeholder="Age" th:field="*{age}" min="0" />
           <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+
+          <input type="file" name="photo" accept="image/*">
 
           <button type="submit">Add Pet</button>
         </form>

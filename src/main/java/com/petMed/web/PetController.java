@@ -1,5 +1,6 @@
 package com.petMed.web;
 
+import com.petMed.cloudinary.CloudinaryService;
 import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.web.dto.PetData;
 import com.petMed.pet.model.Pet;
@@ -25,10 +26,12 @@ public class PetController {
 
     private final PetService petService;
     private final UserService userService;
+    private final CloudinaryService cloudinaryService;
 
-    public PetController(PetService petService, UserService userService) {
+    public PetController(PetService petService, UserService userService, CloudinaryService cloudinaryService) {
         this.petService = petService;
         this.userService = userService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @ModelAttribute("petData")
@@ -58,8 +61,9 @@ public class PetController {
             return new ModelAndView("pet-form");
         }
         User user = userService.findById(currentUser.getUserId());
+        String imageUrl = cloudinaryService.uploadFile(petData.getPhoto());
 
-        petService.save(petData, user);
+        petService.save(petData, user, imageUrl);
 
         return new ModelAndView("redirect:/pets");
     }
