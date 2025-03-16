@@ -13,13 +13,13 @@ import java.util.UUID;
 @Setter
 public class AppointmentData {
 
-    @NotNull
+    @NotNull(message = "Please select a pet")
     private UUID petId;
 
-    @NotNull
+    @NotNull(message = "Please select a date")
     private LocalDate date;
 
-    @NotNull
+    @NotNull(message = "Please select a time")
     private LocalTime time;
 
 }

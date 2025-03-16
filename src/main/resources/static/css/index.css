@@ -10,12 +10,13 @@ form {
 .container ul {
     display: flex;
     flex-direction: column;
+    width: min(800px, 100%);
 }
 
 .container li {
-    width: 800px;
     border: 1px solid #004270;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
     margin-bottom: -1px;
@@ -52,6 +53,7 @@ form {
 
 .vet-description {
     display: flex;
+    flex: 1 1 0;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -61,7 +63,10 @@ form {
     display: flex;
 }
 
-button {
+.vet-info {
     width: 100%;
+}
+
+button {
     margin: 0;
 }

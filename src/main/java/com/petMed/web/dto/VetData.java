@@ -12,22 +12,22 @@ import lombok.*;
 @NoArgsConstructor
 public class VetData {
 
-    @NotBlank
+    @NotBlank(message = "First name cannot be empty")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Last name cannot be empty")
     private String lastName;
 
-    @NotBlank
+    @NotBlank(message = "Phone number cannot be empty")
     private String phone;
 
-    @NotBlank
+    @NotBlank(message = "Clinic name cannot be empty")
     private String clinicName;
 
-    @NotNull
+    @NotNull(message = "Please select a city")
     private CityName city;
 
-    @NotBlank
+    @NotBlank(message = "Address cannot be empty")
     private String address;
 
     private String site;

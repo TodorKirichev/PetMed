@@ -1,6 +1,7 @@
 package com.petMed.web.dto;
 
 import com.petMed.clinic.model.CityName;
+import com.petMed.validation.ValidPhoto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -10,16 +11,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class VetRegisterRequest extends RegisterRequest{
 
-    @NotNull
+    @ValidPhoto
     private MultipartFile photo;
 
-    @NotBlank
+    @NotBlank(message = "Clinic name cannot be empty")
     private String clinicName;
 
-    @NotNull
+    @NotNull(message = "Please select a city")
     private CityName city;
 
-    @NotBlank
+    @NotBlank(message = "Address cannot be empty")
     private String address;
 
     private String site;

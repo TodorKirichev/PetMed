@@ -95,7 +95,7 @@ public class UserService implements UserDetailsService {
 
         Optional<User> byUsername = findByUsernameOptional(registerRequest.getUsername());
         if (byUsername.isPresent()) {
-            throw new RuntimeException("User already exists");
+            throw new RuntimeException("Username already exist");
         }
 
         Optional<User> byEmail = findByEmail(registerRequest.getEmail());

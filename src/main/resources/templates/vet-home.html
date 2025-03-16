@@ -19,9 +19,9 @@
         <h1 th:if="${vet.getClinic() == null}">You need to add a clinic before you can offer appointments.</h1>
 
         <div class="show-schedule">
-            <h1 id="schedule-info">Тoday's schedule</h1>
             <input type="hidden" id="vet-username" th:value="${vet.username}">
-            <div>
+            <h1 id="schedule-info">Тoday's schedule</h1>
+            <div class="buttons">
                 <button id="prev-day">Prev</button>
                 <button id="next-day">Next</button>
             </div>
@@ -60,22 +60,9 @@
             </div>
         </div>
 
-        <!--        <div class="generate-schedule">-->
-        <!--            <h2>Select a date to generate daily schedule</h2>-->
-
-        <!--            <form th:action="@{/appointments/generate}" th:method="POST">-->
-        <!--                <label for="date">Select Date:</label>-->
-        <!--                <input type="date" id="date" name="date" required />-->
-
-        <!--                <button type="submit">Generate</button>-->
-        <!--            </form>-->
-        <!--            <p id="message" th:if="${message}" th:text="${message}"></p>-->
-        <!--        </div>-->
-
     </div>
 </main>
 
 <script th:src="@{/js/fetch-schedule.js}" type="text/javascript"></script>
-<!--<script th:src="@{/js/flash-message.js}" type="text/javascript"></script>-->
 </body>
 </html>

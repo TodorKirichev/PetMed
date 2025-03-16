@@ -51,11 +51,15 @@ public class AppointmentController {
     @PostMapping("/book/{username}")
     @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView bookAppointment(@Valid AppointmentData appointmentData, BindingResult bindingResult, @PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("appointment-form");
-        }
-
         User vet = userService.findByUsername(username);
+
+        if (bindingResult.hasErrors()) {
+            User owner = userService.findById(currentUser.getUserId());
+            ModelAndView modelAndView = new ModelAndView("appointment-form");
+            modelAndView.addObject("vet", vet);
+            modelAndView.addObject("owner", owner);
+            return modelAndView;
+        }
         Pet pet = petService.findPetByIdAndOwnerId(appointmentData.getPetId(), currentUser.getUserId());
 
         appointmentService.book(vet, pet, appointmentData);

@@ -27,6 +27,9 @@
                         <p th:text="'Clinic: ' + ${vet.clinic.name}"></p>
                         <p th:text="'City: ' + ${vet.clinic.city}"></p>
                         <p th:text="'Address: ' + ${vet.clinic.address}"></p>
+                        <p>Site:&nbsp
+                            <a th:text="${vet.clinic.site}" th:href="${vet.clinic.site}"></a>
+                        </p>
                     </div>
                     <form th:action="'/appointments/book/' + ${vet.username}" th:method="GET">
                         <button type="submit"  sec:authorize="!hasRole('VET') and !hasRole('ADMIN')">Request an Appointment</button>

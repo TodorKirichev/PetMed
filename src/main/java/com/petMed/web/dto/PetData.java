@@ -1,5 +1,6 @@
 package com.petMed.web.dto;
 
+import com.petMed.validation.ValidPhoto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,18 +12,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class PetData {
 
-    @NotBlank
+    @NotBlank(message = "Pet name cannot be empty")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Please select a species")
     private String species;
 
-    @NotBlank
+    @NotBlank(message = "Please select a breed")
     private String breed;
 
-    @Positive
+    @Positive(message = "Age must be positive")
+    @NotNull(message = "Age cannot be empty")
     private Integer age;
 
-    @NotNull
+    @ValidPhoto
     private MultipartFile photo;
 }

@@ -21,45 +21,71 @@
 
         <div class="form-content">
           <div class="general-info">
-            <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <div class="input-container">
+              <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
+              <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+              <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+            </div>
 
-            <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}">
-            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <div class="input-container">
+              <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}">
+              <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
 
-            <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
-            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            <div class="input-container">
+              <input type="text" id="first-name" name="first-name" placeholder="First Name" th:field="*{firstName}">
+              <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </div>
 
-            <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
-            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+            <div class="input-container">
+              <input type="text" id="last-name" name="last-name" placeholder="Last Name" th:field="*{lastName}">
+              <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </div>
 
-            <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
-            <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+            <div class="input-container file-container">
+              <input type="file" name="photo" accept="image/*">
+              <span class="error" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></span>
+            </div>
 
-            <input type="file" name="photo" accept="image/*">
-
-            <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" th:field="*{confirmPassword}">
-            <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+            <div class="input-container">
+              <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
+              <span class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            </div>
           </div>
 
           <div class="additional-info">
-            <input type="text" id="clinic-name" name="clinic-name" placeholder="Clinic Name" th:field="*{clinicName}">
-            <p th:if="${#fields.hasErrors('clinicName')}" th:errors="*{clinicName}"></p>
+            <div class="input-container">
+              <input type="text" id="clinic-name" name="clinic-name" placeholder="Clinic Name" th:field="*{clinicName}">
+              <span class="error" th:if="${#fields.hasErrors('clinicName')}" th:errors="*{clinicName}"></span>
+            </div>
 
-            <select id="city" th:field="*{city}">
-              <option th:value="${city}">Select City</option>
-              <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
-            </select>
-            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+            <div class="input-container">
+              <select id="city" th:field="*{city}">
+                <option th:value="${city}">Select City</option>
+                <option th:each="city : ${T(com.petMed.clinic.model.CityName).values()}" th:value="${city}" th:text="${city.cityName}"></option>
+              </select>
+              <span class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+            </div>
 
-            <input type="text" id="address" name="address" placeholder="Address" th:field="*{address}">
-            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+            <div class="input-container">
+              <input type="text" id="address" name="address" placeholder="Address" th:field="*{address}">
+              <span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
 
-            <input type="text" id="site" name="site" placeholder="Site" th:field="*{site}">
-            <p th:if="${#fields.hasErrors('site')}" th:errors="*{site}"></p>
+            <div class="input-container">
+              <input type="text" id="site" name="site" placeholder="Site" th:field="*{site}">
+              <span class="error" th:if="${#fields.hasErrors('site')}" th:errors="*{site}"></span>
+            </div>
+
+            <div class="input-container">
+              <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
+              <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="input-container">
+              <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" th:field="*{confirmPassword}">
+              <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+            </div>
           </div>
         </div>
 
@@ -68,5 +94,6 @@
     </div>
 </main>
 
+<script th:src="@{/js/hide-upload.js}" type="text/javascript"></script>
 </body>
 </html>

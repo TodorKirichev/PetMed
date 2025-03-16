@@ -26,7 +26,7 @@ main {
 }
 
 .container {
-    max-width: 1400px;
+    width: min(calc(100% - 100px), 1400px);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -37,7 +37,7 @@ table {
     border-collapse: collapse;
     margin: 40px 0;
     min-width: 400px;
-    box-shadow: 0px 0px 10px 0px #12629C;
+    box-shadow: 0 0 10px 0 #12629C;
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
@@ -72,7 +72,7 @@ button {
 
 button:hover {
     background-color: #004270;
-    box-shadow: 0px 0px 4px 0px #12629C;
+    box-shadow: 0 0 4px 0 #12629C;
 }
 
 select {
@@ -81,14 +81,14 @@ select {
 }
 
 form {
-    margin-top: 80px;
+    margin: 80px 0 40px 0;
     width: 400px;
     display: flex;
     flex-direction: column;
-    border: 0px solid black;
+    border: 0 solid black;
     border-radius: 8px;
     padding: 10px 40px;
-    box-shadow: 0px 0px 10px 0px #12629C;
+    box-shadow: 0 0 10px 0 #12629C;
 }
 
 form > * {
@@ -109,13 +109,52 @@ form > select {
 
 form > input:focus,
 form > select:focus {
-    box-shadow: 0px 0px 4px 0px #12629C;
+    box-shadow: 0 0 4px 0 #12629C;
 }
 
 input[type=file] {
     background-color: white;
-    color: transparent;
 }
+
+span.error {
+    padding: 0 0 14px 0;
+    margin: -33px 0 0 0;
+    color: #c33535;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    position: relative;
+    cursor: pointer;
+    color: transparent;
+    width: 100%;
+}
+
+input[type="file"]::after {
+    position: absolute;
+    top: 10px;
+    pointer-events: none;
+    left: 10px;
+    color: #6a6a6a;
+    content: "Choose photo...";
+}
+
+input[type="file"]::file-selector-button {
+    display: none;
+}
+
+input[type="file"].has-file::after {
+    content: attr(file-name);
+    color: black;
+}
+
+form > label,
+form > span {
+    margin: 0;
+    padding: 0;
+}
+
+
 
 
 

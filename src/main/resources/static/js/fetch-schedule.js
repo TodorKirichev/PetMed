@@ -1,12 +1,13 @@
 const date = new Date();
 
 const fetchSchedule = () => {
-    const formattedDate = date.toLocaleDateString('sv-SE');
+    const formattedDateForApi = date.toLocaleDateString('sv-SE');
+    const formattedDateForFE = date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const vetUsername = document.getElementById("vet-username").value;
 
-    document.getElementById("schedule-info").textContent = `Schedule for ${formattedDate}`;
+    document.getElementById("schedule-info").textContent = `Schedule for ${formattedDateForFE}`;
 
-    fetch(`/api/appointments/date?date=${formattedDate}&vetUsername=${vetUsername}`)
+    fetch(`/api/appointments/date?date=${formattedDateForApi}&vetUsername=${vetUsername}`)
         .then(response => response.json())
         .then(data => {
             const scheduleBody = document.getElementById("schedule-body");
