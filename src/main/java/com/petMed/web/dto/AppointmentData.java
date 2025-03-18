@@ -1,9 +1,9 @@
 package com.petMed.web.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +17,7 @@ public class AppointmentData {
     private UUID petId;
 
     @NotNull(message = "Please select a date")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
 
     @NotNull(message = "Please select a time")

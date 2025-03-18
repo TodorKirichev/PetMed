@@ -174,6 +174,49 @@ form > span {
     text-align: center;
 }
 
+.flatpickr-days {
+    background-color: white;
+}
+
+.flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover {
+    cursor: not-allowed;
+    color: grey !important;
+}
+
+.flatpickr-day {
+    color: black !important;
+}
+
+.flatpickr-calendar.animate.open {
+    top: 354px;
+    overflow: hidden;
+    width: 320px;
+}
+
+.flatpickr-months,
+.flatpickr-months .flatpickr-month,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-weekdays,
+span.flatpickr-weekday {
+    background-color: #004270 !important;
+}
+
+.flatpickr-day.selected {
+    background-color: #49a7ec !important;
+}
+
+.flatpickr-day:hover,
+.flatpickr-day.selected:hover {
+    background-color: #004270 !important;
+    color: white !important;
+}
+
+.flatpickr-rContainer,
+.flatpickr-days {
+    width: 100% !important;
+}
+
+
 
 
 

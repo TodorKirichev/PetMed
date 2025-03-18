@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class AppointmentControllerREST {
 
     @GetMapping("/available-hours")
     public ResponseEntity<List<String>> getAvailableHours(@RequestParam String date, @RequestParam String vetUsername) {
-        LocalDate selectedDate = LocalDate.parse(date);
+        LocalDate selectedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         User vet = userService.findByUsername(vetUsername);
         List<String> availableTimes = appointmentService.findAllAvailableTimesForAppointmentByDayAndVet(selectedDate, vet);
 

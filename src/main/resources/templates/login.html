@@ -14,19 +14,24 @@
 <header th:insert="~{fragments/commons::nav}"></header>
 
 <main>
-       <div class="container">
-           <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
-               <h1>Login</h1>
+    <div class="container">
+        <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
+            <h1>Login</h1>
 
-               <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+            <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
 
-               <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
+            <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}">
 
-               <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
+            <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">
 
-               <button type="submit">Log in</button>
-           </form>
-       </div>
+            <button type="submit">Log in</button>
+
+            <div class="register-link">
+                <span>Don't have an account ?</span>
+                <a th:href="@{/register}">Register</a>
+            </div>
+        </form>
+    </div>
 </main>
 
 </body>

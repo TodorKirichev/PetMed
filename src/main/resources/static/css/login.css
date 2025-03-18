@@ -1,1 +1,13 @@
+.register-link {
+    text-align: center;
+    margin-bottom: 10px;
+}
 
+.register-link a {
+    color: #12629C;
+    font-weight: bold;
+}
+
+button {
+    margin-bottom: 10px;
+}

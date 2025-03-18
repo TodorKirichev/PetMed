@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="/css/header.css"/>
   <link rel="stylesheet" href="/css/appointment-form.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+
 </head>
 
 <body>
@@ -20,7 +23,7 @@
       <h1>Book an appointment</h1>
 
       <label for="datepicker">Choose a Date:</label>
-      <input type="date" id="datepicker" name="selectedDate"  th:field="*{date}"/>
+      <input type="text" id="datepicker" name="selectedDate" placeholder="Choose a date" th:field="*{date}"/>
       <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
 
       <label for="availableHours">Choose a Time:</label>
@@ -44,5 +47,8 @@
 </main>
 
 <script th:src="@{/js/fetch-available-times.js}" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script th:src="@{/js/datepicker.js}"></script>
+
 </body>
 </html>
