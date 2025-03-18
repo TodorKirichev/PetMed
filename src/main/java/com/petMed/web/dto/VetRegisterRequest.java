@@ -5,6 +5,7 @@ import com.petMed.validation.ValidPhoto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -23,6 +24,7 @@ public class VetRegisterRequest extends RegisterRequest{
     @NotBlank(message = "Address cannot be empty")
     private String address;
 
+    @URL(message = "Invalid URL format")
     private String site;
 
 }

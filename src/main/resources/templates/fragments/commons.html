@@ -18,7 +18,7 @@
 
     <ul>
       <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/users}">Manage Users</a></li>
-      <li sec:authorize="hasRole('VET')"><a th:href="@{/users/schedule}">My schedule</a></li>
+      <li sec:authorize="hasRole('VET')"><a th:href="@{/vets/schedule}">My schedule</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets/add}">Add pet</a></li>
       <li sec:authorize="hasRole('PET_OWNER')"><a th:href="@{/pets}">My pets</a></li>
       <li sec:authorize="hasRole('VET')"><a th:href="@{/users/profile}">Edit profile</a></li>

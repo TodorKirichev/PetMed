@@ -24,7 +24,7 @@ public class UserDashboardService {
             if (vet.getClinic() == null) {
                 return new ModelAndView("redirect:/users/profile");
             }
-            return new ModelAndView("redirect:/users/schedule");
+            return new ModelAndView("redirect:/vets/schedule");
 
         } else if (currentUser.getRole() == Role.ADMIN) {
             return new ModelAndView("redirect:/users");

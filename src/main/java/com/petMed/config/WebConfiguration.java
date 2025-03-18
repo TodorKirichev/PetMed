@@ -23,7 +23,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests(requests -> requests
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .requestMatchers("/img/**").permitAll()
-                    .requestMatchers("/", "/register","/register-owner", "/register-vet").permitAll()
+                    .requestMatchers("/", "/register","/register-owner", "/register-vet", "/vets/search").permitAll()
                     .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

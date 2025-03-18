@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -154,5 +155,16 @@ public class UserService implements UserDetailsService {
         vet.setClinic(clinic);
 
         userRepository.save(vet);
+    }
+
+    public List<User> searchVets(String name, String city) {
+        List<User> allVets = userRepository.findAll();
+
+        return allVets.stream()
+                .filter(user -> user.getRole() == Role.VET)
+                .filter(user -> user.getClinic() != null)
+                .filter(user -> (name == null || user.getFirstName().toLowerCase().contains(name.toLowerCase().trim()) || user.getLastName().toLowerCase().contains(name.toLowerCase())))
+                .filter(user -> (city == null || user.getClinic().getCity().getCityName().toLowerCase().contains(city.toLowerCase().trim())))
+                .collect(Collectors.toList());
     }
 }

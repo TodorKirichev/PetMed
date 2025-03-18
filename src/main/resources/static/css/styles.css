@@ -53,6 +53,11 @@ table td {
     padding: 12px 15px;
 }
 
+table td {
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
 table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
@@ -152,6 +157,21 @@ form > label,
 form > span {
     margin: 0;
     padding: 0;
+}
+
+.no-content {
+    margin-top: 80px;
+    padding: 10px;
+    background-color: #f7fbff;
+    box-shadow: 0 0 10px 0 #12629C;
+}
+
+.table-container {
+    margin-top: 40px;
+}
+
+.table-container h2 {
+    text-align: center;
 }
 
 

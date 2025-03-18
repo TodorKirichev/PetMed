@@ -4,16 +4,21 @@ form {
 
 .container {
     margin-top: 40px;
-    justify-content: left;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
 }
 
-.container ul {
+.vet-container {
+    flex: 2 1 0;
+}
+
+.container ul.vet-list {
     display: flex;
     flex-direction: column;
-    width: min(800px, 100%);
 }
 
-.container li {
+.container ul.vet-list li {
     border: 1px solid #004270;
     display: flex;
     flex-wrap: wrap;
@@ -22,15 +27,15 @@ form {
     margin-bottom: -1px;
 }
 
-.container li:last-of-type {
+.container ul.vet-list li:last-of-type {
     border-radius: 0 0 8px 8px;
 }
 
-.container li:first-of-type {
+.container ul.vet-list li:first-of-type {
     border-radius:8px 8px 0 0;
 }
 
-.container li:only-child {
+.container ul.vet-list li:only-child {
     border-radius: 8px;
 }
 
@@ -68,5 +73,58 @@ form {
 }
 
 button {
+    margin: 0;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 20px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.faq-item {
+    border: 1px solid #004270;
+    border-radius: 4px;
+}
+.faq-question {
+    padding: 6px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    background-color: #12629C;
+    color: white;
+}
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #f7fbff;
+    color: black;
+    border-radius: 4px;
+}
+
+.active i {
+    transform: rotate(180deg);
+}
+
+.search-section {
+    margin-bottom: 10px;
+}
+
+.search-section form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-section input {
     margin: 0;
 }

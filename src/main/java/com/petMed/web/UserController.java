@@ -30,6 +30,11 @@ public class UserController {
         this.appointmentService = appointmentService;
     }
 
+    @ModelAttribute("vetData")
+    public VetData vetData() {
+        return new VetData();
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("")
     public ModelAndView getUsers() {
@@ -47,25 +52,6 @@ public class UserController {
     public ModelAndView changeRole(@PathVariable String username, @RequestParam("new-role") String newRole) {
         userService.changeRole(username, newRole);
         return new ModelAndView("redirect:/users");
-    }
-
-    @ModelAttribute("vetData")
-    public VetData vetData() {
-        return new VetData();
-    }
-
-    @PreAuthorize("hasRole('VET')")
-    @GetMapping("/schedule")
-    public ModelAndView getSchedule(@AuthenticationPrincipal CurrentUser currentUser) {
-        ModelAndView modelAndView = new ModelAndView("vet-home");
-
-        User vet = userService.findById(currentUser.getUserId());
-        List<Appointment> appointments = appointmentService.findAllAppointmentsByDayAndVet(LocalDate.now(), vet);
-
-        modelAndView.addObject("appointments", appointments);
-        modelAndView.addObject("vet", vet);
-
-        return modelAndView;
     }
 
     @PreAuthorize("hasRole('VET')")
@@ -89,4 +75,5 @@ public class UserController {
         userService.updateVetProfile(currentUser.getUserId(), vetData);
         return new ModelAndView("redirect:/home");
     }
+
 }

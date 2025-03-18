@@ -16,26 +16,33 @@
 
 <main>
     <div class="container">
-        <table>
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Diagnosis</th>
-                <th>Treatment</th>
-                <th>Vet</th>
-                <th>Clinic</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="record : ${medicalRecords}">
-                <td th:text="${record.createdOn}"></td>
-                <td th:text="${record.diagnosis}"></td>
-                <td th:text="${record.treatment}"></td>
-                <td th:text="${record.appointment.vet.firstName} + ' ' + ${record.appointment.vet.lastName}"></td>
-                <td th:text="${record.appointment.vet.clinic.name}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="no-content" th:if="${medicalRecords.isEmpty()}">
+            <h2>There are no medical records for this pet.</h2>
+        </div>
+
+        <div class="table-container"  th:unless="${medicalRecords.isEmpty()}">
+            <h2 th:text="'Medical records for ' + ${medicalRecords.getFirst().pet.name}"></h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Diagnosis</th>
+                    <th>Treatment</th>
+                    <th>Vet</th>
+                    <th>Clinic</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="record : ${medicalRecords}">
+                    <td th:text="${#temporals.format(record.createdOn, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${record.diagnosis}"></td>
+                    <td th:text="${record.treatment}"></td>
+                    <td th:text="${record.appointment.vet.firstName} + ' ' + ${record.appointment.vet.lastName}"></td>
+                    <td th:text="${record.appointment.vet.clinic.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 

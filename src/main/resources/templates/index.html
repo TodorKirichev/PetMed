@@ -15,30 +15,76 @@
 
 <main>
     <div class="container">
-        <ul>
-            <li th:each="vet : ${vets}" th:if="${vet.clinic != null}">
-                <div class="vet-profile-pic">
-                    <img th:src="${vet.imageUrl}" alt="Profile Photo">
-                </div>
-
-                <div class="vet-description">
-                    <div class="vet-info">
-                        <p th:text="'Name: ' + ${vet.firstName} + ' ' + ${vet.lastName}"></p>
-                        <p th:text="'Clinic: ' + ${vet.clinic.name}"></p>
-                        <p th:text="'City: ' + ${vet.clinic.city}"></p>
-                        <p th:text="'Address: ' + ${vet.clinic.address}"></p>
-                        <p>Site:&nbsp
-                            <a th:text="${vet.clinic.site}" th:href="${vet.clinic.site}"></a>
-                        </p>
+        <div class="vet-container">
+            <div class="search-section">
+                <form th:action="@{/vets/search}" th:method="GET">
+                    <input type="text" id="vet-name" name="name" placeholder="Search by name">
+                    <input type="text" id="vet-city" name="city" placeholder="Search by city">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <ul class="vet-list" th:unless="${vets.isEmpty()}">
+                <li th:each="vet : ${vets}" th:if="${vet.clinic != null}">
+                    <div class="vet-profile-pic">
+                        <img th:src="${vet.imageUrl}" alt="Profile Photo">
                     </div>
-                    <form th:action="'/appointments/book/' + ${vet.username}" th:method="GET">
-                        <button type="submit"  sec:authorize="!hasRole('VET') and !hasRole('ADMIN')">Request an Appointment</button>
-                    </form>
-                </div>
-            </li>
-        </ul>
+
+                    <div class="vet-description">
+                        <div class="vet-info">
+                            <p th:text="'Name: ' + ${vet.firstName} + ' ' + ${vet.lastName}"></p>
+                            <p th:text="'Clinic: ' + ${vet.clinic.name}"></p>
+                            <p th:text="'City: ' + ${vet.clinic.city}"></p>
+                            <p th:text="'Address: ' + ${vet.clinic.address}"></p>
+                            <p>Site:&nbsp
+                                <a th:text="${vet.clinic.site}" th:href="${vet.clinic.site}"></a>
+                            </p>
+                        </div>
+                        <form th:action="'/appointments/book/' + ${vet.username}" th:method="GET">
+                            <button type="submit"  sec:authorize="!hasRole('VET') and !hasRole('ADMIN')">Request an Appointment</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            <div class="no-content" th:if="${vets.isEmpty()}">
+                <h2>No vets found...</h2>
+            </div>
+        </div>
+        <div class="faq-container">
+            <h2>Frequently asked questions</h2>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <div class="faq-question"><span>How often should I take my pet to the vet?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">It is recommended to take your pet at least once a year for a routine check-up, and more often for older or sick animals.</div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question"><span>What vaccinations are necessary for dogs and cats?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Dogs should be vaccinated against rabies, parvovirus, distemper, and other diseases. Cats should be vaccinated against panleukopenia, calicivirus, and rhinotracheitis.</div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question"><span>How can I tell if my pet is sick?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Symptoms may include lack of appetite, lethargy, changes in behavior, diarrhea, or vomiting.</div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question"><span>What should I do if my pet gets injured?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">In case of injury, keep your pet calm and avoid further harm. Contact your vet immediately for advice or take your pet to an emergency clinic if needed.</div>
+                </li>
+                <li class="faq-item">
+                    <div class="faq-question"><span>Can I give my pet human food?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">It's generally not recommended to give pets human food, as some foods are toxic to them. Always check with your vet before giving any non-pet food.</div>
+                </li>
+                <li class="faq-item">
+                    <div class="faq-question"><span>How can I prevent fleas and ticks on my pet?</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Use preventative treatments recommended by your vet, such as topical or oral medications. Regularly check your pet for fleas and ticks, especially after walks or outdoor activities.</div>
+                </li>
+
+            </ul>
+        </div>
     </div>
 </main>
 
+<script th:src="@{/js/faq.js}" type="text/javascript"></script>
 </body>
 </html>
