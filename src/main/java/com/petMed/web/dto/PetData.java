@@ -6,7 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -21,9 +24,9 @@ public class PetData {
     @NotBlank(message = "Please select a breed")
     private String breed;
 
-    @Positive(message = "Age must be positive")
-    @NotNull(message = "Age cannot be empty")
-    private Integer age;
+    @NotNull(message = "Please select date of birth")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate dateOfBirth;
 
     @ValidPhoto
     private MultipartFile photo;

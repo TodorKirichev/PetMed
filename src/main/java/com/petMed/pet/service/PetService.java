@@ -34,7 +34,7 @@ public class PetService {
                 .name(petData.getName())
                 .species(petSpecies)
                 .breed(petData.getBreed())
-                .age(petData.getAge())
+                .dateOfBirth(petData.getDateOfBirth())
                 .imageUrl(imageUrl)
                 .owner(user)
                 .build();

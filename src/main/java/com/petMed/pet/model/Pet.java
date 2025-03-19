@@ -6,6 +6,7 @@ import com.petMed.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,7 +35,7 @@ public class Pet {
     private String breed;
 
     @Column(nullable = false)
-    private Integer age;
+    private LocalDate dateOfBirth;
 
     @Column
     private String imageUrl;

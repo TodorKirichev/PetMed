@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/css/header.css"/>
   <link rel="stylesheet" href="/css/pet-form.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 
 <body>
@@ -34,8 +36,8 @@
           </select>
           <span class="error" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></span>
 
-          <input type="number" id="age" placeholder="Age" th:field="*{age}"/>
-          <span class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+          <input type="text" id="datepicker" name="dateOfBirth" placeholder="Date of birth" th:field="*{dateOfBirth}"/>
+          <span class="error" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
 
           <input type="file" name="photo" accept="image/*">
           <span class="error" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></span>
@@ -48,5 +50,7 @@
 
 <script th:src="@{/js/fetch-breeds.js}" type="text/javascript"></script>
 <script th:src="@{/js/hide-upload.js}" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script th:src="@{/js/pet-datepicker.js}" type="text/javascript"></script>
 </body>
 </html>

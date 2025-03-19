@@ -25,7 +25,7 @@
                         <p class="pet-name" th:text="'Name: ' + ${pet.name}"></p>
                         <p class="pet-species" th:text="'Species: ' + ${pet.species.speciesName}"></p>
                         <p class="pet-breed" th:text="'Breed: ' + ${pet.breed}"></p>
-                        <p class="pet-age" th:text="'Age: ' + ${pet.age}"></p>
+                        <p class="pet-age" th:text="'Date of birth: ' + ${#temporals.format(pet.dateOfBirth, 'dd-MM-yyyy')}"></p>
                     </div>
                 </div>
                 <div class="buttons">
