@@ -25,7 +25,7 @@ public class AppointmentScheduler {
         this.userRepository = userRepository;
     }
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void generateAppointments() {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusWeeks(2);
@@ -39,7 +39,7 @@ public class AppointmentScheduler {
         }
     }
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void cleanupOldAppointments() {
         LocalDate yesterday = LocalDate.now().minusDays(1);
 
@@ -48,6 +48,19 @@ public class AppointmentScheduler {
 
         if (!oldAppointments.isEmpty()) {
             appointmentRepository.deleteAll(oldAppointments);
+        }
+    }
+
+    public void generateAppointmentsForVetOnRegistration(User vet) {
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusWeeks(2);
+
+        LocalDate date = startDate;
+        while (date.isBefore(endDate)) {
+            if (!isWeekend(date)) {
+                generateAppointmentsForVet(vet, date);
+            }
+            date = date.plusDays(1);
         }
     }
 

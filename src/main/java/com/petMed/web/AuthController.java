@@ -70,8 +70,7 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("register-vet");
         }
-        String imageUrl = cloudinaryService.uploadFile(vetRegisterRequest.getPhoto());
-        userService.registerVet(vetRegisterRequest, imageUrl);
+        userService.registerVet(vetRegisterRequest);
 
         return new ModelAndView("redirect:/login");
     }

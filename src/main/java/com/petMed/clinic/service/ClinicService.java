@@ -15,14 +15,6 @@ public class ClinicService {
     }
 
     public Clinic createClinic(String clinicName, CityName city, String address, String site) {
-//        Optional<Clinic> byName = clinicRepository.findByName(vetRegisterRequest.getClinicName());
-//        if (byName.isPresent()) {
-//            Clinic clinic = byName.get();
-//            clinic.setCity(vetRegisterRequest.getCity());
-//            clinic.setAddress(vetRegisterRequest.getAddress());
-//            clinic.setSite(vetRegisterRequest.getSite());
-//            return clinicRepository.save(clinic);
-//        }
         Clinic clinic = Clinic.builder()
                 .name(clinicName)
                 .city(city)

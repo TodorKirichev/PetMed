@@ -70,7 +70,8 @@ public class PetController {
 
     @DeleteMapping("/{id}/delete")
     public ModelAndView deletePet(@PathVariable UUID id, @AuthenticationPrincipal CurrentUser currentUser) {
-        petService.delete(id, currentUser.getUserId());
+        Pet pet = petService.findPetByIdAndOwnerId(id, currentUser.getUserId());
+        petService.delete(pet);
         return new ModelAndView("redirect:/pets");
     }
 
@@ -83,7 +84,6 @@ public class PetController {
         modelAndView.addObject("medicalRecords", medicalRecords);
 
         return modelAndView;
-
     }
 
 }

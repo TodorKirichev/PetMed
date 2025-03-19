@@ -1,6 +1,7 @@
 package com.petMed.pet.service;
 
 import com.petMed.appointment.service.AppointmentService;
+import com.petMed.exception.PetNotFoundException;
 import com.petMed.pet.model.PetSpecies;
 import com.petMed.web.dto.PetData;
 import com.petMed.pet.model.Pet;
@@ -25,7 +26,6 @@ public class PetService {
     public void save(PetData petData, User user, String imageUrl) {
         PetSpecies petSpecies = PetSpecies.valueOf(petData.getSpecies());
         Pet pet = create(petData, user, petSpecies, imageUrl);
-
         petRepository.save(pet);
     }
 
@@ -40,21 +40,17 @@ public class PetService {
                 .build();
     }
 
+    public void delete(Pet pet) {
+        appointmentService.freeUp(pet.getAppointments());
+        petRepository.delete(pet);
+    }
+
     public Pet findPetByIdAndOwnerId(UUID id, UUID userId) {
-        return getByIdAndOwnerId(id, userId);
-    }
-
-    public void delete(UUID id, UUID userId) {
-        Pet byIdAndOwnerId = getByIdAndOwnerId(id, userId);
-        appointmentService.freeUp(byIdAndOwnerId.getAppointments());
-        petRepository.delete(byIdAndOwnerId);
-    }
-
-    private Pet getByIdAndOwnerId(UUID id, UUID userId) {
         Optional<Pet> byIdAndOwnerId = petRepository.findByIdAndOwnerId(id, userId);
         if (byIdAndOwnerId.isEmpty()) {
-            throw new RuntimeException("Pet not found");
+            throw new PetNotFoundException("Pet not found");
         }
         return byIdAndOwnerId.get();
     }
+
 }

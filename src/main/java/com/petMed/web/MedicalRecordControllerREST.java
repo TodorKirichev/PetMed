@@ -25,10 +25,8 @@ public class MedicalRecordControllerREST {
     public ResponseEntity<String> addRecord(@RequestBody MedicalRecordData medicalRecordData) {
         Appointment appointment = appointmentService.findById(medicalRecordData.getAppointmentId());
         Pet pet = appointment.getPet();
-        String diagnosis = medicalRecordData.getDiagnosis();
-        String treatment = medicalRecordData.getTreatment();
 
-        medicalRecordService.createMedicalRecord(appointment, pet, diagnosis, treatment);
+        medicalRecordService.createMedicalRecord(appointment, pet, medicalRecordData);
         appointmentService.changeStatusToCompleted(appointment);
 
         return ResponseEntity.ok("Record created");

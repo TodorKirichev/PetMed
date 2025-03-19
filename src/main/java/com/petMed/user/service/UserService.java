@@ -1,7 +1,10 @@
 package com.petMed.user.service;
 
 import com.petMed.clinic.service.ClinicService;
+import com.petMed.cloudinary.CloudinaryService;
 import com.petMed.event.UserRegisterEvent;
+import com.petMed.exception.UserNotFoundException;
+import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.web.dto.*;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.user.model.User;
@@ -14,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,30 +31,33 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ClinicService clinicService;
+    private final AppointmentScheduler appointmentScheduler;
+    private final CloudinaryService cloudinaryService;
 
-    public UserService(ApplicationEventPublisher eventPublisher, UserRepository userRepository, PasswordEncoder passwordEncoder, ClinicService clinicService) {
+    public UserService(ApplicationEventPublisher eventPublisher,
+                       UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       ClinicService clinicService,
+                       AppointmentScheduler appointmentScheduler, CloudinaryService cloudinaryService) {
         this.eventPublisher = eventPublisher;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.clinicService = clinicService;
+        this.appointmentScheduler = appointmentScheduler;
+        this.cloudinaryService = cloudinaryService;
     }
 
-    public Optional<User> findByUsernameOptional(String username) {
-        return userRepository.findByUsername(username);
-    }
-
+    @Transactional
     public void registerOwner(PetOwnerRegisterRequest petOwnerRegisterRequest) {
-        validate(petOwnerRegisterRequest);
-
         User user = createUser(petOwnerRegisterRequest);
         user.setRole(Role.PET_OWNER);
         userRepository.save(user);
-
         eventPublisher.publishEvent(createUserRegisterEvent(user));
     }
 
-    public void registerVet(VetRegisterRequest vetRegisterRequest, String imageUrl) {
-        validate(vetRegisterRequest);
+    @Transactional
+    public void registerVet(VetRegisterRequest vetRegisterRequest) {
+        String imageUrl = cloudinaryService.uploadFile(vetRegisterRequest.getPhoto());
 
         User user = createUser(vetRegisterRequest);
         user.setImageUrl(imageUrl);
@@ -60,7 +67,7 @@ public class UserService implements UserDetailsService {
         user.setClinic(clinic);
 
         userRepository.save(user);
-
+        appointmentScheduler.generateAppointmentsForVetOnRegistration(user);
         eventPublisher.publishEvent(createUserRegisterEvent(user));
     }
 
@@ -89,35 +96,17 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    private void validate(RegisterRequest registerRequest) {
-        if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {
-            throw new RuntimeException("Passwords do not match");
-        }
-
-        Optional<User> byUsername = findByUsernameOptional(registerRequest.getUsername());
-        if (byUsername.isPresent()) {
-            throw new RuntimeException("Username already exist");
-        }
-
-        Optional<User> byEmail = findByEmail(registerRequest.getEmail());
-        if (byEmail.isPresent()) {
-            throw new RuntimeException("Email already exists");
-        }
-    }
-
-    private Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
     public User findById(UUID userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> byId = userRepository.findById(userId);
+        if (byId.isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+        return byId.get();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = findByUsername(username);
         return new CurrentUser(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 
@@ -126,19 +115,25 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> byUsername = userRepository.findByUsername(username);
+        if (byUsername.isEmpty()) {
+            throw new UserNotFoundException("User not found");
+        }
+        return byUsername.get();
     }
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
+    @Transactional
     public void changeRole(String username, String newRole) {
         User byUsername = findByUsername(username);
         byUsername.setRole(Role.valueOf(newRole));
         userRepository.save(byUsername);
     }
 
+    @Transactional
     public void updateVetProfile(UUID userId, VetData vetData) {
         User vet = findById(userId);
         Clinic clinic = clinicService.createClinic(

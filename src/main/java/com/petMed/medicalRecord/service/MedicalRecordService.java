@@ -4,6 +4,7 @@ import com.petMed.appointment.model.Appointment;
 import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.pet.model.Pet;
 import com.petMed.medicalRecord.repository.MedicalRecordRepository;
+import com.petMed.web.dto.MedicalRecordData;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,20 +19,15 @@ public class MedicalRecordService {
         this.medicalRecordRepository = medicalRecordRepository;
     }
 
-    public void createMedicalRecord(Appointment appointment, Pet pet, String diagnosis, String treatment) {
-        Optional<MedicalRecord> byAppointment = medicalRecordRepository.findByAppointment(appointment);
-        if (byAppointment.isPresent()) {
-            throw new RuntimeException("Already added medical record");
-        }
-        MedicalRecord medicalRecord = createRecord(appointment, pet, diagnosis, treatment);
-
+    public void createMedicalRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
+        MedicalRecord medicalRecord = createRecord(appointment, pet, medicalRecordData);
         medicalRecordRepository.save(medicalRecord);
     }
 
-    private static MedicalRecord createRecord(Appointment appointment, Pet pet, String diagnosis, String treatment) {
+    private static MedicalRecord createRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
         return MedicalRecord.builder()
-                .diagnosis(diagnosis)
-                .treatment(treatment)
+                .diagnosis(medicalRecordData.getDiagnosis())
+                .treatment(medicalRecordData.getTreatment())
                 .createdOn(LocalDate.now())
                 .appointment(appointment)
                 .pet(pet)
