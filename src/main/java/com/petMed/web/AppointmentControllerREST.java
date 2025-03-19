@@ -34,7 +34,7 @@ public class AppointmentControllerREST {
 
     @GetMapping("/date")
     public ResponseEntity<List<AppointmentInfo>> getAllByDate(@RequestParam String date, @RequestParam String vetUsername) {
-        LocalDate currentDate = LocalDate.parse(date);
+        LocalDate currentDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         User vet = userService.findByUsername(vetUsername);
         List<AppointmentInfo> allAppointmentsByDay = appointmentService.findAllBookedAppointmentsByDayAndVet(currentDate, vet);
 

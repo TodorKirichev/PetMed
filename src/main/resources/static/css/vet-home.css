@@ -1,6 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 50px;
+    gap: 40px;
+}
+
 .popup {
     display: none;
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
     width: 100%;
@@ -39,19 +48,28 @@ input, textarea {
 
 .show-schedule h1 {
     text-align: center;
-    margin-top: 40px;
-}
-
-.buttons {
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-button {
 }
 
 table {
     margin: 0;
+    width: 100%;
+}
+
+.flatpickr-calendar.inline {
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 #12629C;
+    border: 1px solid #004270;
+}
+
+.table-container {
+    flex: 1 1 0;
+    margin: 0;
+}
+
+.calendar-container {
+    margin-top: 40px;
+}
+
+th:last-of-type {
+    width: 212px;
 }

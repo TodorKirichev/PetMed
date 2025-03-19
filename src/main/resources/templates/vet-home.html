@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/vet-home.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 
 <body>
@@ -16,53 +18,53 @@
 
 <main>
     <div class="container">
-        <h1 th:if="${vet.getClinic() == null}">You need to add a clinic before you can offer appointments.</h1>
+        <div class="table-container">
+            <h1 th:if="${vet.getClinic() == null}">You need to add a clinic before you can offer appointments.</h1>
 
-        <div class="show-schedule">
-            <input type="hidden" id="vet-username" th:value="${vet.username}">
-            <h1 id="schedule-info">Тoday's schedule</h1>
-            <div class="buttons">
-                <button id="prev-day">Prev</button>
-                <button id="next-day">Next</button>
-            </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Start time</th>
-                    <th>Pet</th>
-                    <th>Species</th>
-                    <th>Breed</th>
-                    <th>Owner</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody id="schedule-body">
-                <tr th:each="appointment : ${appointments}" th:if="${appointment.pet}">
-                    <td th:text="${appointment.startTime}"></td>
-                    <td th:text="${appointment.pet.name}"></td>
-                    <td th:text="${appointment.pet.species}"></td>
-                    <td th:text="${appointment.pet.breed}"></td>
-                    <td th:text="${appointment.pet.owner.firstName}"></td>
+            <div class="show-schedule">
+                <input type="hidden" id="vet-username" th:value="${vet.username}">
+                <h1 id="schedule-info">Тoday's schedule</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Start time</th>
+                        <th>Pet</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Owner</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="schedule-body">
+                    <tr th:each="appointment : ${appointments}" th:if="${appointment.pet}">
+                        <td th:text="${appointment.startTime}"></td>
+                        <td th:text="${appointment.pet.name}"></td>
+                        <td th:text="${appointment.pet.species}"></td>
+                        <td th:text="${appointment.pet.breed}"></td>
+                        <td th:text="${appointment.pet.owner.firstName}"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                </tr>
-                </tbody>
-            </table>
-
-            <div id="popup" class="popup">
-                <div class="popup-content">
-                    <h2>Enter Medical Record</h2>
-                    <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
-                    <textarea id="treatment-textarea" rows="6" cols="50"
-                              placeholder="Enter treatment here..."></textarea>
-                    <button id="save-record">Save Record</button>
-                    <button id="close-record">Close</button>
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <h2>Enter Medical Record</h2>
+                        <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
+                        <textarea id="treatment-textarea" rows="6" cols="50"
+                                  placeholder="Enter treatment here..."></textarea>
+                        <button id="save-record">Save Record</button>
+                        <button id="close-record">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <div class="calendar-container">
+            <div id="datepicker"></div>
+        </div>
     </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script th:src="@{/js/fetch-schedule.js}" type="text/javascript"></script>
 </body>
 </html>
