@@ -34,14 +34,14 @@
 }
 
 .vet-container .option {
-    background-image: url('/img/vet.jpg');
+    background-image: url('../img/vet.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .owner-container .option {
-    background-image: url('/img/owner.jpg');
+    background-image: url('../img/owner.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

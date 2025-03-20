@@ -13,9 +13,9 @@ html, body,label, button, form, table, a, select, input, textarea {
 }
 
 body {
-    background-image: url('/img/background.png');
+    background-image: url('../img/background.png');
     background-color: #f7fbff;
-    background-size: 1920px 960px;
+    background-size: 1920px 100vh;
     background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed;
