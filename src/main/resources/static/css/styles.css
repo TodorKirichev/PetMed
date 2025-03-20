@@ -56,6 +56,11 @@ table td {
 table td {
     max-width: 200px;
     word-wrap: break-word;
+    height: 60px;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 1px solid #004270;
 }
 
 table tbody tr {
@@ -63,6 +68,10 @@ table tbody tr {
 }
 
 table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+table tbody tr:nth-of-type(odd) {
     background-color: #f3f3f3;
 }
 

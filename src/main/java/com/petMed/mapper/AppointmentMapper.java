@@ -10,11 +10,12 @@ public class AppointmentMapper {
     public static AppointmentInfo mapAppointmentToAppointmentInfo(Appointment appointment) {
         return AppointmentInfo.builder()
                 .appointmentId(appointment.getId())
+                .date(appointment.getDate().toString())
                 .startTime(appointment.getStartTime().toString())
-                .petName(appointment.getPet().getName())
-                .petSpecies(appointment.getPet().getSpecies().getSpeciesName())
-                .petBreed(appointment.getPet().getBreed())
-                .petOwnerFirstName(appointment.getPet().getOwner().getFirstName())
+                .petName(appointment.getPet() != null ? appointment.getPet().getName() : null)
+                .petSpecies(appointment.getPet() != null ? appointment.getPet().getSpecies().getSpeciesName() : null)
+                .petBreed(appointment.getPet() != null ? appointment.getPet().getBreed() : null)
+                .petOwnerFirstName(appointment.getPet() != null ? appointment.getPet().getOwner().getFirstName() : null)
                 .build();
     }
 }

@@ -11,6 +11,8 @@ public class AppointmentInfo {
 
     private UUID appointmentId;
 
+    private String date;
+
     private String startTime;
 
     private String petName;

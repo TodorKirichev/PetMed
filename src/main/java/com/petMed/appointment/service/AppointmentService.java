@@ -61,7 +61,7 @@ public class AppointmentService {
 
     public List<AppointmentInfo> findAllBookedAppointmentsByDayAndVet(LocalDate currentDate, User vet) {
         return findAllAppointmentsByDayAndVet(currentDate, vet)
-                .stream().filter(appointment -> appointment.getStatus() == AppointmentStatus.BOOKED)
+                .stream()
                 .map(AppointmentMapper::mapAppointmentToAppointmentInfo)
                 .collect(Collectors.toList());
     }

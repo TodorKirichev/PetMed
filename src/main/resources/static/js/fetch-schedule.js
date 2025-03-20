@@ -43,19 +43,35 @@ const renderSchedule = (appointments) => {
 
 const createAppointmentRow = (appointment) => {
     const row = document.createElement("tr");
-    row.innerHTML = `
+    if (appointment.petName != null) {
+        row.innerHTML = `
         <td>${appointment.startTime}</td>
         <td>${appointment.petName}</td>
         <td>${appointment.petSpecies}</td>
         <td>${appointment.petBreed}</td>
         <td>${appointment.petOwnerFirstName}</td>
     `;
+        const today = new Date().toDateString();
+        const appointmentDate = new Date(appointment.date).toDateString();
+        if (appointmentDate === today) {
+            const buttonCell = document.createElement("td");
+            const button = createMedicalRecordButton(appointment);
+            buttonCell.appendChild(button);
+            row.appendChild(buttonCell);
+        } else {
+            row.appendChild(document.createElement("td"));
+        }
 
-    const buttonCell = document.createElement("td");
-    const button = createMedicalRecordButton(appointment);
-    buttonCell.appendChild(button);
-    row.appendChild(buttonCell);
-
+    } else {
+        row.innerHTML = `
+        <td>${appointment.startTime}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    `;
+    }
     return row;
 };
 
