@@ -1,5 +1,6 @@
 package com.petMed.event;
 
+import com.petMed.user.model.User;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -7,15 +8,13 @@ import org.springframework.context.ApplicationEvent;
 public class UserRegisterEvent extends ApplicationEvent {
 
     private final String firstName;
-
     private final String lastName;
-
     private final String email;
 
-    public UserRegisterEvent(Object source, String firstName, String lastName, String email) {
-        super(source);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public UserRegisterEvent(User user) {
+        super(user);
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
     }
 }

@@ -1,5 +1,6 @@
 package com.petMed.appointment.service;
 
+import com.petMed.event.AppointmentBookedEvent;
 import com.petMed.exception.AppointmentNotFoundException;
 import com.petMed.mapper.AppointmentMapper;
 import com.petMed.web.dto.AppointmentInfo;
@@ -9,6 +10,8 @@ import com.petMed.pet.model.Pet;
 import com.petMed.user.model.User;
 import com.petMed.appointment.model.AppointmentStatus;
 import com.petMed.appointment.repository.AppointmentRepository;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +26,11 @@ import java.util.stream.Collectors;
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public AppointmentService(AppointmentRepository appointmentRepository) {
+    public AppointmentService(AppointmentRepository appointmentRepository, ApplicationEventPublisher eventPublisher) {
         this.appointmentRepository = appointmentRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional
@@ -34,6 +39,11 @@ public class AppointmentService {
         appointment.setPet(pet);
         appointment.setStatus(AppointmentStatus.BOOKED);
         appointmentRepository.save(appointment);
+        eventPublisher.publishEvent(createAppointmentBookedEvent(appointment));
+    }
+
+    private AppointmentBookedEvent createAppointmentBookedEvent(Appointment appointment) {
+        return new AppointmentBookedEvent(appointment);
     }
 
     public Appointment findByVetAndDateAndTime(User vet, LocalDate date, LocalTime time) {

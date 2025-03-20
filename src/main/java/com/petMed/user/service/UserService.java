@@ -72,7 +72,7 @@ public class UserService implements UserDetailsService {
     }
 
     private static UserRegisterEvent createUserRegisterEvent(User user) {
-        return new UserRegisterEvent(user, user.getFirstName(), user.getLastName(), user.getEmail());
+        return new UserRegisterEvent(user);
     }
 
     private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {

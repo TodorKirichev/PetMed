@@ -24,7 +24,7 @@ public class MedicalRecord {
     @Column(nullable = false)
     private String diagnosis;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String treatment;
 
     @Column(nullable = false)
