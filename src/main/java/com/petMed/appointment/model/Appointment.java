@@ -1,5 +1,6 @@
 package com.petMed.appointment.model;
 
+import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.pet.model.Pet;
 import com.petMed.user.model.User;
 import jakarta.persistence.*;
@@ -34,6 +35,9 @@ public class Appointment {
 
     @ManyToOne
     private Pet pet;
+
+    @OneToOne
+    private MedicalRecord medicalRecord;
 
     @ManyToOne(optional = false)
     private User vet;

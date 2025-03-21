@@ -8,14 +8,17 @@ import lombok.experimental.UtilityClass;
 public class AppointmentMapper {
 
     public static AppointmentInfo mapAppointmentToAppointmentInfo(Appointment appointment) {
+        boolean hasPet = appointment.getPet() != null;
+
         return AppointmentInfo.builder()
                 .appointmentId(appointment.getId())
                 .date(appointment.getDate().toString())
                 .startTime(appointment.getStartTime().toString())
-                .petName(appointment.getPet() != null ? appointment.getPet().getName() : null)
-                .petSpecies(appointment.getPet() != null ? appointment.getPet().getSpecies().getSpeciesName() : null)
-                .petBreed(appointment.getPet() != null ? appointment.getPet().getBreed() : null)
-                .petOwnerFirstName(appointment.getPet() != null ? appointment.getPet().getOwner().getFirstName() : null)
+                .petName(hasPet ? appointment.getPet().getName() : null)
+                .petSpecies(hasPet ? appointment.getPet().getSpecies().getSpeciesName() : null)
+                .petBreed(hasPet ? appointment.getPet().getBreed() : null)
+                .petOwnerFirstName(hasPet ? appointment.getPet().getOwner().getFirstName() : null)
+                .hasMedicalRecord(hasPet && appointment.getMedicalRecord() != null)
                 .build();
     }
 }

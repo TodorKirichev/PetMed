@@ -53,7 +53,7 @@ const createAppointmentRow = (appointment) => {
     `;
         const today = new Date().toDateString();
         const appointmentDate = new Date(appointment.date).toDateString();
-        if (appointmentDate === today) {
+        if (appointmentDate === today && !appointment.hasMedicalRecord) {
             const buttonCell = document.createElement("td");
             const button = createMedicalRecordButton(appointment);
             buttonCell.appendChild(button);

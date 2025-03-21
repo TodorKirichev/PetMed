@@ -19,9 +19,9 @@ public class MedicalRecordService {
         this.medicalRecordRepository = medicalRecordRepository;
     }
 
-    public void createMedicalRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
+    public MedicalRecord createMedicalRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
         MedicalRecord medicalRecord = createRecord(appointment, pet, medicalRecordData);
-        medicalRecordRepository.save(medicalRecord);
+        return medicalRecordRepository.save(medicalRecord);
     }
 
     private static MedicalRecord createRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {

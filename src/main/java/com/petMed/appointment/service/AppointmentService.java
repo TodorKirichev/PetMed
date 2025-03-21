@@ -3,6 +3,7 @@ package com.petMed.appointment.service;
 import com.petMed.event.AppointmentBookedEvent;
 import com.petMed.exception.AppointmentNotFoundException;
 import com.petMed.mapper.AppointmentMapper;
+import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.web.dto.AppointmentInfo;
 import com.petMed.web.dto.AppointmentData;
 import com.petMed.appointment.model.Appointment;
@@ -79,7 +80,8 @@ public class AppointmentService {
     }
 
     @Transactional
-    public void changeStatusToCompleted(Appointment appointment) {
+    public void changeStatusToCompleted(Appointment appointment, MedicalRecord medicalRecord) {
+        appointment.setMedicalRecord(medicalRecord);
         appointment.setStatus(AppointmentStatus.COMPLETED);
         appointmentRepository.save(appointment);
     }

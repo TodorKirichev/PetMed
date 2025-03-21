@@ -30,7 +30,7 @@ public class MedicalRecord {
     @Column(nullable = false)
     private LocalDate createdOn;
 
-    @OneToOne(optional = false)
+    @OneToOne(mappedBy = "medicalRecord")
     private Appointment appointment;
 
     @ManyToOne

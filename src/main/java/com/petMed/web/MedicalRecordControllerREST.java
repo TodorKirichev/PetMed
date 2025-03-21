@@ -1,5 +1,6 @@
 package com.petMed.web;
 
+import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.web.dto.MedicalRecordData;
 import com.petMed.appointment.model.Appointment;
 import com.petMed.pet.model.Pet;
@@ -26,8 +27,8 @@ public class MedicalRecordControllerREST {
         Appointment appointment = appointmentService.findById(medicalRecordData.getAppointmentId());
         Pet pet = appointment.getPet();
 
-        medicalRecordService.createMedicalRecord(appointment, pet, medicalRecordData);
-        appointmentService.changeStatusToCompleted(appointment);
+        MedicalRecord medicalRecord = medicalRecordService.createMedicalRecord(appointment, pet, medicalRecordData);
+        appointmentService.changeStatusToCompleted(appointment, medicalRecord);
 
         return ResponseEntity.ok("Record created");
     }
