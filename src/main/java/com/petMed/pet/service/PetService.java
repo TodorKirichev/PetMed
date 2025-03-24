@@ -24,12 +24,12 @@ public class PetService {
     }
 
     public void save(PetData petData, User user, String imageUrl) {
-        PetSpecies petSpecies = PetSpecies.valueOf(petData.getSpecies());
-        Pet pet = create(petData, user, petSpecies, imageUrl);
+        Pet pet = create(petData, user, imageUrl);
         petRepository.save(pet);
     }
 
-    private static Pet create(PetData petData, User user, PetSpecies petSpecies, String imageUrl) {
+    private Pet create(PetData petData, User user, String imageUrl) {
+        PetSpecies petSpecies = PetSpecies.valueOf(petData.getSpecies());
         return Pet.builder()
                 .name(petData.getName())
                 .species(petSpecies)

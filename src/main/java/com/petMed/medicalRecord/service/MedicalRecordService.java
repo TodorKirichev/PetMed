@@ -23,7 +23,7 @@ public class MedicalRecordService {
         return medicalRecordRepository.save(medicalRecord);
     }
 
-    private static MedicalRecord createRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
+    private MedicalRecord createRecord(Appointment appointment, Pet pet, MedicalRecordData medicalRecordData) {
         return MedicalRecord.builder()
                 .diagnosis(medicalRecordData.getDiagnosis())
                 .treatment(medicalRecordData.getTreatment())
