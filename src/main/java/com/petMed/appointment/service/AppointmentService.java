@@ -11,7 +11,6 @@ import com.petMed.pet.model.Pet;
 import com.petMed.user.model.User;
 import com.petMed.appointment.model.AppointmentStatus;
 import com.petMed.appointment.repository.AppointmentRepository;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,14 +59,14 @@ public class AppointmentService {
         });
     }
 
-    public List<AppointmentInfo> findAllBookedAppointmentsByDayAndVet(LocalDate currentDate, User vet) {
+    public List<AppointmentInfo> findAllAppointmentsInfoByDayAndVet(LocalDate currentDate, User vet) {
         return findAllAppointmentsByDayAndVet(currentDate, vet)
                 .stream()
                 .map(AppointmentMapper::mapAppointmentToAppointmentInfo)
                 .collect(Collectors.toList());
     }
 
-    public List<String> findAllAvailableTimesForAppointmentByDayAndVet(LocalDate selectedDate, User vet) {
+    public List<String> findAllScheduledTimesForAppointmentByDayAndVet(LocalDate selectedDate, User vet) {
         return findAllAppointmentsByDayAndVet(selectedDate, vet)
                 .stream()
                 .filter(appointment -> appointment.getStatus() == AppointmentStatus.SCHEDULED)

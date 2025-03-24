@@ -22,7 +22,7 @@ public class MedicalRecordControllerREST {
         this.medicalRecordService = medicalRecordService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<String> addRecord(@RequestBody MedicalRecordData medicalRecordData) {
         Appointment appointment = appointmentService.findById(medicalRecordData.getAppointmentId());
         Pet pet = appointment.getPet();

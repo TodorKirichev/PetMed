@@ -110,7 +110,7 @@ const saveMedicalRecord = (appointment) => {
         treatment: treatmentTextarea
     };
 
-    fetch('/api/medical-records', {
+    fetch('/api/medical-records/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
