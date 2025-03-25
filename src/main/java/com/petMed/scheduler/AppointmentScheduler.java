@@ -26,6 +26,18 @@ public class AppointmentScheduler {
     }
 
     @Scheduled(cron = "0 0 0 * * ?")
+    public void cleanUpOldAppointments() {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        List<Appointment> oldAppointments = appointmentRepository
+                .findByDateBeforeAndStatus(yesterday, AppointmentStatus.SCHEDULED);
+
+        if (!oldAppointments.isEmpty()) {
+            appointmentRepository.deleteAll(oldAppointments);
+        }
+    }
+
+    @Scheduled(cron = "0 0 0 * * ?")
     public void generateAppointments() {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusWeeks(2);
@@ -39,15 +51,15 @@ public class AppointmentScheduler {
         }
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
-    public void cleanupOldAppointments() {
-        LocalDate yesterday = LocalDate.now().minusDays(1);
+    private void generateAppointmentsForDay(LocalDate date) {
+        List<User> vets = userRepository.findAllByRole(Role.VET);
 
-        List<Appointment> oldAppointments = appointmentRepository
-                .findByDateBeforeAndStatus(yesterday, AppointmentStatus.SCHEDULED);
+        for (User vet : vets) {
+            boolean hasAppointments = appointmentRepository.existsByVetAndDate(vet, date);
 
-        if (!oldAppointments.isEmpty()) {
-            appointmentRepository.deleteAll(oldAppointments);
+            if (!hasAppointments) {
+                generateAppointmentsForVet(vet, date);
+            }
         }
     }
 
@@ -64,16 +76,8 @@ public class AppointmentScheduler {
         }
     }
 
-    private void generateAppointmentsForDay(LocalDate date) {
-        List<User> vets = userRepository.findAllByRole(Role.VET);
-
-        for (User vet : vets) {
-            boolean hasAppointments = appointmentRepository.existsByVetAndDate(vet, date);
-
-            if (!hasAppointments) {
-                generateAppointmentsForVet(vet, date);
-            }
-        }
+    private boolean isWeekend(LocalDate date) {
+        return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 
     private void generateAppointmentsForVet(User vet, LocalDate date) {
@@ -92,9 +96,5 @@ public class AppointmentScheduler {
                 .build();
 
         appointmentRepository.save(appointment);
-    }
-
-    private boolean isWeekend(LocalDate date) {
-        return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 }
