@@ -1,6 +1,5 @@
 package com.petMed.web;
 
-import com.petMed.cloudinary.CloudinaryService;
 import com.petMed.web.dto.VetRegisterRequest;
 import com.petMed.web.dto.LoginRequest;
 import com.petMed.web.dto.PetOwnerRegisterRequest;
@@ -18,11 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class AuthController {
 
     private final UserService userService;
-    private final CloudinaryService cloudinaryService;
 
-    public AuthController(UserService userService, CloudinaryService cloudinaryService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
-        this.cloudinaryService = cloudinaryService;
     }
 
     @ModelAttribute("loginRequest")

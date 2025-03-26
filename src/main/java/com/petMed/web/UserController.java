@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -23,11 +22,9 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final AppointmentService appointmentService;
 
-    public UserController(UserService userService, AppointmentService appointmentService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.appointmentService = appointmentService;
     }
 
     @ModelAttribute("vetData")

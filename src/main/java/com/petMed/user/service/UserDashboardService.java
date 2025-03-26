@@ -1,6 +1,5 @@
 package com.petMed.user.service;
 
-import com.petMed.appointment.service.AppointmentService;
 import com.petMed.user.model.User;
 import com.petMed.user.model.Role;
 import com.petMed.security.CurrentUser;
@@ -10,11 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Service
 public class UserDashboardService {
 
-    private final AppointmentService appointmentService;
     private final UserService userService;
 
-    public UserDashboardService(AppointmentService appointmentService, UserService userService) {
-        this.appointmentService = appointmentService;
+    public UserDashboardService(UserService userService) {
         this.userService = userService;
     }
 
