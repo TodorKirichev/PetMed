@@ -1,7 +1,5 @@
 package com.petMed.web;
 
-import com.petMed.appointment.model.Appointment;
-import com.petMed.appointment.service.AppointmentService;
 import com.petMed.mapper.VetMapper;
 import com.petMed.security.CurrentUser;
 import com.petMed.user.model.User;

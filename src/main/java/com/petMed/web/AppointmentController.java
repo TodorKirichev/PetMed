@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/appointments")
+@PreAuthorize("hasRole('PET_OWNER')")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
@@ -35,7 +36,6 @@ public class AppointmentController {
     }
 
     @GetMapping("/book/{username}")
-    @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView showAppointmentForm(@PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
         ModelAndView modelAndView = new ModelAndView("appointment-form");
 
@@ -49,7 +49,6 @@ public class AppointmentController {
     }
 
     @PostMapping("/book/{username}")
-    @PreAuthorize("hasRole('PET_OWNER')")
     public ModelAndView bookAppointment(@Valid AppointmentData appointmentData, BindingResult bindingResult, @PathVariable String username, @AuthenticationPrincipal CurrentUser currentUser) {
         User vet = userService.findByUsername(username);
 
