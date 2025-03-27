@@ -36,8 +36,8 @@
                 <td th:text="${user.role}"></td>
                 <form th:method="POST" th:action="@{'/users/' + ${user.username} + '/change-role'}">
                 <td>
-                    <select name="new-role" id="new-role">
-                        <option>Select role</option>
+                    <select name="new-role">
+                        <option value="">Select role</option>
                         <option th:each="role : ${T(com.petMed.user.model.Role).values()}" th:value="${role}" th:text="${role}"></option>
                     </select>
                 </td>
@@ -53,6 +53,6 @@
 
     </div>
 </main>
-
+<script th:src="@{/js/no-role-selected-alert.js}"></script>
 </body>
 </html>

@@ -150,6 +150,9 @@ public class UserService implements UserDetailsService {
         vet.setClinic(clinic);
 
         userRepository.save(vet);
+        if (vet.getClinic() != null) {
+            appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
+        }
     }
 
     public List<User> searchVets(String name, String city) {

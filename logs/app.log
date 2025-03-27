@@ -22,3 +22,6 @@
 2025-03-27 17:26:58 - Exception in loadUserByUsername: User not found
 2025-03-27 17:28:30 - Exception in loadUserByUsername: User not found
 2025-03-27 18:19:11 - Exception in changeRole: No enum constant com.petMed.user.model.Role.Select role
+2025-03-27 18:40:08 - Exception in changeRole: No enum constant com.petMed.user.model.Role.
+2025-03-27 18:55:46 - Exception in changeRole: No enum constant com.petMed.user.model.Role.
+2025-03-27 18:55:48 - Exception in changeRole: No enum constant com.petMed.user.model.Role.
