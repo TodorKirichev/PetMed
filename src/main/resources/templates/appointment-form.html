@@ -35,6 +35,10 @@
       </select>
       <span class="error" th:if="${#fields.hasErrors('petId')}" th:errors="*{petId}"></span>
 
+      <label for="reason">Reason:</label>
+      <input type="text" id="reason" name="reason" placeholder="Enter a reason" th:field="*{reason}"/>
+      <span class="error" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></span>
+
       <button type="submit">Book Appointment</button>
     </form>
   </div>

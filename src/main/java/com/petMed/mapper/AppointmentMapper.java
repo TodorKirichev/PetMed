@@ -14,6 +14,7 @@ public class AppointmentMapper {
                 .appointmentId(appointment.getId())
                 .date(appointment.getDate().toString())
                 .startTime(appointment.getStartTime().toString())
+                .reason(hasPet ? appointment.getReason() : null)
                 .petName(hasPet ? appointment.getPet().getName() : null)
                 .petSpecies(hasPet ? appointment.getPet().getSpecies().getSpeciesName() : null)
                 .petBreed(hasPet ? appointment.getPet().getBreed() : null)

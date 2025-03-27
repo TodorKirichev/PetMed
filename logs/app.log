@@ -35,3 +35,14 @@
 2025-03-27 21:03:39 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-27 21:03:50 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-27 21:03:56 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 21:56:03 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 22:29:54 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 23:06:23 - Exception in findById: User not found
+2025-03-27 23:06:24 - Exception in findById: User not found
+2025-03-27 23:06:25 - Exception in findById: User not found
+2025-03-27 23:06:25 - Exception in findById: User not found
+2025-03-27 23:06:26 - Exception in findById: User not found
+2025-03-27 23:06:26 - Exception in findById: User not found
+2025-03-27 23:06:27 - Exception in findById: User not found
+2025-03-27 23:06:29 - Exception in findById: User not found
+2025-03-27 23:29:01 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email

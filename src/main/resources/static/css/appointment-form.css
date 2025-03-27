@@ -47,3 +47,14 @@ input[type="radio"] {
     color: white;
     align-content: center;
 }
+
+#datepicker,
+#pet {
+    margin-bottom: 20px;
+}
+
+.error:nth-of-type(1):not(:last-of-type),
+.error:nth-of-type(2):not(:last-of-type) {
+    margin-top: -23px;
+    padding-bottom: 4px;
+}

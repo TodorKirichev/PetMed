@@ -86,7 +86,7 @@ public class UsersLoader implements CommandLineRunner {
                     .owner(owner)
                     .name("Timo" + i)
                     .species(PetSpecies.CAT)
-                    .breed("SCOTTISH_FOLD")
+                    .breed("Scottish Fold")
                     .dateOfBirth(LocalDate.of(2021, 9, 13))
                     .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743072396/lfph1zniv1f6vxs7alwg.jpg")
                     .build();

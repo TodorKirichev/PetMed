@@ -37,13 +37,10 @@ public class AppointmentService {
     public void book(User vet, Pet pet, AppointmentData appointmentData) {
         Appointment appointment = findByVetAndDateAndTime(vet, appointmentData.getDate(), appointmentData.getTime());
         appointment.setPet(pet);
+        appointment.setReason(appointmentData.getReason());
         appointment.setStatus(AppointmentStatus.BOOKED);
         appointmentRepository.save(appointment);
-        eventPublisher.publishEvent(createAppointmentBookedEvent(appointment));
-    }
-
-    private AppointmentBookedEvent createAppointmentBookedEvent(Appointment appointment) {
-        return new AppointmentBookedEvent(appointment);
+        eventPublisher.publishEvent(new AppointmentBookedEvent(appointment));
     }
 
     public Appointment findByVetAndDateAndTime(User vet, LocalDate date, LocalTime time) {

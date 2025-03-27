@@ -10,6 +10,9 @@ function fetchAvailableTimes() {
             timeContainer.innerHTML = '';
 
             if (data.length > 0) {
+                const p = document.createElement("p");
+                p.textContent = "Available times:";
+                timeContainer.appendChild(p);
                 data.forEach(time => {
                     const label = document.createElement("label");
                     label.classList.add('radio-button')

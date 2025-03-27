@@ -67,6 +67,7 @@ public class AppointmentControllerApiTest {
         AppointmentData appointmentData = new AppointmentData();
         appointmentData.setDate(LocalDate.now());
         appointmentData.setTime(LocalTime.now());
+        appointmentData.setReason("reason");
         appointmentData.setPetId(UUID.randomUUID());
 
         when(userService.findByUsername(any())).thenReturn(vet);

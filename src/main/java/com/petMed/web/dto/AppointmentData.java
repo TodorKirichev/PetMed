@@ -1,5 +1,6 @@
 package com.petMed.web.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,8 @@ public class AppointmentData {
 
     @NotNull(message = "Time was not selected")
     private LocalTime time;
+
+    @NotBlank(message = "Please enter a reason")
+    private String reason;
 
 }

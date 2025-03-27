@@ -29,6 +29,8 @@ public class Appointment {
     @Column(nullable = false)
     private LocalTime startTime;
 
+    private String reason;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AppointmentStatus status;

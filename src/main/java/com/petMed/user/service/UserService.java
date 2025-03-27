@@ -49,30 +49,26 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void registerOwner(PetOwnerRegisterRequest petOwnerRegisterRequest) {
-        User user = createUser(petOwnerRegisterRequest);
-        user.setRole(Role.PET_OWNER);
-        userRepository.save(user);
-        eventPublisher.publishEvent(createUserRegisterEvent(user));
+        User owner = createUser(petOwnerRegisterRequest);
+        owner.setRole(Role.PET_OWNER);
+        userRepository.save(owner);
+        eventPublisher.publishEvent(new UserRegisterEvent(owner));
     }
 
     @Transactional
     public void registerVet(VetRegisterRequest vetRegisterRequest) {
         String imageUrl = cloudinaryService.uploadFile(vetRegisterRequest.getPhoto());
 
-        User user = createUser(vetRegisterRequest);
-        user.setImageUrl(imageUrl);
-        user.setRole(Role.VET);
+        User vet = createUser(vetRegisterRequest);
+        vet.setImageUrl(imageUrl);
+        vet.setRole(Role.VET);
 
         Clinic clinic = createClinic(vetRegisterRequest);
-        user.setClinic(clinic);
+        vet.setClinic(clinic);
 
-        userRepository.save(user);
-        appointmentScheduler.generateAppointmentsForVetOnRegistration(user);
-        eventPublisher.publishEvent(createUserRegisterEvent(user));
-    }
-
-    private static UserRegisterEvent createUserRegisterEvent(User user) {
-        return new UserRegisterEvent(user);
+        userRepository.save(vet);
+        appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
+        eventPublisher.publishEvent(new UserRegisterEvent(vet));
     }
 
     private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {

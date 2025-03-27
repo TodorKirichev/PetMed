@@ -56,7 +56,11 @@ table td {
 table td {
     max-width: 200px;
     word-wrap: break-word;
-    height: 60px;
+    height: 62px;
+}
+
+table th {
+    height: 62px;
 }
 
 tbody tr:last-of-type {
@@ -150,7 +154,7 @@ input[type="file"]::after {
     pointer-events: none;
     left: 10px;
     color: #6a6a6a;
-    content: "Choose photo...";
+    content: "Choose photo";
 }
 
 input[type="file"]::file-selector-button {
@@ -226,3 +230,6 @@ span.flatpickr-weekday {
     width: 100% !important;
 }
 
+h1, h2 {
+    color: #011725;
+}

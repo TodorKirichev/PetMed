@@ -50,6 +50,7 @@ const createAppointmentRow = (appointment) => {
         <td>${appointment.petSpecies}</td>
         <td>${appointment.petBreed}</td>
         <td>${appointment.petOwnerName}</td>
+        <td>${appointment.reason}</td>
     `;
         const today = new Date().toDateString();
         const appointmentDate = new Date(appointment.date).toDateString();
@@ -65,6 +66,7 @@ const createAppointmentRow = (appointment) => {
     } else {
         row.innerHTML = `
         <td>${appointment.startTime}</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

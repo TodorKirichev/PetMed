@@ -15,6 +15,8 @@ public class AppointmentInfo {
 
     private String startTime;
 
+    private String reason;
+
     private String petName;
 
     private String petSpecies;
