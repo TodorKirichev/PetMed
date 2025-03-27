@@ -6,6 +6,7 @@ import com.petMed.appointment.model.Appointment;
 import com.petMed.pet.model.Pet;
 import com.petMed.appointment.service.AppointmentService;
 import com.petMed.medicalRecord.service.MedicalRecordService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class MedicalRecordControllerREST {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addRecord(@RequestBody MedicalRecordData medicalRecordData) {
+    public ResponseEntity<String> addRecord(@Valid @RequestBody MedicalRecordData medicalRecordData) {
         Appointment appointment = appointmentService.findById(medicalRecordData.getAppointmentId());
         Pet pet = appointment.getPet();
 

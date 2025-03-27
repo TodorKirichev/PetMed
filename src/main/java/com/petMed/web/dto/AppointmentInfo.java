@@ -21,7 +21,7 @@ public class AppointmentInfo {
 
     private String petBreed;
 
-    private String petOwnerFirstName;
+    private String petOwnerName;
 
     private boolean hasMedicalRecord;
 }

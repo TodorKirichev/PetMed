@@ -17,7 +17,7 @@ public class AppointmentMapper {
                 .petName(hasPet ? appointment.getPet().getName() : null)
                 .petSpecies(hasPet ? appointment.getPet().getSpecies().getSpeciesName() : null)
                 .petBreed(hasPet ? appointment.getPet().getBreed() : null)
-                .petOwnerFirstName(hasPet ? appointment.getPet().getOwner().getFirstName() : null)
+                .petOwnerName(hasPet ? appointment.getPet().getOwner().getFirstName() + " " + appointment.getPet().getOwner().getLastName() : null)
                 .hasMedicalRecord(hasPet && appointment.getMedicalRecord() != null)
                 .build();
     }

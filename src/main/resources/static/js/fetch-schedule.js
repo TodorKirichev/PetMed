@@ -49,7 +49,7 @@ const createAppointmentRow = (appointment) => {
         <td>${appointment.petName}</td>
         <td>${appointment.petSpecies}</td>
         <td>${appointment.petBreed}</td>
-        <td>${appointment.petOwnerFirstName}</td>
+        <td>${appointment.petOwnerName}</td>
     `;
         const today = new Date().toDateString();
         const appointmentDate = new Date(appointment.date).toDateString();
@@ -92,6 +92,8 @@ const openMedicalRecordPopup = (appointment) => {
     const diagnosisInput = document.getElementById("diagnosis-input");
     const treatmentTextarea = document.getElementById("treatment-textarea");
 
+    popup.querySelector("span.error").style.display = "none";
+
     popup.style.display = "flex";
     diagnosisInput.value = "";
     treatmentTextarea.value = "";
@@ -101,27 +103,36 @@ const openMedicalRecordPopup = (appointment) => {
 };
 
 const saveMedicalRecord = (appointment) => {
-    const diagnosisInput = document.getElementById("diagnosis-input").value;
-    const treatmentTextarea = document.getElementById("treatment-textarea").value;
+    const diagnosisInput = document.getElementById("diagnosis-input");
+    const diagnosisInputValue = diagnosisInput.value;
+    const treatmentTextarea = document.getElementById("treatment-textarea");
+    const treatmentTextareaValue = treatmentTextarea.value;
 
-    const data = {
-        appointmentId: appointment.appointmentId,
-        diagnosis: diagnosisInput,
-        treatment: treatmentTextarea
-    };
+    if (diagnosisInputValue && treatmentTextareaValue) {
+        const data = {
+            appointmentId: appointment.appointmentId,
+            diagnosis: diagnosisInputValue,
+            treatment: treatmentTextareaValue
+        };
 
-    fetch('/api/medical-records/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .catch(error => console.error("Error during POST request:", error))
-        .finally(() => {
-            closePopup();
-            window.location.reload();
-        });
+        fetch('/api/medical-records/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .catch(error => console.error("Error during POST request:", error))
+            .finally(() => {
+                closePopup();
+                window.location.reload();
+            });
+    } else {
+        const popupContentContainer = document.querySelector(".popup-content");
+        popupContentContainer.querySelector("span.error").style.display = "block";
+        popupContentContainer.querySelector("#save-record").addEventListener("click", () => saveMedicalRecord(appointment), { once: true });
+        popupContentContainer.querySelector("#close-record").addEventListener("click", closePopup);
+    }
 };
 
 const closePopup = () => {
