@@ -1,0 +1,6 @@
+2025-03-26 23:54:56 - Exception in searchVets: Test
+2025-03-27 12:22:21 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 13:00:20 - Exception in findById: User not found
+2025-03-27 13:00:21 - Exception in findById: User not found
+2025-03-27 13:00:22 - Exception in findById: User not found
+2025-03-27 13:00:27 - Exception in findById: User not found

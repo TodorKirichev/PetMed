@@ -7,7 +7,6 @@ import com.petMed.appointment.service.AppointmentService;
 import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.clinic.repository.ClinicRepository;
-import com.petMed.mapper.AppointmentMapper;
 import com.petMed.user.model.Role;
 import com.petMed.user.model.User;
 import com.petMed.user.repository.UserRepository;
