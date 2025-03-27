@@ -35,8 +35,10 @@ public class UsersLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        createUser();
-        createVets();
+        if (userRepository.count() == 1) {
+            createUser();
+            createVets();
+        }
     }
 
     private void createVets() {
@@ -57,7 +59,7 @@ public class UsersLoader implements CommandLineRunner {
                     .lastName("Pol" + i)
                     .phone("123456" + i)
                     .email("jan" + i + "@petmed.com")
-                    .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743070942/urmm1gszirokmhvajovf.png")
+                    .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743077520/ay5kzqhnirzqwv3gmtmj.jpg")
                     .clinic(clinic)
                     .isActive(true)
                     .build();

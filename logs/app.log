@@ -4,3 +4,21 @@
 2025-03-27 13:00:21 - Exception in findById: User not found
 2025-03-27 13:00:22 - Exception in findById: User not found
 2025-03-27 13:00:27 - Exception in findById: User not found
+2025-03-27 14:07:12 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 14:12:00 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 14:25:01 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 14:25:43 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 15:51:07 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 15:52:48 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 15:53:34 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 15:54:50 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 15:55:00 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 16:25:05 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 16:46:17 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 16:48:40 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-27 17:26:41 - Exception in loadUserByUsername: User not found
+2025-03-27 17:26:46 - Exception in loadUserByUsername: User not found
+2025-03-27 17:26:55 - Exception in loadUserByUsername: User not found
+2025-03-27 17:26:58 - Exception in loadUserByUsername: User not found
+2025-03-27 17:28:30 - Exception in loadUserByUsername: User not found
+2025-03-27 18:19:11 - Exception in changeRole: No enum constant com.petMed.user.model.Role.Select role

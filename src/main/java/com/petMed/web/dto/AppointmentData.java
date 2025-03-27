@@ -20,7 +20,7 @@ public class AppointmentData {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
 
-    @NotNull(message = "Please select a time")
+    @NotNull(message = "Time was not selected")
     private LocalTime time;
 
 }

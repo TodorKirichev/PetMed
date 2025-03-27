@@ -1,29 +1,31 @@
 function fetchAvailableTimes() {
     const selectedDate = document.getElementById("datepicker").value;
-    const vetUsername= document.getElementById("vetUsername").value;
-    const timeSelect = document.getElementById("availableHours");
-
-    if (!selectedDate) {
-        timeSelect.innerHTML = '<option value="">Please select a time</option>';
-        return;
-    }
+    const vetUsername = document.getElementById("vetUsername").value;
+    const timeContainer = document.getElementById("availableHoursContainer");
+    timeContainer.style.display = "flex";
 
     fetch(`/api/appointments/available-hours?date=${selectedDate}&vetUsername=${vetUsername}`)
         .then(response => response.json())
         .then(data => {
-            timeSelect.innerHTML = '';
+            timeContainer.innerHTML = '';
 
             if (data.length > 0) {
                 data.forEach(time => {
-                    const option = document.createElement("option");
-                    option.value = time;
-                    option.text = time;
-                    timeSelect.appendChild(option);
+                    const label = document.createElement("label");
+                    label.classList.add('radio-button')
+                    label.innerHTML = `
+                        <input type="radio" name="time" th:field="*{time}" value="${time}">
+                        <span>${time}</span>
+                    `;
+                    const div = document.createElement("div");
+                    div.classList.add('label-container');
+                    div.appendChild(label);
+                    timeContainer.appendChild(div);
                 });
             } else {
-                timeSelect.innerHTML = '<option value="">No available times</option>';
+                timeContainer.innerHTML = '<p>No available times.</p>';
             }
-        })
+        });
 }
 
 document.getElementById("datepicker").addEventListener("change", fetchAvailableTimes);

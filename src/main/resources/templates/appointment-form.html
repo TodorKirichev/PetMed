@@ -25,12 +25,8 @@
       <input type="text" id="datepicker" name="selectedDate" placeholder="Choose a date" th:field="*{date}"/>
       <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
 
-      <label for="availableHours">Choose a Time:</label>
-      <select name="selectedTime" id="availableHours" th:field="*{time}">
-        <option value="">Please select a time</option>
-      </select>
-      <span class="error" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span>
-
+      <div id="availableHoursContainer" style="display: none"></div>
+      <span class="error" th:if="${#fields.hasErrors('time')}" th:unless="${#fields.hasErrors('date')}" th:errors="*{time}"></span>
 
       <label for="pet">Choose a Pet:</label>
       <select name="pet" id="pet" th:field="*{petId}">
@@ -38,7 +34,6 @@
         <option th:each="pet : ${owner.getPets()}" th:text="${pet.name}" th:value="${pet.id}"></option>
       </select>
       <span class="error" th:if="${#fields.hasErrors('petId')}" th:errors="*{petId}"></span>
-
 
       <button type="submit">Book Appointment</button>
     </form>
