@@ -61,3 +61,30 @@ header img {
     height: 100%;
     width: 100%;
 }
+
+@media (max-width: 620px) {
+    header .logo {
+        display: none;
+    }
+
+    header nav ul {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    header nav ul li {
+        flex-grow: 1;
+    }
+
+    header nav ul li a {
+        width: 100%;
+    }
+
+    .search-section form {
+        flex-wrap: wrap;
+    }
+
+    .search-section form > *{
+        flex-grow: 1;
+    }
+}

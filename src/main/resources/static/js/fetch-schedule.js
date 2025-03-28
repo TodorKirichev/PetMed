@@ -45,12 +45,12 @@ const createAppointmentRow = (appointment) => {
     const row = document.createElement("tr");
     if (appointment.petName != null) {
         row.innerHTML = `
-        <td>${appointment.startTime}</td>
-        <td>${appointment.petName}</td>
-        <td>${appointment.petSpecies}</td>
-        <td>${appointment.petBreed}</td>
-        <td>${appointment.petOwnerName}</td>
-        <td>${appointment.reason}</td>
+        <td data-title="Start time">${appointment.startTime}</td>
+        <td data-title="Pet name">${appointment.petName}</td>
+        <td data-title="Species">${appointment.petSpecies}</td>
+        <td data-title="Breed">${appointment.petBreed}</td>
+        <td data-title="Owner">${appointment.petOwnerName}</td>
+        <td data-title="Reason">${appointment.reason}</td>
     `;
         const today = new Date().toDateString();
         const appointmentDate = new Date(appointment.date).toDateString();
@@ -65,12 +65,12 @@ const createAppointmentRow = (appointment) => {
 
     } else {
         row.innerHTML = `
-        <td>${appointment.startTime}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td data-title="Start time">${appointment.startTime}</td>
+        <td data-title="Pet name"></td>
+        <td data-title="Species"></td>
+        <td data-title="Breed"></td>
+        <td data-title="Owner"></td>
+        <td data-title="Reason"></td>
         <td></td>
     `;
     }
