@@ -3,6 +3,7 @@ package com.petMed.web;
 import com.petMed.exception.AppointmentNotFoundException;
 import com.petMed.exception.PetNotFoundException;
 import com.petMed.exception.UserNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.nio.file.AccessDeniedException;
 
+@Hidden
 @ControllerAdvice
 public class ExceptionController {
 
