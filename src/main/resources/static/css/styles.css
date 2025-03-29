@@ -230,3 +230,13 @@ span.flatpickr-weekday {
 h1, h2 {
     color: #011725;
 }
+
+.login-link {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-link a {
+    color: #12629C;
+    font-weight: bold;
+}

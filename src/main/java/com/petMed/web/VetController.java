@@ -43,12 +43,12 @@ public class VetController {
     }
 
     @GetMapping("/search")
-    public ModelAndView searchVets(
+    public ModelAndView findVets(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "city", required = false) String city) {
 
         ModelAndView modelAndView = new ModelAndView("index");
-        List<User> vets = userService.searchVets(name, city);
+        List<User> vets = userService.findVets(name, city);
 
         modelAndView.addObject("vets", vets);
 

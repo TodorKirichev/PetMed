@@ -3,7 +3,6 @@ package com.petMed.util;
 import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.clinic.repository.ClinicRepository;
-import com.petMed.pet.model.CatBreed;
 import com.petMed.pet.model.Pet;
 import com.petMed.pet.model.PetSpecies;
 import com.petMed.pet.repository.PetRepository;
@@ -35,52 +34,79 @@ public class UsersLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (userRepository.count() == 1) {
+        if (userRepository.count() == 0) {
+            createAdmin();
             createUser();
             createVets();
         }
     }
 
+    private void createAdmin() {
+        User admin = User.builder()
+                .username("admin")
+                .password(passwordEncoder.encode("admin"))
+                .role(Role.ADMIN)
+                .firstName("Admin")
+                .lastName("Adminov")
+                .phone("0898000000")
+                .email("admin@petmed.com")
+                .isActive(true)
+                .build();
+        userRepository.save(admin);
+    }
+
     private void createVets() {
         for (int i = 1; i < 11; i++) {
-            Clinic clinic = Clinic.builder()
-                    .name("ClinicPol" + i)
-                    .city(CityName.PLOVDIV)
-                    .address("Ivan Vazov" + i)
-                    .site("https://clinic" + i + ".com")
-                    .build();
-            clinicRepository.save(clinic);
-
-            User vet = User.builder()
-                    .username("vet" + i)
-                    .password(passwordEncoder.encode("123"))
-                    .role(Role.VET)
-                    .firstName("Jan" + i)
-                    .lastName("Pol" + i)
-                    .phone("123456" + i)
-                    .email("jan" + i + "@petmed.com")
-                    .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743077520/ay5kzqhnirzqwv3gmtmj.jpg")
-                    .clinic(clinic)
-                    .isActive(true)
-                    .build();
-            userRepository.save(vet);
-            appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
+            Clinic clinic = createClinic(i);
+            createVet(i, clinic);
         }
+    }
+
+    private Clinic createClinic(int i) {
+        Clinic clinic = Clinic.builder()
+                .name("Pet med " + i)
+                .city(CityName.PLOVDIV)
+                .address("Ivan Vazov " + i)
+                .site("https://pet-med" + i + ".com")
+                .build();
+        clinicRepository.save(clinic);
+        return clinic;
+    }
+
+    private void createVet(int i, Clinic clinic) {
+        User vet = User.builder()
+                .username("vet" + i)
+                .password(passwordEncoder.encode("vet" + i))
+                .role(Role.VET)
+                .firstName("Vet" + i)
+                .lastName("Vet" + i)
+                .phone("089800001" + i)
+                .email("vet" + i + "@petmed.com")
+                .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743077520/ay5kzqhnirzqwv3gmtmj.jpg")
+                .clinic(clinic)
+                .isActive(true)
+                .build();
+        userRepository.save(vet);
+        appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
     }
 
     private void createUser() {
         User owner = User.builder()
                 .username("user")
-                .password(passwordEncoder.encode("123"))
+                .password(passwordEncoder.encode("user"))
                 .role(Role.PET_OWNER)
                 .firstName("Ivan")
                 .lastName("Ivanov")
-                .phone("12345")
+                .phone("0898000020")
                 .email("user@petmed.com")
                 .isActive(true)
                 .build();
         userRepository.save(owner);
 
+        addPets(owner);
+    }
+
+    private void addPets(User owner) {
         for (int i = 1; i < 6; i++) {
             Pet pet = Pet.builder()
                     .owner(owner)

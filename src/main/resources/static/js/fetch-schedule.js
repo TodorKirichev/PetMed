@@ -31,7 +31,7 @@ const renderSchedule = (appointments) => {
     scheduleBody.innerHTML = "";
 
     if (appointments.length === 0) {
-        scheduleBody.innerHTML = "<tr><td colspan='6'>No appointments</td></tr>";
+        scheduleBody.innerHTML = "<tr><td colspan='8'>No appointments</td></tr>";
         return;
     }
 
@@ -49,6 +49,7 @@ const createAppointmentRow = (appointment) => {
         <td data-title="Pet name">${appointment.petName}</td>
         <td data-title="Species">${appointment.petSpecies}</td>
         <td data-title="Breed">${appointment.petBreed}</td>
+        <td data-title="Age">${appointment.petAge}</td>
         <td data-title="Owner">${appointment.petOwnerName}</td>
         <td data-title="Reason">${appointment.reason}</td>
     `;
@@ -69,6 +70,7 @@ const createAppointmentRow = (appointment) => {
         <td data-title="Pet name"></td>
         <td data-title="Species"></td>
         <td data-title="Breed"></td>
+        <td data-title="Age"></td>
         <td data-title="Owner"></td>
         <td data-title="Reason"></td>
         <td></td>

@@ -151,7 +151,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public List<User> searchVets(String name, String city) {
+    public List<User> findVets(String name, String city) {
         List<User> allVets = userRepository.findAll();
 
         return allVets.stream()

@@ -21,7 +21,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -94,12 +93,12 @@ public class UserServiceUTest {
     }
 
     @Test
-    void searchVets_WithExistingNameAndCity() {
+    void findVets_WithExistingNameAndCity() {
         String name = "Ivan";
         String city = "Plovdiv";
         when(userRepository.findAll()).thenReturn(List.of(vet1, vet2, vet3, vet4, vet5));
 
-        List<User> vets = userService.searchVets(name, city);
+        List<User> vets = userService.findVets(name, city);
 
         assertEquals(2, vets.size());
         assertEquals(name, vets.get(0).getFirstName());
@@ -110,11 +109,11 @@ public class UserServiceUTest {
     }
 
     @Test
-    void searchVets_WithExistingNameOnly() {
+    void findVets_WithExistingNameOnly() {
         String name = "Asen";
         when(userRepository.findAll()).thenReturn(List.of(vet1, vet2, vet3, vet4, vet5));
 
-        List<User> vets = userService.searchVets(name, null);
+        List<User> vets = userService.findVets(name, null);
 
         assertEquals(1, vets.size());
         assertEquals(name, vets.get(0).getFirstName());
@@ -122,11 +121,11 @@ public class UserServiceUTest {
     }
 
     @Test
-    void searchVets_WithExistingCityOnly() {
+    void findVets_WithExistingCityOnly() {
         String city = "Plovdiv";
         when(userRepository.findAll()).thenReturn(List.of(vet1, vet2, vet3, vet4, vet5));
 
-        List<User> vets = userService.searchVets(null, city);
+        List<User> vets = userService.findVets(null, city);
 
         assertEquals(3, vets.size());
         assertEquals(city, vets.get(0).getClinic().getCity().getCityName());

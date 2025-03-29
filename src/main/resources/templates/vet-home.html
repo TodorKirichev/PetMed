@@ -18,11 +18,11 @@
 <main>
     <div class="container">
         <div class="table-container">
-            <h1 th:if="${vet.getClinic() == null}">You need to add a clinic before you can offer appointments.</h1>
+            <p class="error" th:if="${vet.getClinic() == null}">You need to add a clinic info before you can offer appointments.Go to <a href="/users/profile">Edit profile</a></p>
 
             <div class="show-schedule">
                 <input type="hidden" id="vet-username" th:value="${vet.username}">
-                <h1 id="schedule-info">Тoday's schedule</h1>
+                <h1 id="schedule-info"></h1>
                 <table class="table">
                     <thead>
                     <tr>
@@ -30,6 +30,7 @@
                         <th>Pet name</th>
                         <th>Species</th>
                         <th>Breed</th>
+                        <th>Age</th>
                         <th>Owner</th>
                         <th>Reason</th>
                         <th></th>

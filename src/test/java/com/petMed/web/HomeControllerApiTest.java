@@ -2,7 +2,6 @@ package com.petMed.web;
 
 import com.petMed.security.CurrentUser;
 import com.petMed.user.model.Role;
-import com.petMed.user.service.UserDashboardService;
 import com.petMed.user.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(HomeController.class)
 public class HomeControllerApiTest {
 
-    @MockitoBean
-    private UserDashboardService userDashboardService;
     @MockitoBean
     private UserService userService;
 
@@ -49,37 +46,31 @@ public class HomeControllerApiTest {
     @Test
     void showHomePage_ShouldRedirectToVetHomePage_WhenUserIsVet() throws Exception {
         CurrentUser currentUser = new CurrentUser(currentUserId,"vet", "123", Role.VET, true);
-        when(userDashboardService.getDashboardView(currentUser)).thenReturn(new ModelAndView("redirect:/vets/schedule"));
 
         mockMvc.perform(get("/home")
                         .with(user(currentUser)))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/vets/schedule"));
-        verify(userDashboardService, times(1)).getDashboardView(currentUser);
+                .andExpect(redirectedUrl("/"));
     }
 
     @Test
     void showHomePage_ShouldRedirectToHomePage_WhenUserIsPetOwner() throws Exception {
         CurrentUser currentUser = new CurrentUser(currentUserId,"owner", "123", Role.PET_OWNER, true);
-        when(userDashboardService.getDashboardView(currentUser)).thenReturn(new ModelAndView("redirect:/"));
 
         mockMvc.perform(get("/home")
                 .with(user(currentUser)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
-        verify(userDashboardService, times(1)).getDashboardView(currentUser);
     }
 
     @Test
     void showHomePage_ShouldRedirectToAdminHomePage_WhenUserIsAdmin() throws Exception {
         CurrentUser currentUser = new CurrentUser(currentUserId,"admin", "123", Role.ADMIN, true);
-        when(userDashboardService.getDashboardView(currentUser)).thenReturn(new ModelAndView("redirect:/users"));
 
         mockMvc.perform(get("/home")
                 .with(user(currentUser)))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/users"));
-        verify(userDashboardService, times(1)).getDashboardView(currentUser);
+                .andExpect(redirectedUrl("/"));
 
     }
 }

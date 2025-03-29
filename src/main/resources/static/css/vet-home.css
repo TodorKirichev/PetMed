@@ -59,7 +59,6 @@ table {
 .flatpickr-calendar.inline {
     overflow: hidden;
     box-shadow: 0 0 10px 0 #12629C;
-    border: 1px solid #004270;
 }
 
 .table-container {
@@ -77,19 +76,31 @@ th:last-of-type {
     width: 212px;
 }
 
+td:first-of-type:not(:last-of-type) {
+    font-weight: bold;
+}
+
 span.error {
     display: none;
     padding: 0 0 4px 0;
     margin: -23px 0 0 0;
 }
 
-@media (max-width: 920px) {
-    .container {
-        flex-direction: column-reverse;
-        align-items: center;
-        padding-bottom: 40px;
-        margin-top: 0;
-    }
+p.error {
+    color: #c33535;
+    font-weight: normal;
+    text-align: center;
+    font-size: 24px;
+}
+
+p.error a {
+    cursor: pointer;
+    color: #12629C;
+    font-size: 24px;
+}
+
+p.error a:hover {
+    color: #004270;
 }
 
 @media (max-width: 1270px) {
@@ -166,5 +177,27 @@ span.error {
 
     table tbody td:nth-of-type(odd) {
         background-color: #f3f3f3;
+        border-radius: 8px 8px 0 0;
+    }
+
+    #schedule-body td:nth-child(1) {
+        font-weight: bold;
+    }
+
+    #schedule-body td::before {
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 920px) {
+    .container {
+        flex-direction: column-reverse;
+        align-items: center;
+        padding-bottom: 40px;
+        margin-top: 0;
+    }
+
+    .calendar-container {
+        position: unset;
     }
 }

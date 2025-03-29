@@ -55,3 +55,44 @@
 2025-03-28 13:34:04 - Exception in sendConfirmRegistrationEmail: Connection refused: no further information executing POST http://localhost:8081/api/notifications/send-email
 2025-03-28 13:35:57 - Exception in sendConfirmRegistrationEmail: Connection refused: no further information executing POST http://localhost:8081/api/notifications/send-email
 2025-03-28 13:59:47 - Exception in sendConfirmRegistrationEmail: Connection refused: no further information executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 13:12:31 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 15:46:24 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 16:09:40 - Exception in findById: User not found
+2025-03-29 16:09:41 - Exception in findById: User not found
+2025-03-29 16:09:42 - Exception in findById: User not found
+2025-03-29 16:09:42 - Exception in findById: User not found
+2025-03-29 16:09:42 - Exception in findById: User not found
+2025-03-29 16:09:42 - Exception in findById: User not found
+2025-03-29 16:09:42 - Exception in findById: User not found
+2025-03-29 16:10:55 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 16:34:33 - Exception in findById: User not found
+2025-03-29 16:34:37 - Exception in findById: User not found
+2025-03-29 16:34:43 - Exception in findById: User not found
+2025-03-29 16:34:45 - Exception in findById: User not found
+2025-03-29 16:36:30 - Exception in findById: User not found
+2025-03-29 16:40:13 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 16:56:12 - Exception in createMedicalRecord: could not execute statement [Data truncation: Data too long for column 'diagnosis' at row 1] [insert into medical_records (created_on,diagnosis,pet_id,treatment,id) values (?,?,?,?,?)]; SQL [insert into medical_records (created_on,diagnosis,pet_id,treatment,id) values (?,?,?,?,?)]
+2025-03-29 18:00:40 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 18:35:02 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 19:24:08 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 19:26:37 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 19:47:31 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:48:17 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:48:47 - Exception in loadUserByUsername: User not found
+2025-03-29 19:49:07 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 19:49:59 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:50:26 - Exception in loadUserByUsername: User not found
+2025-03-29 19:50:39 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:55:27 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:55:55 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 19:56:32 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 20:00:06 - Exception in findAllAppointmentsInfoByDayAndVet: Cannot invoke "com.petMed.pet.model.Pet.getDateOfBirth()" because the return value of "com.petMed.appointment.model.Appointment.getPet()" is null
+2025-03-29 20:04:06 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:16:00 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:16:14 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:16:24 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:23:10 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:23:20 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:23:28 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:28:15 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-29 20:28:23 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email

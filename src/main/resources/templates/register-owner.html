@@ -40,6 +40,11 @@
                 <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
 
                 <button type="submit">Register</button>
+
+                <div class="login-link">
+                    <span>Already have an account ?</span>
+                    <a th:href="@{/login}">Log in</a>
+                </div>
             </form>
         </div>
 </main>

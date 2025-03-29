@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,7 +50,7 @@ public class VetControllerApiTest {
 
     @Test
     void searchVets_ShouldReturnIndexPageWithVets() throws Exception {
-        when(userService.searchVets(any(), any())).thenReturn(List.of(new User()));
+        when(userService.findVets(any(), any())).thenReturn(List.of(new User()));
 
         mockMvc.perform(get("/vets/search"))
                 .andExpect(status().is2xxSuccessful())

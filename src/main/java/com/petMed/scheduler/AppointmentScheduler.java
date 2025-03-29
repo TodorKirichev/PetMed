@@ -77,7 +77,8 @@ public class AppointmentScheduler {
     }
 
     private boolean isWeekend(LocalDate date) {
-        return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+//        return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+        return false;
     }
 
     private void generateAppointmentsForVet(User vet, LocalDate date) {
