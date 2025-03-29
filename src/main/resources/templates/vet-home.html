@@ -29,9 +29,6 @@
                         <th>Start time</th>
                         <th>Pet name</th>
                         <th>Species</th>
-                        <th>Breed</th>
-                        <th>Age</th>
-                        <th>Owner</th>
                         <th>Reason</th>
                         <th></th>
                     </tr>
@@ -48,8 +45,29 @@
                         <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
                         <textarea id="treatment-textarea" rows="6" cols="50"
                                   placeholder="Enter treatment here..."></textarea>
-                        <button id="save-record">Save Record</button>
+                        <button id="save-record">Save</button>
                         <button id="close-record">Close</button>
+                    </div>
+                </div>
+
+                <div id="details-popup" class="popup">
+                    <div class="popup-content details-content">
+                        <h2>Appointments Details</h2>
+                        <div class="pet-picture">
+                            <img id="pet-image" src="" alt="">
+                        </div>
+                        <p><strong>Start time: </strong><span id="start-time"></span></p>
+                        <p><strong>Name: </strong><span id="pet-name"></span></p>
+                        <p><strong>Species: </strong><span id="pet-species"></span></p>
+                        <p><strong>Breed: </strong><span id="pet-breed"></span></p>
+                        <p><strong>Age: </strong><span id="pet-age"></span></p>
+                        <p><strong>Owner: </strong><span id="pet-owner"></span></p>
+                        <p><strong>Reason: </strong><span id="reason"></span></p>
+                        <p><strong>Email: </strong><span id="email"></span></p>
+                        <p><strong>Phone: </strong><span id="phone"></span></p>
+                        <div class="details-buttons">
+                            <button id="close-details">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

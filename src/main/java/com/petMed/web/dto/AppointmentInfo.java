@@ -3,7 +3,6 @@ package com.petMed.web.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -27,6 +26,12 @@ public class AppointmentInfo {
     private String petAge;
 
     private String petOwnerName;
+
+    private String petOwnerEmail;
+
+    private String petOwnerPhone;
+
+    private String petImageUrl;
 
     private boolean hasMedicalRecord;
 }

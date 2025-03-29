@@ -42,7 +42,7 @@ form {
 .vet-profile-pic {
     width: 200px;
     aspect-ratio: 1 / 1;
-    border-radius: 4px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
