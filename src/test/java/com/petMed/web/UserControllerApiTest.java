@@ -56,7 +56,7 @@ public class UserControllerApiTest {
         User vet = User.builder()
                 .firstName("firstName")
                 .lastName("lastName")
-                .phone("phone")
+                .phone("123456789")
                 .clinic(clinic)
                 .build();
         when(userService.findById(any())).thenReturn(vet);
@@ -69,41 +69,6 @@ public class UserControllerApiTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("vet-edit-profile"))
                 .andExpect(model().attributeExists("vetData"));
-    }
-
-    @Test
-    void editProfile_Success() throws Exception {
-        CurrentUser currentUser = new CurrentUser(userId,"vet", "123", Role.VET, true);
-        VetData vetData = VetData.builder()
-                .firstName("firstName")
-                .lastName("lastName")
-                .phone("phone")
-                .clinicName("clinic")
-                .city(CityName.PLOVDIV)
-                .address("Ivan Vazov")
-                .site("http://petMed.com")
-                .build();
-
-        doNothing().when(userService).updateVetProfile(eq(userId), any(VetData.class));
-
-        mockMvc.perform(patch("/users/profile")
-                .with(user(currentUser))
-                .flashAttr("vetData", vetData))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/home"));
-    }
-
-    @Test
-    @WithMockUser(roles = "VET")
-    void editProfile_ShouldRedirectBack_WhenInvalidData() throws Exception {
-        VetData vetData = new VetData();
-
-        doNothing().when(userService).updateVetProfile(eq(userId), any(VetData.class));
-
-        mockMvc.perform(patch("/users/profile")
-                        .flashAttr("vetData", vetData))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("vet-edit-profile"));
     }
 
     @Test

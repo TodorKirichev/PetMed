@@ -1,6 +1,7 @@
 package com.petMed.web.dto;
 
 import com.petMed.clinic.model.CityName;
+import com.petMed.validation.PhoneNumberNotUsedByOtherUser;
 import com.petMed.validation.UniquePhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,8 +26,8 @@ public class VetData {
     private String lastName;
 
     @NotBlank(message = "Phone number cannot be empty")
-    @UniquePhoneNumber
     @Pattern(regexp = "^[0-9]+$", message = "The phone number must contain only numbers")
+    @PhoneNumberNotUsedByOtherUser
     @Size(max = 20, message = "The phone number cannot exceed 20 characters")
     private String phone;
 
