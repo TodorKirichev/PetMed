@@ -2,6 +2,7 @@ package com.petMed.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,7 @@ public class AppointmentData {
     private LocalTime time;
 
     @NotBlank(message = "Please enter a reason")
+    @Size(max = 200, message = "Reason cannot exceed 200 characters")
     private String reason;
 
 }

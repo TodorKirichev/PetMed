@@ -1,9 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("en-GB").split("/").join("-");
-    fetchSchedule(formattedDate);
-});
-
 flatpickr("#datepicker", {
     dateFormat: "d-m-Y",
     locale: {
@@ -11,7 +5,7 @@ flatpickr("#datepicker", {
     },
     inline: true,
     defaultDate: new Date(),
-    onChange: function(selectedDates, dateStr) {
+    onChange: function (selectedDates, dateStr) {
         fetchSchedule(dateStr);
     }
 });
@@ -133,7 +127,7 @@ const openMedicalRecordPopup = (appointment) => {
     diagnosisInput.value = "";
     treatmentTextarea.value = "";
 
-    saveButton.addEventListener("click", () => saveMedicalRecord(appointment), { once: true });
+    saveButton.addEventListener("click", () => saveMedicalRecord(appointment), {once: true});
     closeButton.addEventListener("click", closePopup);
 };
 
@@ -143,7 +137,9 @@ const saveMedicalRecord = (appointment) => {
     const treatmentTextarea = document.getElementById("treatment-textarea");
     const treatmentTextareaValue = treatmentTextarea.value;
 
-    if (diagnosisInputValue && treatmentTextareaValue) {
+    const isDiagnosisInputValid = diagnosisInputValue && diagnosisInputValue.length < 100;
+
+    if (isDiagnosisInputValid && treatmentTextareaValue) {
         const data = {
             appointmentId: appointment.appointmentId,
             diagnosis: diagnosisInputValue,
@@ -164,8 +160,16 @@ const saveMedicalRecord = (appointment) => {
             });
     } else {
         const popupContentContainer = document.querySelector(".popup-content");
-        popupContentContainer.querySelector("span.error").style.display = "block";
-        popupContentContainer.querySelector("#save-record").addEventListener("click", () => saveMedicalRecord(appointment), { once: true });
+        const emptyErrorSpan = document.getElementById("empty-error");
+        const lengthErrorSpan = document.getElementById("length-error");
+        emptyErrorSpan.style.display = "none";
+        lengthErrorSpan.style.display = "none";
+        if (diagnosisInputValue.length < 100) {
+            emptyErrorSpan.style.display = "block";
+        } else {
+            lengthErrorSpan.style.display = "block";
+        }
+        popupContentContainer.querySelector("#save-record").addEventListener("click", () => saveMedicalRecord(appointment), {once: true});
         popupContentContainer.querySelector("#close-record").addEventListener("click", closePopup);
     }
 };
@@ -174,3 +178,7 @@ const closePopup = () => {
     document.getElementById("popup").style.display = "none";
     document.getElementById("details-popup").style.display = "none";
 };
+
+const today = new Date();
+const formattedDate = today.toLocaleDateString("en-GB").split("/").join("-");
+fetchSchedule(formattedDate);

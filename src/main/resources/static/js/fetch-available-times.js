@@ -1,3 +1,5 @@
+document.getElementById("datepicker").addEventListener("change", fetchAvailableTimes);
+
 function fetchAvailableTimes() {
     const selectedDate = document.getElementById("datepicker").value;
     const vetUsername = document.getElementById("vetUsername").value;
@@ -30,5 +32,3 @@ function fetchAvailableTimes() {
             }
         });
 }
-
-document.getElementById("datepicker").addEventListener("change", fetchAvailableTimes);

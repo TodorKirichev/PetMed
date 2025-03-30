@@ -1,3 +1,8 @@
+const forms = document.querySelectorAll("form");
+forms.forEach(form => {
+    form.addEventListener("submit", alertIfNotSelected)
+})
+
 function alertIfNotSelected(event) {
     const form = event.target;
     const select = form.parentElement.querySelector("select[name='new-role']");
@@ -8,8 +13,3 @@ function alertIfNotSelected(event) {
         alert("Select a role before submitting")
     }
 }
-
-const forms = document.querySelectorAll("form");
-forms.forEach(form => {
-    form.addEventListener("submit", alertIfNotSelected)
-})

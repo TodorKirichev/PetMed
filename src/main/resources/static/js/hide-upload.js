@@ -1,3 +1,5 @@
+document.querySelector('input[type="file"]').addEventListener("change", handleFileSelection);
+
 function handleFileSelection() {
     const fileInput = document.querySelector('input[type="file"]');
 
@@ -9,5 +11,3 @@ function handleFileSelection() {
         fileInput.classList.remove("has-file");
     }
 }
-
-document.querySelector('input[type="file"]').addEventListener("change", handleFileSelection);

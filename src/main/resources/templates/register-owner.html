@@ -30,7 +30,7 @@
                 <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}">
                 <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 
-                <input type="text" id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
+                <input type="text" id="phone" name="phone" placeholder="Phone number" th:field="*{phone}">
                 <span class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
 
                 <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}">

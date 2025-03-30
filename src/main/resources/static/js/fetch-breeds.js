@@ -1,9 +1,11 @@
+document.getElementById("species").addEventListener("change", fetchBreeds);
+
 function fetchBreeds() {
     const species = document.getElementById("species").value;
 
     if (!species) return;
 
-    fetch('/api/breeds?species=' + species)
+    fetch(`/api/breeds?species=${species}`)
         .then(response => response.json())
         .then(data => {
             const breedSelect = document.getElementById("breed");
@@ -18,5 +20,3 @@ function fetchBreeds() {
         })
         .catch(error => console.error("Error fetching breeds:", error));
 }
-
-document.getElementById("species").addEventListener("change", fetchBreeds);

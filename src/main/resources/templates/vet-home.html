@@ -41,10 +41,10 @@
                 <div id="popup" class="popup">
                     <div class="popup-content">
                         <h2>Enter Medical Record</h2>
-                        <span class="error">Please fill out both fields before saving.</span>
+                        <span class="error" id="empty-error">Please fill out both fields before saving.</span>
+                        <span class="error" id="length-error">Diagnosis cannot exceed 100 characters</span>
                         <input type="text" id="diagnosis-input" placeholder="Enter diagnosis here...">
-                        <textarea id="treatment-textarea" rows="6" cols="50"
-                                  placeholder="Enter treatment here..."></textarea>
+                        <textarea id="treatment-textarea" rows="6" cols="50" placeholder="Enter treatment here..."></textarea>
                         <button id="save-record">Save</button>
                         <button id="close-record">Close</button>
                     </div>
@@ -57,7 +57,7 @@
                             <img id="pet-image" src="" alt="">
                         </div>
                         <p><strong>Start time: </strong><span id="start-time"></span></p>
-                        <p><strong>Name: </strong><span id="pet-name"></span></p>
+                        <p><strong>Pet name: </strong><span id="pet-name"></span></p>
                         <p><strong>Species: </strong><span id="pet-species"></span></p>
                         <p><strong>Breed: </strong><span id="pet-breed"></span></p>
                         <p><strong>Age: </strong><span id="pet-age"></span></p>
