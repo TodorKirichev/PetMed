@@ -19,7 +19,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/medical-records/add"))
                 .authorizeHttpRequests(requests -> requests
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .requestMatchers("/img/**").permitAll()

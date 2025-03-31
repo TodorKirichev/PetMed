@@ -134,3 +134,9 @@
 2025-03-31 02:20:04 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 02:22:50 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 02:23:58 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 16:20:29 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 16:20:34 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 16:20:45 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 16:20:59 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 19:16:02 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 19:17:39 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email

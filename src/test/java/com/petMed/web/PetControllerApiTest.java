@@ -23,6 +23,7 @@ import java.util.UUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -48,7 +49,8 @@ class PetControllerApiTest {
         doNothing().when(petService).delete(any());
 
         mockMvc.perform(delete("/pets/8914a649-8824-487e-bc6c-759cc7c48aac/delete")
-                        .with(user(currentUser)))
+                        .with(user(currentUser))
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/pets"));
     }
@@ -86,7 +88,8 @@ class PetControllerApiTest {
 
         mockMvc.perform(post("/pets/add")
                         .with(user(currentUser))
-                        .flashAttr("petData", petData))
+                        .flashAttr("petData", petData)
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/pets"));
     }
@@ -99,7 +102,8 @@ class PetControllerApiTest {
 
         mockMvc.perform(post("/pets/add")
                         .with(user(currentUser))
-                        .flashAttr("petData", petData))
+                        .flashAttr("petData", petData)
+                        .with(csrf()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("pet-form"));
     }

@@ -21,6 +21,7 @@ import java.util.UUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -76,7 +77,8 @@ public class AppointmentControllerApiTest {
 
         mockMvc.perform(post("/appointments/book/username")
                 .with(user(currentUser))
-                        .flashAttr("appointmentData", appointmentData))
+                        .flashAttr("appointmentData", appointmentData)
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/home"));
     }
@@ -97,7 +99,8 @@ public class AppointmentControllerApiTest {
 
         mockMvc.perform(post("/appointments/book/username")
                         .with(user(currentUser))
-                        .flashAttr("appointmentData", appointmentData))
+                        .flashAttr("appointmentData", appointmentData)
+                        .with(csrf()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("appointment-form"));
     }
