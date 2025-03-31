@@ -2,7 +2,6 @@ package com.petMed.web.dto;
 
 import com.petMed.clinic.model.CityName;
 import com.petMed.validation.PhoneNumberNotUsedByOtherUser;
-import com.petMed.validation.UniquePhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

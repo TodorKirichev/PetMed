@@ -1,6 +1,5 @@
 package com.petMed.validation;
 
-import com.petMed.security.CurrentUser;
 import com.petMed.user.model.User;
 import com.petMed.user.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;

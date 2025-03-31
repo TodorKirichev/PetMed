@@ -4,6 +4,7 @@ import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.model.Clinic;
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.cloudinary.CloudinaryService;
+import com.petMed.event.UserRegisterEventProducer;
 import com.petMed.exception.UserNotFoundException;
 import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.user.model.Role;
@@ -18,7 +19,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
 public class UserServiceUTest {
 
     @Mock
-    private ApplicationEventPublisher eventPublisher;
+    private UserRegisterEventProducer userRegisterEventProducer;
     @Mock
     private UserRepository userRepository;
     @Mock
@@ -257,10 +257,11 @@ public class UserServiceUTest {
         registerRequest.setPhone("123456789");
         registerRequest.setPassword("12345");
 
+        doNothing().when(userRegisterEventProducer).send(any());
+
         userService.registerOwner(registerRequest);
 
         verify(userRepository,times(1)).save(any());
-        verify(eventPublisher, times(1)).publishEvent(any());
     }
 
     @Test
@@ -280,10 +281,11 @@ public class UserServiceUTest {
         registerRequest.setSite("www.petMed.com");
         registerRequest.setCity(CityName.PLOVDIV);
 
+        doNothing().when(userRegisterEventProducer).send(any());
+
         userService.registerVet(registerRequest);
 
         verify(userRepository,times(1)).save(any());
         verify(appointmentScheduler, times(1)).generateAppointmentsForVetOnRegistration(any());
-        verify(eventPublisher,times(1)).publishEvent(any());
     }
 }

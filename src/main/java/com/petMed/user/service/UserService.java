@@ -2,7 +2,9 @@ package com.petMed.user.service;
 
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.cloudinary.CloudinaryService;
-import com.petMed.event.UserRegisterEvent;
+import com.petMed.email.EmailTemplates;
+import com.petMed.event.UserRegisterEventProducer;
+import com.petMed.event.payload.UserRegisterEvent;
 import com.petMed.exception.UserNotFoundException;
 import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.web.dto.*;
@@ -33,18 +35,20 @@ public class UserService implements UserDetailsService {
     private final ClinicService clinicService;
     private final AppointmentScheduler appointmentScheduler;
     private final CloudinaryService cloudinaryService;
+    private final UserRegisterEventProducer userRegisterEventProducer;
 
     public UserService(ApplicationEventPublisher eventPublisher,
                        UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        ClinicService clinicService,
-                       AppointmentScheduler appointmentScheduler, CloudinaryService cloudinaryService) {
+                       AppointmentScheduler appointmentScheduler, CloudinaryService cloudinaryService, UserRegisterEventProducer userRegisterEventProducer) {
         this.eventPublisher = eventPublisher;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.clinicService = clinicService;
         this.appointmentScheduler = appointmentScheduler;
         this.cloudinaryService = cloudinaryService;
+        this.userRegisterEventProducer = userRegisterEventProducer;
     }
 
     @Transactional
@@ -52,7 +56,7 @@ public class UserService implements UserDetailsService {
         User owner = createUser(petOwnerRegisterRequest);
         owner.setRole(Role.PET_OWNER);
         userRepository.save(owner);
-        eventPublisher.publishEvent(new UserRegisterEvent(owner));
+        userRegisterEventProducer.send(createEvent(owner));
     }
 
     @Transactional
@@ -68,7 +72,18 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(vet);
         appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
-        eventPublisher.publishEvent(new UserRegisterEvent(vet));
+        userRegisterEventProducer.send(createEvent(vet));
+    }
+
+    private UserRegisterEvent createEvent(User user) {
+        UserRegisterEvent event = new UserRegisterEvent();
+        event.setUsername(user.getUsername());
+        event.setEmail(user.getEmail());
+        event.setEmailSubject(EmailTemplates.CONFIRM_REGISTRATION_SUBJECT);
+        event.setEmailBody(String.format(EmailTemplates.CONFIRM_REGISTRATION_BODY,
+                user.getFirstName(),
+                user.getLastName()));
+        return event;
     }
 
     private Clinic createClinic(VetRegisterRequest vetRegisterRequest) {

@@ -140,3 +140,5 @@
 2025-03-31 16:20:59 - Exception in sendAppointmentBookedEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 19:16:02 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 19:17:39 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 21:01:55 - Exception in sendConfirmRegistrationEmail: Read timed out executing POST http://localhost:8081/api/notifications/send-email
+2025-03-31 21:13:41 - Exception in sendConfirmRegistrationEmail: [404] during [POST] to [http://localhost:8081/api/notifications/send-email] [EmailNotificationClient#sendEmail(EmailNotificationData)]: [{"timestamp":"2025-03-31T18:13:41.581+00:00","status":404,"error":"Not Found","path":"/api/notifications/send-email"}]

@@ -3,6 +3,7 @@ package com.petMed.IntegrationTests;
 import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.cloudinary.CloudinaryService;
+import com.petMed.event.UserRegisterEventProducer;
 import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.user.model.User;
 import com.petMed.user.repository.UserRepository;
@@ -44,6 +45,8 @@ public class UserServiceITest {
     private AppointmentScheduler appointmentScheduler;
     @MockitoBean
     private CloudinaryService cloudinaryService;
+    @Autowired
+    private UserRegisterEventProducer userRegisterEventProducer;
 
     @Test
     void registerVet_Success() {
@@ -68,6 +71,7 @@ public class UserServiceITest {
         registerRequest.setPhoto(photo);
 
         when(cloudinaryService.uploadFile(any())).thenReturn("http://image.com");
+        doNothing().when(userRegisterEventProducer).send(any());
 
         userService.registerVet(registerRequest);
 
