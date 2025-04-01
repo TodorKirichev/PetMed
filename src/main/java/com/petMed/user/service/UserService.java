@@ -2,8 +2,7 @@ package com.petMed.user.service;
 
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.cloudinary.CloudinaryService;
-import com.petMed.email.EmailTemplates;
-import com.petMed.event.UserRegisterEventProducer;
+import com.petMed.event.EventProducer;
 import com.petMed.event.payload.UserRegisterEvent;
 import com.petMed.exception.UserNotFoundException;
 import com.petMed.scheduler.AppointmentScheduler;
@@ -13,7 +12,6 @@ import com.petMed.user.model.User;
 import com.petMed.user.model.Role;
 import com.petMed.user.repository.UserRepository;
 import com.petMed.security.CurrentUser;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,26 +27,23 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final ApplicationEventPublisher eventPublisher;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ClinicService clinicService;
     private final AppointmentScheduler appointmentScheduler;
     private final CloudinaryService cloudinaryService;
-    private final UserRegisterEventProducer userRegisterEventProducer;
+    private final EventProducer eventProducer;
 
-    public UserService(ApplicationEventPublisher eventPublisher,
-                       UserRepository userRepository,
+    public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        ClinicService clinicService,
-                       AppointmentScheduler appointmentScheduler, CloudinaryService cloudinaryService, UserRegisterEventProducer userRegisterEventProducer) {
-        this.eventPublisher = eventPublisher;
+                       AppointmentScheduler appointmentScheduler, CloudinaryService cloudinaryService, EventProducer eventProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.clinicService = clinicService;
         this.appointmentScheduler = appointmentScheduler;
         this.cloudinaryService = cloudinaryService;
-        this.userRegisterEventProducer = userRegisterEventProducer;
+        this.eventProducer = eventProducer;
     }
 
     @Transactional
@@ -56,7 +51,7 @@ public class UserService implements UserDetailsService {
         User owner = createUser(petOwnerRegisterRequest);
         owner.setRole(Role.PET_OWNER);
         userRepository.save(owner);
-        userRegisterEventProducer.send(createEvent(owner));
+        eventProducer.send("user-register-event", createEvent(owner));
     }
 
     @Transactional
@@ -72,17 +67,15 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(vet);
         appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
-        userRegisterEventProducer.send(createEvent(vet));
+        eventProducer.send("user-register-event", createEvent(vet));
     }
 
     private UserRegisterEvent createEvent(User user) {
         UserRegisterEvent event = new UserRegisterEvent();
         event.setUsername(user.getUsername());
         event.setEmail(user.getEmail());
-        event.setEmailSubject(EmailTemplates.CONFIRM_REGISTRATION_SUBJECT);
-        event.setEmailBody(String.format(EmailTemplates.CONFIRM_REGISTRATION_BODY,
-                user.getFirstName(),
-                user.getLastName()));
+        event.setFirstName(user.getFirstName());
+        event.setLastName(user.getLastName());
         return event;
     }
 
@@ -161,9 +154,6 @@ public class UserService implements UserDetailsService {
         vet.setClinic(clinic);
 
         userRepository.save(vet);
-        if (vet.getClinic() != null) {
-            appointmentScheduler.generateAppointmentsForVetOnRegistration(vet);
-        }
     }
 
     public List<User> findVets(String name, String city) {

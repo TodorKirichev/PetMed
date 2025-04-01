@@ -3,13 +3,14 @@ package com.petMed.IntegrationTests;
 import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.service.ClinicService;
 import com.petMed.cloudinary.CloudinaryService;
-import com.petMed.event.UserRegisterEventProducer;
+import com.petMed.event.EventProducer;
 import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.user.model.User;
 import com.petMed.user.repository.UserRepository;
 import com.petMed.user.service.UserService;
 import com.petMed.web.dto.VetRegisterRequest;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
@@ -32,7 +33,6 @@ public class UserServiceITest {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private ApplicationEventPublisher eventPublisher;
     @Autowired
@@ -43,10 +43,11 @@ public class UserServiceITest {
     private ClinicService clinicService;
     @Autowired
     private AppointmentScheduler appointmentScheduler;
+
     @MockitoBean
     private CloudinaryService cloudinaryService;
-    @Autowired
-    private UserRegisterEventProducer userRegisterEventProducer;
+    @MockitoBean
+    EventProducer eventProducer;
 
     @Test
     void registerVet_Success() {
@@ -71,7 +72,7 @@ public class UserServiceITest {
         registerRequest.setPhoto(photo);
 
         when(cloudinaryService.uploadFile(any())).thenReturn("http://image.com");
-        doNothing().when(userRegisterEventProducer).send(any());
+        doNothing().when(eventProducer).send(any(), any());
 
         userService.registerVet(registerRequest);
 

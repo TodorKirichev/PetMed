@@ -9,7 +9,8 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaConfig {
 
     @Bean
-    public NewTopic newTopic() {
+    public NewTopic userRegisterTopic() {
         return TopicBuilder.name("user-register-event").build();
     }
+
 }

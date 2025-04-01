@@ -15,7 +15,8 @@ public class UserRegisterEvent {
 
     private String email;
 
-    private String emailSubject;
+    private String firstName;
 
-    private String emailBody;
+    private String lastName;
+
 }

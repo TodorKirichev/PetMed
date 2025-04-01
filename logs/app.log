@@ -142,3 +142,15 @@
 2025-03-31 19:17:39 - Exception in sendConfirmRegistrationEmail: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 21:01:55 - Exception in sendConfirmRegistrationEmail: Read timed out executing POST http://localhost:8081/api/notifications/send-email
 2025-03-31 21:13:41 - Exception in sendConfirmRegistrationEmail: [404] during [POST] to [http://localhost:8081/api/notifications/send-email] [EmailNotificationClient#sendEmail(EmailNotificationData)]: [{"timestamp":"2025-03-31T18:13:41.581+00:00","status":404,"error":"Not Found","path":"/api/notifications/send-email"}]
+2025-04-01 12:53:10 - Exception in book: Read timed out executing POST http://localhost:8081/api/notifications/appointments
+2025-04-01 14:13:37 - Exception in book: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-01 14:15:36 - Exception in loadUserByUsername: User not found
+2025-04-01 14:26:16 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-01 16:06:43 - Exception in registerOwner: Send failed
+2025-04-01 16:13:02 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-01 16:56:13 - Exception in book: Query did not return a unique result: 2 results were returned
+2025-04-01 17:03:34 - Exception in findById: User not found
+2025-04-01 17:03:37 - Exception in findById: User not found
+2025-04-01 17:03:38 - Exception in findById: User not found
+2025-04-01 19:36:30 - Exception in loadUserByUsername: User not found
+2025-04-01 19:36:34 - Exception in loadUserByUsername: User not found

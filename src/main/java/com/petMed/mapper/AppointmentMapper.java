@@ -30,7 +30,7 @@ public class AppointmentMapper {
                 .build();
     }
 
-    private static String getAge(Appointment appointment) {
+    private String getAge(Appointment appointment) {
         String age;
 
         Period period = Period.between(appointment.getPet().getDateOfBirth(), LocalDate.now());
