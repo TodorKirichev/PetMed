@@ -46,6 +46,7 @@ public class PetController {
         User user = userService.findById(currentUser.getUserId());
         List<Pet> pets = user.getPets();
         modelAndView.addObject("pets", pets);
+        modelAndView.addObject("username", currentUser.getUsername());
 
         return modelAndView;
     }

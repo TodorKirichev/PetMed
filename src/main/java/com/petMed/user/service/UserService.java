@@ -146,11 +146,13 @@ public class UserService implements UserDetailsService {
                 vetData.getAddress(),
                 vetData.getSite()
         );
+        String imageUrl = cloudinaryService.uploadFile(vetData.getPhoto());
 
         vet.setId(vet.getId());
         vet.setFirstName(vetData.getFirstName());
         vet.setLastName(vetData.getLastName());
         vet.setPhone(vetData.getPhone());
+        vet.setImageUrl(imageUrl);
         vet.setClinic(clinic);
 
         userRepository.save(vet);

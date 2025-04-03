@@ -13,8 +13,9 @@
 <header th:insert="~{fragments/commons::nav}"></header>
 
 <main>
+    <input type="hidden" id="username" th:value="${username}">
     <div class="container">
-        <ul>
+        <ul th:unless="${pets.isEmpty()}">
             <li th:each="pet : ${pets}">
                 <div class="details">
                     <div class="pet-picture">
@@ -37,8 +38,12 @@
                 </div>
             </li>
         </ul>
+        <h2 class="no-content" th:if="${pets.isEmpty()}">You don't have any pets yet</h2>
+        <div class="notifications" id="notifications">
+        <p>Loading data...</p>
+    </div>
     </div>
 </main>
-
+<script th:src="@{/js/fetch-notifications.js}"></script>
 </body>
 </html>

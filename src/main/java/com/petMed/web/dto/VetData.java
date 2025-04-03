@@ -2,12 +2,14 @@ package com.petMed.web.dto;
 
 import com.petMed.clinic.model.CityName;
 import com.petMed.validation.PhoneNumberNotUsedByOtherUser;
+import com.petMed.validation.ValidPhoto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -44,4 +46,7 @@ public class VetData {
     @URL(message = "Invalid URL format")
     @Size(max = 100, message = "Site name cannot exceed 100 characters")
     private String site;
+
+    @ValidPhoto
+    private MultipartFile photo;
 }

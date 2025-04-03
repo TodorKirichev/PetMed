@@ -1,5 +1,9 @@
 form {
-    margin-top: 40px;
+    margin-top: 20px;
+}
+
+form > h1 {
+    margin-bottom: 10px;
 }
 
 form input {
@@ -9,4 +13,8 @@ form input {
 span.error {
     padding-bottom: 4px;
     margin: -23px 0 0 0;
+}
+
+#city {
+    margin-bottom: 20px;
 }

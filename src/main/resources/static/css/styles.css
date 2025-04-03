@@ -175,6 +175,8 @@ form > span {
     background-color: #f7fbff;
     box-shadow: 0 0 10px 0 #12629C;
     border-radius: 4px;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .table-container {

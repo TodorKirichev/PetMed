@@ -3,10 +3,13 @@ form {
 }
 
 .container {
+    justify-content: space-between;
     margin-top: 40px;
+    gap: 10px;
 }
 
 .container ul {
+    flex: 1 1 840px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -67,4 +70,33 @@ form {
 button {
     width: 100%;
     margin: 0;
+}
+
+.notifications {
+    display: none;
+    width: 320px;
+    align-self: flex-start;
+    border: 1px solid #12629C;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fefefe;
+    color: #011725;
+    text-align: center;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+p.notification:not(:last-of-type) {
+    border-bottom: 2px solid darkgrey;
+    padding-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .notifications {
+        align-self: center;
+    }
 }

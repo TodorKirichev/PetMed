@@ -154,3 +154,17 @@
 2025-04-01 17:03:38 - Exception in findById: User not found
 2025-04-01 19:36:30 - Exception in loadUserByUsername: User not found
 2025-04-01 19:36:34 - Exception in loadUserByUsername: User not found
+2025-04-02 15:33:17 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-02 15:33:25 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-02 17:31:13 - Exception in findById: JDBC exception executing SQL [select u1_0.id,c1_0.id,c1_0.address,c1_0.city,c1_0.name,c1_0.site,u1_0.email,u1_0.first_name,u1_0.image_url,u1_0.is_active,u1_0.last_name,u1_0.password,u1_0.phone,u1_0.role,u1_0.username from users u1_0 left join clinics c1_0 on c1_0.id=u1_0.clinic_id where u1_0.id=?] [Unknown database 'pet_med'] [n/a]; SQL [n/a]
+2025-04-03 10:34:59 - Exception in findById: User not found
+2025-04-03 10:35:08 - Exception in findById: User not found
+2025-04-03 10:35:32 - Exception in findById: User not found
+2025-04-03 10:44:43 - Exception in findById: User not found
+2025-04-03 10:49:58 - Exception in loadUserByUsername: User not found
+2025-04-03 10:54:23 - Exception in findById: User not found
+2025-04-03 11:14:14 - Exception in loadUserByUsername: User not found
+2025-04-03 12:02:42 - Exception in loadUserByUsername: User not found
+2025-04-03 12:26:43 - Exception in sendNotification: [500] during [POST] to [http://localhost:8081/api/notifications/appointments] [NotificationClient#sendAppointmentBookedNotification(AppointmentBookedData)]: [{"timestamp":"2025-04-03T09:26:43.661+00:00","status":500,"error":"Internal Server Error","path":"/api/notifications/appointments"}]
+2025-04-03 12:26:49 - Exception in sendNotification: [500] during [POST] to [http://localhost:8081/api/notifications/appointments] [NotificationClient#sendAppointmentBookedNotification(AppointmentBookedData)]: [{"timestamp":"2025-04-03T09:26:49.063+00:00","status":500,"error":"Internal Server Error","path":"/api/notifications/appointments"}]
+2025-04-03 12:27:52 - Exception in findById: User not found

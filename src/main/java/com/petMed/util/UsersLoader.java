@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class UsersLoader implements CommandLineRunner {
@@ -44,7 +45,7 @@ public class UsersLoader implements CommandLineRunner {
     private void createAdmin() {
         User admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder.encode("admin"))
+                .password(passwordEncoder.encode("123"))
                 .role(Role.ADMIN)
                 .firstName("Admin")
                 .lastName("Adminov")
@@ -74,15 +75,25 @@ public class UsersLoader implements CommandLineRunner {
     }
 
     private void createVet(int i, Clinic clinic) {
+        List<String> images = List.of("http://res.cloudinary.com/dj4dqvael/image/upload/v1743665872/e8tnzl7li7jmxfksowe4.jpg",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665935/iwgcqofm3rjl7w9zzmb5.jpg",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743666032/hess1dxwvwkaunlgrjdq.avif",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665984/ms0he7bnrejfasmjifg5.webp",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665895/mvzcsu5ia8f5rqizchzh.jpg",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665882/mvfkeedjvbrof6amgxlg.avif",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665793/lroyfefvfthnwpccyrlo.jpg",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665779/h2q6og8anltbskmnzxjd.webp",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665805/qam9cbkdlzyvhzwme4fi.avif",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743665907/sqmezxc8entdpbywxkzw.jpg");
         User vet = User.builder()
                 .username("vet" + i)
-                .password(passwordEncoder.encode("vet" + i))
+                .password(passwordEncoder.encode("123"))
                 .role(Role.VET)
                 .firstName("Vet" + i)
                 .lastName("Vet" + i)
                 .phone("089800001" + i)
                 .email("vet" + i + "@petmed.com")
-                .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743077520/ay5kzqhnirzqwv3gmtmj.jpg")
+                .imageUrl(images.get(i - 1))
                 .clinic(clinic)
                 .isActive(true)
                 .build();
@@ -93,7 +104,7 @@ public class UsersLoader implements CommandLineRunner {
     private void createUser() {
         User owner = User.builder()
                 .username("user")
-                .password(passwordEncoder.encode("user"))
+                .password(passwordEncoder.encode("123"))
                 .role(Role.PET_OWNER)
                 .firstName("Ivan")
                 .lastName("Ivanov")
@@ -107,14 +118,19 @@ public class UsersLoader implements CommandLineRunner {
     }
 
     private void addPets(User owner) {
-        for (int i = 1; i < 6; i++) {
+        List<String> images = List.of("http://res.cloudinary.com/dj4dqvael/image/upload/v1743667762/hayr1fozsnwelfosjacd.jpg",
+                "http://res.cloudinary.com/dj4dqvael/image/upload/v1743667416/atmwjvyvogpyy9c8xlnk.webp",
+                "https://res.cloudinary.com/dj4dqvael/image/upload/v1743072396/lfph1zniv1f6vxs7alwg.jpg");
+        List<PetSpecies> species = List.of(PetSpecies.PARROT, PetSpecies.DOG, PetSpecies.CAT);
+        List<String> breeds = List.of("Macaw", "Golden retriever", "Scottish fold");
+        for (int i = 1; i < 4; i++) {
             Pet pet = Pet.builder()
                     .owner(owner)
-                    .name("Timo" + i)
-                    .species(PetSpecies.CAT)
-                    .breed("Scottish Fold")
+                    .name("Pet" + i)
+                    .species(species.get(i - 1))
+                    .breed(breeds.get(i - 1))
                     .dateOfBirth(LocalDate.of(2021, 9, 13))
-                    .imageUrl("http://res.cloudinary.com/dj4dqvael/image/upload/v1743072396/lfph1zniv1f6vxs7alwg.jpg")
+                    .imageUrl(images.get(i - 1))
                     .build();
             petRepository.save(pet);
         }

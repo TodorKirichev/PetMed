@@ -16,6 +16,7 @@ public class VetMapper {
                 .address(user.getClinic() != null ? user.getClinic().getAddress() : "")
                 .city(user.getClinic() != null ? user.getClinic().getCity() : null)
                 .site(user.getClinic() != null ? user.getClinic().getSite() : "")
+                .photo(null)
                 .build();
     }
 }

@@ -159,6 +159,10 @@ p.error a:hover {
     width: 120px;
 }
 
+table tbody tr {
+    height: 64px;
+}
+
 @media (max-width: 1270px) {
     .table-container {
         width: 100%;
