@@ -86,9 +86,29 @@ button {
     flex-shrink: 0;
 }
 
-p.notification:not(:last-of-type) {
+.notification-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.notification-wrapper:not(:last-of-type) {
     border-bottom: 2px solid darkgrey;
     padding-bottom: 8px;
+}
+
+.close-x {
+    display: inline-block;
+    background-image: url('../img/close.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    align-self: flex-start;
+    margin-top: 4px;
+    margin-left: 4px;
+    cursor: pointer;
 }
 
 @media (max-width: 700px) {

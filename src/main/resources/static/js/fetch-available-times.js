@@ -8,28 +8,30 @@ function fetchAvailableTimes() {
 
     fetch(`/api/appointments/available-hours?date=${selectedDate}&vetUsername=${vetUsername}`)
         .then(response => response.json())
-        .then(data => {
-            timeContainer.innerHTML = '';
+        .then(data => displayAvailableTimes(data, timeContainer))
+        .catch(error => console.error("Error fetching breeds:", error));
+}
 
-            if (data.length > 0) {
-                const p = document.createElement("p");
-                p.textContent = "Available times:";
-                timeContainer.appendChild(p);
-                data.forEach(time => {
-                    const label = document.createElement("label");
-                    label.classList.add('radio-button')
-                    label.innerHTML = `
+function displayAvailableTimes(data, timeContainer) {
+    timeContainer.innerHTML = '';
+
+    if (data.length > 0) {
+        const p = document.createElement("p");
+        p.textContent = "Available times:";
+        timeContainer.appendChild(p);
+        data.forEach(time => {
+            const label = document.createElement("label");
+            label.classList.add('radio-button')
+            label.innerHTML = `
                         <input type="radio" name="time" th:field="*{time}" value="${time}">
                         <span>${time}</span>
                     `;
-                    const div = document.createElement("div");
-                    div.classList.add('label-container');
-                    div.appendChild(label);
-                    timeContainer.appendChild(div);
-                });
-            } else {
-                timeContainer.innerHTML = '<p>No available times.</p>';
-            }
-        })
-        .catch(error => console.error("Error fetching breeds:", error));
+            const div = document.createElement("div");
+            div.classList.add('label-container');
+            div.appendChild(label);
+            timeContainer.appendChild(div);
+        });
+    } else {
+        timeContainer.innerHTML = '<p>No available times.</p>';
+    }
 }
