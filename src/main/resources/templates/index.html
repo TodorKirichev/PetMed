@@ -29,12 +29,12 @@
 
                     <div class="vet-description">
                         <div class="vet-info">
-                            <p th:text="'Name: ' + ${vet.firstName} + ' ' + ${vet.lastName}"></p>
-                            <p th:text="'Clinic: ' + ${vet.clinic.name}"></p>
-                            <p th:text="'City: ' + ${vet.clinic.city.cityName}"></p>
-                            <p th:text="'Address: ' + ${vet.clinic.address}"></p>
-                            <p th:text="'Phone: ' + ${vet.phone}"></p>
-                            <p>Site:&nbsp
+                            <p><span>Name: &nbsp</span><span th:text="${vet.firstName} + ' ' + ${vet.lastName}"></span></p>
+                            <p><span>Clinic: &nbsp</span><span th:text="${vet.clinic.name}"></span></p>
+                            <p><span>City: &nbsp</span><span th:text="${vet.clinic.city.cityName}"></span></p>
+                            <p><span>Address: &nbsp</span><span th:text="${vet.clinic.address}"></span></p>
+                            <p><span>Phone: &nbsp</span><span th:text="${vet.phone}"></span></p>
+                            <p><span>Site:&nbsp</span>
                                 <a th:text="${vet.clinic.site}" th:href="${vet.clinic.site}"></a>
                             </p>
                         </div>

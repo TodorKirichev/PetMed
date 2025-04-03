@@ -52,9 +52,11 @@ input[type="radio"] {
 #pet {
     margin-bottom: 20px;
 }
-
+.error:nth-of-type(1),
+.error:nth-of-type(2),
 .error:nth-of-type(1):not(:last-of-type),
-.error:nth-of-type(2):not(:last-of-type) {
+.error:nth-of-type(2):not(:last-of-type),
+.error:nth-of-type(3):not(:last-of-type){
     margin-top: -23px;
     padding-bottom: 4px;
 }

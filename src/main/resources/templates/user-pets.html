@@ -21,10 +21,10 @@
                         <img th:src="${pet.imageUrl}" alt="Profile Photo">
                     </div>
                     <div class="pet-details">
-                        <p class="pet-name" th:text="'Name: ' + ${pet.name}"></p>
-                        <p class="pet-species" th:text="'Species: ' + ${pet.species.speciesName}"></p>
-                        <p class="pet-breed" th:text="'Breed: ' + ${pet.breed}"></p>
-                        <p class="pet-age" th:text="'Date of birth: ' + ${#temporals.format(pet.dateOfBirth, 'dd-MM-yyyy')}"></p>
+                        <p class="pet-name"><span>Name: &nbsp</span><span th:text="${pet.name}"></span></p>
+                        <p class="pet-species"><span>Species: &nbsp</span><span th:text="${pet.species.speciesName}"></span></p>
+                        <p class="pet-breed"><span>Breed: &nbsp</span><span th:text="${pet.breed}"></span></p>
+                        <p class="pet-age"><span>Date of birth: &nbsp</span><span th:text="${#temporals.format(pet.dateOfBirth, 'dd-MM-yyyy')}"></span></p>
                     </div>
                 </div>
                 <div class="buttons">

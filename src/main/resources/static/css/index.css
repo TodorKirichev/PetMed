@@ -130,6 +130,10 @@ button {
     margin: 0;
 }
 
+.vet-info p > span:first-of-type {
+    font-weight: bold;
+}
+
 @media (max-width: 900px) {
     .faq-container {
         display: none;
