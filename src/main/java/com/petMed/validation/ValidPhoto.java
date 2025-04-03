@@ -1,5 +1,6 @@
 package com.petMed.validation;
 
+import com.petMed.validation.validators.PhotoValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

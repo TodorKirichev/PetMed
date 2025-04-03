@@ -168,3 +168,7 @@
 2025-04-03 12:26:43 - Exception in sendNotification: [500] during [POST] to [http://localhost:8081/api/notifications/appointments] [NotificationClient#sendAppointmentBookedNotification(AppointmentBookedData)]: [{"timestamp":"2025-04-03T09:26:43.661+00:00","status":500,"error":"Internal Server Error","path":"/api/notifications/appointments"}]
 2025-04-03 12:26:49 - Exception in sendNotification: [500] during [POST] to [http://localhost:8081/api/notifications/appointments] [NotificationClient#sendAppointmentBookedNotification(AppointmentBookedData)]: [{"timestamp":"2025-04-03T09:26:49.063+00:00","status":500,"error":"Internal Server Error","path":"/api/notifications/appointments"}]
 2025-04-03 12:27:52 - Exception in findById: User not found
+2025-04-03 15:07:07 - Exception in loadUserByUsername: User not found
+2025-04-03 16:27:34 - Exception in loadUserByUsername: User not found
+2025-04-03 16:27:44 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments
+2025-04-03 16:44:02 - Exception in sendNotification: Connection refused: getsockopt executing POST http://localhost:8081/api/notifications/appointments

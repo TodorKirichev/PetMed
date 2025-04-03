@@ -10,7 +10,7 @@ import com.petMed.scheduler.AppointmentScheduler;
 import com.petMed.user.model.Role;
 import com.petMed.user.model.User;
 import com.petMed.user.repository.UserRepository;
-import com.petMed.user.service.UserService;
+import com.petMed.user.service.impl.UserServiceImpl;
 import com.petMed.web.dto.PetOwnerRegisterRequest;
 import com.petMed.web.dto.VetData;
 import com.petMed.web.dto.VetRegisterRequest;
@@ -47,7 +47,7 @@ public class UserServiceUTest {
     private CloudinaryService cloudinaryService;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     private User vet1;
     private User vet2;

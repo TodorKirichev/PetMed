@@ -85,7 +85,7 @@ class PetControllerApiTest {
         User user = new User();
         when(userService.findById(any())).thenReturn(user);
         when(cloudinaryService.uploadFile(any())).thenReturn("success");
-        doNothing().when(petService).save(any(), any(), any());
+        doNothing().when(petService).save(any(), any());
 
         mockMvc.perform(post("/pets/add")
                         .with(user(currentUser))

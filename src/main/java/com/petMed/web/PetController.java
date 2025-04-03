@@ -62,9 +62,8 @@ public class PetController {
             return new ModelAndView("pet-form");
         }
         User user = userService.findById(currentUser.getUserId());
-        String imageUrl = cloudinaryService.uploadFile(petData.getPhoto());
 
-        petService.save(petData, user, imageUrl);
+        petService.save(petData, user);
 
         return new ModelAndView("redirect:/pets");
     }

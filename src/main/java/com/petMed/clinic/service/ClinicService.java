@@ -1,26 +1,12 @@
 package com.petMed.clinic.service;
 
-import com.petMed.clinic.model.CityName;
 import com.petMed.clinic.model.Clinic;
-import com.petMed.clinic.repository.ClinicRepository;
-import org.springframework.stereotype.Service;
+import com.petMed.web.dto.VetData;
+import com.petMed.web.dto.VetRegisterRequest;
 
-@Service
-public class ClinicService {
+public interface ClinicService {
 
-    private final ClinicRepository clinicRepository;
+    Clinic createClinicFromRegisterRequest(VetRegisterRequest registerRequest);
 
-    public ClinicService(ClinicRepository clinicRepository) {
-        this.clinicRepository = clinicRepository;
-    }
-
-    public Clinic createClinic(String clinicName, CityName city, String address, String site) {
-        Clinic clinic = Clinic.builder()
-                .name(clinicName)
-                .city(city)
-                .address(address)
-                .site(site)
-                .build();
-        return clinicRepository.save(clinic);
-    }
+    Clinic createClinicFromVetData(VetData vetData);
 }

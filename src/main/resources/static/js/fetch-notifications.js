@@ -7,13 +7,11 @@ function getNotifications() {
     const username = document.getElementById("username").value;
     fetch(`http://localhost:8081/api/notifications/appointments?username=${username}`)
         .then(response => {
-            console.log(response);
             return response.json();
         })
         .then(data => {
             if (data.length > 0) {
                 notificationsContainer.style.display = "flex";
-                console.log(data)
                 notificationsContainer.innerHTML = "";
                 data.forEach(notification => {
                     const p = document.createElement("p");

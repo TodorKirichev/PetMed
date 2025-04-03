@@ -1,5 +1,6 @@
 package com.petMed.validation;
 
+import com.petMed.validation.validators.PhoneNumberNotUsedByOtherUserValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

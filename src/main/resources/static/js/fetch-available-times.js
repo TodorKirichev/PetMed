@@ -30,5 +30,6 @@ function fetchAvailableTimes() {
             } else {
                 timeContainer.innerHTML = '<p>No available times.</p>';
             }
-        });
+        })
+        .catch(error => console.error("Error fetching breeds:", error));
 }

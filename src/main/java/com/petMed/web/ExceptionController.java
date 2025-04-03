@@ -1,6 +1,7 @@
 package com.petMed.web;
 
 import com.petMed.exception.AppointmentNotFoundException;
+import com.petMed.exception.InvalidSpeciesException;
 import com.petMed.exception.PetNotFoundException;
 import com.petMed.exception.UserNotFoundException;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -23,7 +24,8 @@ public class ExceptionController {
             UserNotFoundException.class,
             PetNotFoundException.class,
             AppointmentNotFoundException.class,
-            NoResourceFoundException.class
+            NoResourceFoundException.class,
+            InvalidSpeciesException.class
     })
     public ModelAndView handleNotFoundException() {
         return new ModelAndView("not-found");

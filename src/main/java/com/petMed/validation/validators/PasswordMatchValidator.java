@@ -1,5 +1,6 @@
-package com.petMed.validation;
+package com.petMed.validation.validators;
 
+import com.petMed.validation.PasswordMatch;
 import com.petMed.web.dto.RegisterRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

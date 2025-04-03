@@ -1,7 +1,7 @@
 package com.petMed.UnitTests.pet.service;
 
 import com.petMed.pet.model.*;
-import com.petMed.pet.service.BreedService;
+import com.petMed.pet.service.impl.BreedServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BreedServiceUTest {
 
     @InjectMocks
-    private BreedService breedService;
+    private BreedServiceImpl breedService;
 
     @Test
     void getBreedsBySpecies_Cat_Success() {

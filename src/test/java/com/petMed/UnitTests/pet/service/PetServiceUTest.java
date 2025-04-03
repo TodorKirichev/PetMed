@@ -2,10 +2,11 @@ package com.petMed.UnitTests.pet.service;
 
 import com.petMed.appointment.model.Appointment;
 import com.petMed.appointment.service.AppointmentService;
+import com.petMed.cloudinary.CloudinaryService;
 import com.petMed.exception.PetNotFoundException;
 import com.petMed.pet.model.Pet;
 import com.petMed.pet.repository.PetRepository;
-import com.petMed.pet.service.PetService;
+import com.petMed.pet.service.impl.PetServiceImpl;
 import com.petMed.user.model.User;
 import com.petMed.web.dto.PetData;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,9 +31,11 @@ public class PetServiceUTest {
     private PetRepository petRepository;
     @Mock
     private AppointmentService appointmentService;
+    @Mock
+    private CloudinaryService cloudinaryService;
 
     @InjectMocks
-    private PetService petService;
+    private PetServiceImpl petService;
 
     private UUID petId;
     private UUID userId;
@@ -81,10 +84,11 @@ public class PetServiceUTest {
         petData.setBreed("SCOTTISH FOLD");
         petData.setDateOfBirth(LocalDate.of(2024, 2, 23));
 
-        User user = new User();
-        String imageUrl = "imageUrl";
+        when(cloudinaryService.uploadFile(any())).thenReturn("url");
 
-        petService.save(petData, user, imageUrl);
+        User user = new User();
+
+        petService.save(petData, user);
 
         verify(petRepository, times(1)).save(any());
     }

@@ -3,7 +3,7 @@ package com.petMed.UnitTests.medicalRecord.service;
 import com.petMed.appointment.model.Appointment;
 import com.petMed.medicalRecord.model.MedicalRecord;
 import com.petMed.medicalRecord.repository.MedicalRecordRepository;
-import com.petMed.medicalRecord.service.MedicalRecordService;
+import com.petMed.medicalRecord.service.impl.MedicalRecordServiceImpl;
 import com.petMed.pet.model.Pet;
 import com.petMed.web.dto.MedicalRecordData;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class MedicalRecordServiceUTest {
     private MedicalRecordRepository medicalRecordRepository;
 
     @InjectMocks
-    private MedicalRecordService medicalRecordService;
+    private MedicalRecordServiceImpl medicalRecordService;
 
     @Test
     void createMedicalRecord_Success() {

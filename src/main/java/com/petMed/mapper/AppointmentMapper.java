@@ -1,6 +1,7 @@
 package com.petMed.mapper;
 
 import com.petMed.appointment.model.Appointment;
+import com.petMed.notification.dto.AppointmentBookedData;
 import com.petMed.web.dto.AppointmentInfo;
 import lombok.experimental.UtilityClass;
 
@@ -9,6 +10,20 @@ import java.time.Period;
 
 @UtilityClass
 public class AppointmentMapper {
+
+    public static AppointmentBookedData mapToAppointmentBookedData(Appointment appointment) {
+        AppointmentBookedData event = new AppointmentBookedData();
+        event.setPetOwnerUsername(appointment.getPet().getOwner().getUsername());
+        event.setPetOwnerEmail(appointment.getPet().getOwner().getEmail());
+        event.setVetFirstName(appointment.getVet().getFirstName());
+        event.setVetLastName(appointment.getVet().getLastName());
+        event.setPetName(appointment.getPet().getName());
+        event.setPetSpecies(appointment.getPet().getSpecies().getSpeciesName());
+        event.setDate(appointment.getDate());
+        event.setTime(appointment.getStartTime());
+
+        return event;
+    }
 
     public static AppointmentInfo mapAppointmentToAppointmentInfo(Appointment appointment) {
         boolean hasPet = appointment.getPet() != null;

@@ -65,6 +65,4 @@ public class AppointmentController {
 
         return new ModelAndView("redirect:/home");
     }
-
-
 }

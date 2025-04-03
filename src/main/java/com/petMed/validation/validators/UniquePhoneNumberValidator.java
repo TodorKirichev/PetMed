@@ -1,6 +1,7 @@
-package com.petMed.validation;
+package com.petMed.validation.validators;
 
 import com.petMed.user.repository.UserRepository;
+import com.petMed.validation.UniquePhoneNumber;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

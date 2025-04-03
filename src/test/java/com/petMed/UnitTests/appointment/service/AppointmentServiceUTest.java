@@ -3,7 +3,7 @@ package com.petMed.UnitTests.appointment.service;
 import com.petMed.appointment.model.Appointment;
 import com.petMed.appointment.model.AppointmentStatus;
 import com.petMed.appointment.repository.AppointmentRepository;
-import com.petMed.appointment.service.AppointmentService;
+import com.petMed.appointment.service.impl.AppointmentServiceImpl;
 import com.petMed.exception.AppointmentNotFoundException;
 import com.petMed.mapper.AppointmentMapper;
 import com.petMed.medicalRecord.model.MedicalRecord;
@@ -40,7 +40,7 @@ public class AppointmentServiceUTest {
     private NotificationService notificationService;
 
     @InjectMocks
-    private AppointmentService appointmentService;
+    private AppointmentServiceImpl appointmentService;
 
     private UUID appointmentId1;
     private UUID appointmentId2;
