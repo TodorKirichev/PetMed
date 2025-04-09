@@ -2,17 +2,17 @@
 
 Simple Web Application (MVC Pattern)
 
-Technologies Used:
-Backend: Java, Spring Boot
-Frontend: HTML, CSS, JavaScript, Thymeleaf
-Database: MySQL
-Security: Spring Security
-Media Management: Cloudinary
+Technologies Used:<br>
+Backend: Java, Spring Boot<br>
+Frontend: HTML, CSS, JavaScript, Thymeleaf<br>
+Database: MySQL<br>
+Security: Spring Security<br>
+Media Management: Cloudinary<br>
 
-[Microservice](https://github.com/TodorKirichev/Notification-Service) Communication:
-Feign Client – for RESTful synchronous communication
-Apache Kafka – for asynchronous messaging
+[Microservice](https://github.com/TodorKirichev/Notification-Service) Communication:<br>
+Feign Client – for RESTful synchronous communication<br>
+Apache Kafka – for asynchronous messaging<br>
 
-Testing:
-JUnit
+Testing:<br>
+JUnit<br>
 Mockito
