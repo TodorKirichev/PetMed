@@ -7,10 +7,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
+
+    private final RedirectLoggedInUsers redirectLoggedInUsers;
+
+    public WebConfiguration(RedirectLoggedInUsers redirectLoggedInUsers) {
+        this.redirectLoggedInUsers = redirectLoggedInUsers;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(redirectLoggedInUsers)
+                .addPathPatterns("/login", "/register", "/register-vet", "/register-owner");
+    }
 
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
